@@ -1,0 +1,41 @@
+body {
+    background-color: #F8f8f8;
+}
+
+main {
+    padding-top: 40px;   
+}
+
+input[type="radio"] {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    border: solid 1px #cccccc;
+    position: relative;
+    background-color: #F8F8F8;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+input[type="radio"]::before {
+    content: "";
+    position: relative;
+    background-color: transparent;
+    width: 7px;
+    height: 7px;
+    transition: background-color .15s ease-in-out;
+    pointer-events: none;
+    border-radius: 100%;
+}
+
+input[type="radio"]:checked::before{
+  background-color: #000000;
+}
