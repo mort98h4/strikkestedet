@@ -7,7 +7,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Header></Header>
-      <Component {...pageProps} />
+      <main className="2xl:container mx-auto bg-background">
+        <Component {...pageProps} />
+      </main>
       <Footer></Footer>
     </>
   )
