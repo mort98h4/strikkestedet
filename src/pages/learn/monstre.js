@@ -1,10 +1,10 @@
 import { getPatternsPage } from "../../../lib/api" ;
-import VideoSection from "../../components/VideoSection";
+import ImageSection from "../../components/ImageSection";
 
 export default function Patterns(props) {
     console.log(props);
     const section1 = props.content.page.learnsection1;
-    // const learningVideos = props.content.posts.edges;
+    const learningImages = props.content.posts.nodes;
 
     return (
         <>
@@ -15,9 +15,9 @@ export default function Patterns(props) {
                 </article>
             </section>
 
-            {/* {learningVideos.map((video) => {
-                return <VideoSection key={video.node.id} index={learningVideos.findIndex(item => item.node.id === video.node.id)} {...video}></VideoSection>
-            })} */}
+            {learningImages.map((image) => {
+                return <ImageSection key={image.id} index={learningImages.findIndex(item => item.id === image.id)} {...image}></ImageSection>
+            })}
         </>
     )
 }
