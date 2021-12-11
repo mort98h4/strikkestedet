@@ -1,4 +1,4 @@
-import { getHomePage, getCustomerReviews, getAllPosts } from "../../lib/api";
+import { getHomePage } from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
 
@@ -35,9 +35,9 @@ export default function Home(props) {
       <section className="grid grid-cols-6 gap-4">
         <article className="col-span-6 lg:col-span-3 lg:col-start-2 p-16">
           <h2 className="font-serif text-3xl lg:text-5xl mb-4">
-            {/* TODO: Get header from WP */}
+            {homePage.section1Header}
           </h2>
-          <p className="text-black-60">{/* TODO: Get body from WP */}</p>
+          <p className="text-black-60">{homePage.section1Body}</p>
         </article>
       </section>
 
@@ -82,9 +82,9 @@ export default function Home(props) {
       <section className="grid grid-cols-6 gap-4">
         <article className="col-span-6 lg:col-span-3 lg:col-start-3 p-16">
           <h2 className="font-serif text-3xl lg:text-5xl mb-4">
-            {/* TODO: Get header from WP */}
+            {homePage.section2Header}
           </h2>
-          <p className="text-black-60">{/* TODO: Get body from WP */}</p>
+          <p className="text-black-60">{homePage.section2Body}</p>
         </article>
       </section>
 
