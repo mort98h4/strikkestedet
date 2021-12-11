@@ -1,5 +1,4 @@
 export default function ImageSection(props) {
-    console.log(props.index);
     const image = props.learningimages;
 
     return (
