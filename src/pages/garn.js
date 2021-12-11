@@ -1,5 +1,5 @@
 export default function Garn(){
-    return(
-        <h1>hello siw</h1>
-    )
+   return (
+       <p>this is a test</p>
+   )
 }
