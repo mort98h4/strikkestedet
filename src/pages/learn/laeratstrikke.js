@@ -4,16 +4,7 @@ import VideoSection from "../../components/VideoSection";
 export default function LearnToKnit(props) {
     console.log(props);
     const section1 = props.content.page.ltksection1;
-
-    const array = [
-        {
-            id: "432ds2",
-            url: "https://www.youtube.com/embed/uE-1RPDqJAY",
-            header: "Overskrift",
-            body: "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
-            videoNumber: 1
-        }
-    ]
+    const learningVideos = props.content.posts.edges;
 
     return (
         <>
@@ -24,8 +15,8 @@ export default function LearnToKnit(props) {
                 </article>
             </section>
 
-            {array.map((obj) => {
-                return <VideoSection key={obj.id} index={array.findIndex(item => item.id === obj.id)} {...obj}></VideoSection>
+            {learningVideos.map((video) => {
+                return <VideoSection key={video.node.id} index={learningVideos.findIndex(item => item.node.id === video.node.id)} {...video}></VideoSection>
             })}
         </>
     )
