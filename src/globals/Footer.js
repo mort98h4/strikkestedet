@@ -21,12 +21,12 @@ export default function Footer(props) {
                 <h3 className="font-serif text-xl lg:text-3xl">{props.generalSettings.title}</h3>
               </div>
               <div className="col-span-3 lg:col-span-1">
-                <ul>
+                <ul className="text-black-70">
                   <li>
-                    <a href="tel:24449392">+45 2444 9392</a>
+                    Tel: <a className="transition-all hover:text-black hover:underline" href="tel:24449392">+45 2444 9392</a>
                   </li>
-                  <li>
-                    <a href="mailto:lene@strikkestedet.dk">lene@strikkestedet.dk</a>
+                  <li className="mb-4">
+                    E-mail: <a className="transition-all hover:text-black hover:underline" href="mailto:lene@strikkestedet.dk">lene@strikkestedet.dk</a>
                   </li>
                   <li>Hvidovrevej 324</li>
                   <li>2650 Hvidovre</li>
@@ -34,14 +34,14 @@ export default function Footer(props) {
                 </ul>
               </div>
               <div className="col-span-3 lg:col-span-1">
-                <h4>Produkter</h4>
-                <ul>
+                <h4 className="font-bold mb-4">Produkter</h4>
+                <ul className="text-black-70">
 
                 </ul>
               </div>
               <div className="col-span-3 lg:col-span-1">
-                <h4>Lær at strikke</h4>
-                <ul>
+                <h4 className="font-bold mb-4">Lær at strikke</h4>
+                <ul className="text-black-70">
                   {learnPages.map(item => {
                     return (
                       <NavItem key={item.id} {...item}></NavItem>
@@ -50,8 +50,8 @@ export default function Footer(props) {
                 </ul>
               </div>
               <div className="col-span-3 lg:col-span-1">
-                <h4>Om os</h4>
-                <ul>
+                <h4 className="font-bold mb-4">Om os</h4>
+                <ul className="text-black-70">
 
                 </ul>
               </div>
@@ -66,7 +66,7 @@ function NavItem(props) {
   console.log(props);
   return (
     <li>
-      <Link href={`/learn/${props.slug}`}>{props.title}</Link>
+      <Link href={`/learn/${props.slug}`}><a className="transition-all hover:text-black hover:underline">{props.title}</a></Link>
     </li>
   )
 }
