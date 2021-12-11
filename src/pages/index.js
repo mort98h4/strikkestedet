@@ -1,20 +1,25 @@
-import { getHomePage, getCustomerReviews, getAllPosts } from "../../lib/api";
+import { getHomePage } from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
 
 export default function Home(props) {
-  console.log(props);
-  const homePage = props.content.page.homepage;
+  const ctaSection1 = props.content.page.homepagectasection1;
+  const ctaSection2 = props.content.page.homepagectasection2;
+  const ctaSection3 = props.content.page.homepagectasection3;
+  const section1 = props.content.page.homepagesection1;
+  const section2 = props.content.page.homepagesection2;
+  const newsLetter = props.content.page.homepagenewsletter;
+  const selectedItems = props.content.page.homepageselecteditems;
   const reviews = props.content.posts.edges;
 
   const patternsBgImage = {
-    backgroundImage: "url('" + homePage.image1.guid + "');",
+    backgroundImage: "url('" + ctaSection1.image1.guid + "');",
   };
   const yarnBgImage = {
-    backgroundImage: "url('" + homePage.image2.guid + "');",
+    backgroundImage: "url('" + ctaSection2.image2.guid + "');",
   };
   const knitBgImage = {
-    backgroundImage: "url('" + homePage.image3.guid + "');",
+    backgroundImage: "url('" + ctaSection3.image3.guid + "');",
   };
 
   function handleSubmit(e) {
@@ -25,34 +30,34 @@ export default function Home(props) {
     <>
       <section className="grid grid-cols-6 gap-4">
         <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center" style={patternsBgImage}>
-          <Button href={homePage.ctaHref1} fullWidth={false}>{homePage.cta1}</Button>
+          <Button href={ctaSection1.ctaHref1} fullWidth={false}>{ctaSection1.ctaText1}</Button>
         </div>
         <div className="col-span-6 md:col-span-2 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center" style={yarnBgImage}>
-          <Button href={homePage.ctaHref2}>{homePage.cta2}</Button>
+          <Button href={ctaSection2.ctaHref2}>{ctaSection2.ctaText2}</Button>
         </div>
       </section>
 
       <section className="grid grid-cols-6 gap-4">
         <article className="col-span-6 lg:col-span-3 lg:col-start-2 p-16">
           <h2 className="font-serif text-3xl lg:text-5xl mb-4">
-            {/* TODO: Get header from WP */}
+            {section1.header1}
           </h2>
-          <p className="text-black-60">{/* TODO: Get body from WP */}</p>
+          <p className="text-black-60">{section1.body1}</p>
         </article>
       </section>
 
       <section className="grid grid-cols-6 md:gap-4">
         <div className="col-span-6 md:col-span-2 bg-white p-16 md:p-8 flex flex-wrap content-center">
           <h2 className="font-serif text-3xl lg:text-5xl mb-4">
-            {/* TODO: Get header from WP */}
+            {newsLetter.headerNewsletter}
           </h2>
           <p className="text-black-60 mb-16">
-            {/* TODO: Get body from WP */}
+            {newsLetter.bodyNewsletter}
           </p>
           <form className="w-full" onSubmit={handleSubmit}>
             <div className="w-full mb-16">
               <label htmlFor="newsletterEmail" className="block mb-2 text-lg">
-                Indtast din e-mail
+                {newsLetter.labelNewsletter}
               </label>
               <input
                 type="email"
@@ -62,12 +67,11 @@ export default function Home(props) {
                 required
               />
               <span className="text-black-40 text-sm mb-16">
-                Vi benytter kun din e-mail til at sende dig gode tilbud og
-                nyheder.
+                {newsLetter.info}
               </span>
             </div>
             <Button type="submit" href={false} fullWidth={true}>
-              Tilmeld
+              {newsLetter.buttonText}
             </Button>
           </form>
         </div>
@@ -75,30 +79,29 @@ export default function Home(props) {
           className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center"
           style={knitBgImage}
         >
-          <Button href={homePage.ctaHref3}>{homePage.cta3}</Button>
+          <Button href={ctaSection3.ctaHref3}>{ctaSection3.ctaText3}</Button>
         </div>
       </section>
 
       <section className="grid grid-cols-6 gap-4">
         <article className="col-span-6 lg:col-span-3 lg:col-start-3 p-16">
           <h2 className="font-serif text-3xl lg:text-5xl mb-4">
-            {/* TODO: Get header from WP */}
+            {section2.header2}
           </h2>
-          <p className="text-black-60">{/* TODO: Get body from WP */}</p>
+          <p className="text-black-60">{section2.body2}</p>
         </article>
       </section>
 
       <section className="grid grid-cols-6 md:gap-4">
         <div className="col-span-6 md:col-span-2 bg-white p-16 md:p-8 flex flex-wrap content-center">
-          {/* TODO: Use real content here */}
           <h2 className="font-serif text-3xl lg:text-5xl mb-4">
-            Udvalgte produkter
+            {selectedItems.headerSelecteditems}
           </h2>
           <p className="text-black-60 mb-4">
-            {/* TODO: Get body from WP */}
+            {selectedItems.bodySelecteditems}
           </p>
           <h3 className="font-sans text-xl lg:text-2xl font-bold mb-4">
-            Filtrer mellem udvalgte produkter
+            {selectedItems.subheaderSelecteditems}
           </h3>
           <div className="flex items-center w-full mb-2">
             <input
@@ -112,7 +115,7 @@ export default function Home(props) {
               htmlFor="yarnRadio"
               className="pl-4 text-base cursor-pointer"
             >
-              Garn
+              {selectedItems.label1}
             </label>
           </div>
           <div className="flex items-center w-full">
@@ -126,7 +129,7 @@ export default function Home(props) {
               htmlFor="knittingPatternsRadio"
               className="pl-4 text-base cursor-pointer"
             >
-              Strikkeopskrifter
+              {selectedItems.label2}
             </label>
           </div>
         </div>
