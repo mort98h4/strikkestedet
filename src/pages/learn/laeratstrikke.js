@@ -3,7 +3,7 @@ import VideoSection from "../../components/VideoSection";
 
 export default function LearnToKnit(props) {
     console.log(props);
-    const section1 = props.content.page.ltksection1;
+    const section1 = props.content.page.learnsection1;
     const learningVideos = props.content.posts.edges;
 
     return (
