@@ -21,13 +21,6 @@ export default function Home(props) {
     e.preventDefault();
   }
 
-  function getStarsArray(num) {
-    let stars = [];
-    for (let i = 1; i <= num; i++) {
-      stars.push(i);
-    }
-    return stars;
-  }
   return (
     <>
       <section className="grid grid-cols-6 gap-4">
