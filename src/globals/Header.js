@@ -45,7 +45,7 @@ export default function Header(props) {
   return (
     <>
       <header className="w-full fixed z-10">
-        <nav className="w-full bg-black relative z-30">
+        <nav className="w-full bg-black relative z-30 shadow">
           <div className="2xl:container mx-auto grid grid-cols-6 gap-x-4 px-8">
             <div className="lg:absolute col-span-5 lg:col-span-1 py-2">
               <Link href="/">
