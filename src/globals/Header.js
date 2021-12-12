@@ -94,9 +94,9 @@ function SubMenu(props) {
   });
 
   return (
-    <nav className={"hidden lg:block bg-gray-header w-full relative z-20 transition-all duration-500 " + (props.settings[0].visible || props.settings[1].visible || props.settings[2].visible ?  "translate-y-0" : "-translate-y-20")}>
-      <div className="2xl:container mx-auto grid grid-cols-6 gap-x-4 px-8 col-span-6 py-2">
-        <div className="flex justify-center items-center">
+    <nav className={"hidden lg:block bg-gray-header w-full relative z-20 transition-all duration-500 shadow " + (props.settings[0].visible || props.settings[1].visible || props.settings[2].visible ?  "translate-y-0" : "-translate-y-20")}>
+      <div className="2xl:container mx-auto grid grid-cols-6 gap-x-4 px-8 py-2">
+        <div className="flex justify-center items-center col-span-6">
           {
             (props.settings[0].visible ? productPages : props.settings[1].visible ? learnPages :  aboutPages)
             .map(item => {
