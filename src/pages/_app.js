@@ -22,10 +22,10 @@ function MyApp({ Component, pageProps }) {
     }
     setData(json.data);
   }
-  async function getFooter() {
+  async function getData() {
     const data = await fetchAPI(
       `
-      query Footer {
+      query Data {
         generalSettings {
           title
           description
@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }) {
     return data;
   }
   useEffect(() => {
-    getFooter();
+    getData();
   }, []);
 
   return (
