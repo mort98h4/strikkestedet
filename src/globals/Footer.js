@@ -70,6 +70,17 @@ export default function Footer(props) {
                   })}
                 </ul>
               </div>
+              <div className="col-span-6 lg:col-span-2 mb-4">
+                <h4 className="text-center font-bold mb-2 w-full">Følg os</h4>
+                <div className="flex justify-center">
+                  <a className="mx-1 transition opacity-70 hover:opacity-100" href="https://www.facebook.com/strikkestedet2650" target="_blank">
+                    <img src="./facebook_icon.svg" alt="Facebook icon"></img>
+                  </a>
+                  <a className="mx-1 transition opacity-70 hover:opacity-100" href="https://www.instagram.com/strikkestedet" target="_blank">
+                    <img src="./instagram_icon.svg" alt="Instagram icon"></img>
+                  </a>
+                </div>
+              </div>
             </div>
         
       </footer>
