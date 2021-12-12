@@ -1,7 +1,4 @@
-import {useState, useEffect} from 'react';
-
 import Link from "next/link";
-// import { getFooter } from "../../lib/api";
 
 export default function Footer(props) {
   const productsId = "cG9zdDo0MzA=";
