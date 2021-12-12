@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
           title
           description
         }
-        pages {
+        pages(first: 20) {
           nodes {
             id
             title
@@ -39,6 +39,7 @@ function MyApp({ Component, pageProps }) {
               edges {
                 node {
                   id
+                  slug
                 }
               }
             }
@@ -60,7 +61,7 @@ function MyApp({ Component, pageProps }) {
         <title>Strikkestedet</title>
       </Head>
       {
-        data != 0 ? (
+        data.length != 0 ? (
           <>
           <Header></Header>
           <main className="2xl:container mx-auto bg-background">
