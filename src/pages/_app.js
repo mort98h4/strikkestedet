@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }) {
       {
         data.length != 0 ? (
           <>
-          <Header></Header>
+          <Header {...data}></Header>
           <main className="2xl:container mx-auto bg-background">
             <Component {...pageProps} />
           </main>
