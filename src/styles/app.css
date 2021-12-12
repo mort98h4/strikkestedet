@@ -70,8 +70,90 @@ input[type="radio"]:checked::before{
     text-align: center;
 }
 
-@media screen and (max-width: 1023px) {
+.footer-text-center {
+    text-align: center;
+}
+
+/***** Styling of menu *****/
+.burger {
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 1px;
+    background-color: white;
+    margin: 5px 0;
+    transition: all .5s ease, opacity .15s ease-in;
+    pointer-events: none;
+}
+
+.toggle .line1 {
+    transform: rotate(45deg) translate(3px, 4px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.burger-underlay {
+    position: absolute;
+    height: calc(100vh - 40px);
+    width: 100%;
+    background-color:#000000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s ease-in-out;
+}
+
+.burger-underlay.toggle {
+    opacity: .7;
+    pointer-events: all;
+}
+
+.sub-menu {
+    position: absolute;
+    right: 0;
+    z-index: 20;
+    background-color: #E3E3E3;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1);
+    min-height: calc(100vh - 40px);
+    width: 80vw;
+    transition: transform .5s ease-in-out;
+}
+
+@media screen and (min-width: 576px) {
+    .sub-menu {
+        width: 70vw;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .sub-menu {
+        width: 50vw;
+
+    }
+}
+/***** Styling of menu END *****/
+
+@media screen and (min-width: 1024px) {
+    main {
+        padding-top: 44px;   
+    }
+
+    /***** Styling of menu *****/
+    .sub-menu {
+        position: relative;
+        min-height: unset;
+        width: 100%;
+    }
+    /***** Styling of menu END *****/
+
     .footer-text-center {
-        text-align: center;
+        text-align: left;
     }
 }
