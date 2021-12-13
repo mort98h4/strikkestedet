@@ -3,7 +3,7 @@ body {
 }
 
 main {
-    padding-top: 40px;   
+    padding-top: 52px;   
 }
 
 header .logo {
@@ -152,7 +152,7 @@ input[type="radio"]:checked::before{
 
 @media screen and (min-width: 1024px) {
     main {
-        padding-top: 44px;   
+        padding-top: 48px;   
     }
 
     /***** Styling of menu *****/
