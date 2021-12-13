@@ -1,6 +1,13 @@
 import Link from "next/link";
+import AddressList from "../components/AddressList";
 
 export default function Footer(props) {
+  console.log(props);
+  const address = props.posts.nodes.map(item => {
+    if (item.id === "cG9zdDo0NDE=") {
+        return item;
+    }
+});
   const productsId = "cG9zdDo0MzA=";
   const learnId = "cG9zdDo0MDY=";
   const aboutId = "cG9zdDo0MjI=";
@@ -25,17 +32,9 @@ export default function Footer(props) {
                 <h3 className="font-serif footer-text-center text-xl lg:text-3xl">{props.generalSettings.title}</h3>
               </div>
               <div className="col-span-6 md:col-span-3 lg:col-span-1 mb-4">
-                <ul className="footer-text-center text-black-70">
-                  <li>
-                    Tel: <a className="transition-all hover:text-black hover:underline" href="tel:24449392">+45 2444 9392</a>
-                  </li>
-                  <li className="mb-4">
-                    E-mail: <a className="transition-all hover:text-black hover:underline" href="mailto:lene@strikkestedet.dk">lene@strikkestedet.dk</a>
-                  </li>
-                  <li>Hvidovrevej 324</li>
-                  <li>2650 Hvidovre</li>
-                  <li>Danmark</li>
-                </ul>
+                {address.map(item => {
+                    return <AddressList key={item.id} {...item} color="text-black-70 footer-text-center"></AddressList>
+                })}
               </div>
               <div className="col-span-6 md:col-span-3 lg:col-span-1 mb-4">
                 <h4 className="footer-text-center font-bold mb-2">Produkter</h4>

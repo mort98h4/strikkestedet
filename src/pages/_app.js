@@ -45,6 +45,20 @@ function MyApp({ Component, pageProps }) {
             }
           }
         }
+        posts(where: {categoryId: 14, tag: "kontakt", orderby: {field: DATE, order: ASC}}) {
+          nodes {
+            id
+            title
+            kontaktMap {
+              address
+              city
+              country
+              email
+              phone
+              zipCode
+            }
+          }
+        }
       }
       `
     )
