@@ -1,5 +1,5 @@
 export default function ImageSection(props) {
-    const image = props.learningimages;
+    const image = props.learningimages ? props.learningimages : props.aboutimages;
 
     return (
         <section className="w-full mb-4">

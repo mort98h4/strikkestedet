@@ -13,13 +13,13 @@ export default function Home(props) {
   const reviews = props.content.posts.edges;
 
   const patternsBgImage = {
-    backgroundImage: "url('" + ctaSection1.image1.guid + "');",
+    backgroundImage: "url('" + ctaSection1.image1.guid + "')",
   };
   const yarnBgImage = {
-    backgroundImage: "url('" + ctaSection2.image2.guid + "');",
+    backgroundImage: "url('" + ctaSection2.image2.guid + "')",
   };
   const knitBgImage = {
-    backgroundImage: "url('" + ctaSection3.image3.guid + "');",
+    backgroundImage: "url('" + ctaSection3.image3.guid + "')",
   };
 
   function handleSubmit(e) {
