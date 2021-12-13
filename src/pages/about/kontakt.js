@@ -1,10 +1,13 @@
 import { getContactPage } from "../../../lib/api";
-import ImageSection from "../../components/ImageSection";
+import AddressList from "../../components/AddressList";
 
 export default function AboutUs(props) {
-    console.log(props);
     const section1 = props.content.page.aboutsection1;
-    const aboutImages = props.content.posts.nodes;
+    const address = props.content.posts.nodes.map(item => {
+        if (item.id === "cG9zdDo0NDE=") {
+            return item;
+        }
+    });
 
     return (
         <>
@@ -15,9 +18,26 @@ export default function AboutUs(props) {
                 </article>
             </section>
 
-            {aboutImages.map((image) => {
-                return <ImageSection key={image.id} index={aboutImages.findIndex(item => item.id === image.id)} {...image}></ImageSection>
-            })}
+            <section className="grid grid-cols-6 gap-4 pb-16">
+                <div className="col-span-6 lg:col-span-2 lg:col-start-2 px-16 pb-8 lg:pb-0 flex flex-wrap items-center">
+                    <div>
+                        <p className="text-black-60 mb-4">
+                            Butikken holder åbent tirsdag til fredag fra kl. 10-17.30, samt lørdag fra kl. 10-14.
+                        </p>
+                        {address.map(item => {
+                            return <AddressList key={item.id} {...item} color="text-black-60"></AddressList>
+                        })}
+                    </div>
+                </div>
+                <div className="col-span-6 lg:col-span-2 embed-responsive embed-responsive-16by9">
+                    <iframe 
+                        className="embed-responsive-item"
+                        src={address[0].kontaktMap.googleMapsUrl} 
+                        frameBorder="0" 
+                        scrolling="no">
+                    </iframe>
+                </div>
+            </section>
         </>
     )
 }
