@@ -28,8 +28,9 @@ export default function Footer(props) {
     return (
       <footer className="bg-gray-footer w-full">
         <div className="2xl:container px-8 py-16 2xl:px-0 mx-auto grid grid-cols-6 gap-4">
-              <div className="col-span-6">
-                <h3 className="font-serif footer-text-center text-xl lg:text-3xl">{props.generalSettings.title}</h3>
+              <div className="col-span-6 flex flex-wrap items-center">
+                <img className="logo align-middle" src="./../logo_black.svg"></img>
+                <h3 className="font-serif footer-text-center text-xl lg:text-3xl align-middle">{props.generalSettings.title}</h3>
               </div>
               <div className="col-span-6 md:col-span-3 lg:col-span-1 mb-4">
                 {address.map(item => {
