@@ -19,15 +19,13 @@ export default function AboutUs(props) {
             </section>
 
             <section className="grid grid-cols-6 gap-4 pb-16">
-                <div className="col-span-6 lg:col-span-2 lg:col-start-2 px-16 pb-8 lg:pb-0 flex flex-wrap items-center">
-                    <div>
-                        <p className="text-black-60 mb-4">
-                            Butikken holder åbent tirsdag til fredag fra kl. 10-17.30, samt lørdag fra kl. 10-14.
-                        </p>
-                        {address.map(item => {
-                            return <AddressList key={item.id} {...item} color="text-black-60"></AddressList>
-                        })}
-                    </div>
+                <div className="col-span-6 lg:col-span-2 lg:col-start-2 px-16 pb-8 lg:pb-0 self-center">
+                    <p className="text-black-60 mb-4">
+                        Butikken holder åbent tirsdag til fredag fra kl. 10-17.30, samt lørdag fra kl. 10-14.
+                    </p>
+                    {address.map(item => {
+                        return <AddressList key={item.id} {...item} color="text-black-60"></AddressList>
+                    })}
                 </div>
                 <div className="col-span-6 lg:col-span-2 embed-responsive embed-responsive-16by9">
                     <iframe 
