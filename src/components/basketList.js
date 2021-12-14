@@ -44,10 +44,12 @@ export default function BasketList(data) {
         </div>
         <div>
           <h3 className="font-bold">Pris</h3>
-          <span className="text-black-70 block">{`Stk: ${info.price}`}</span>
-          <span className="text-black-70 block">{`Total: ${
-            amount * info.price
-          }`}</span>
+          <span className="text-black-70 block">
+            Stk: <span className="ml-6">{info.price} DKK</span>
+          </span>
+          <span className="text-black-70 block">
+            Tota: <span className="ml-6">{amount * info.price} DKK</span>{" "}
+          </span>
         </div>
       </li>
     </>

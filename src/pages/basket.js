@@ -33,10 +33,10 @@ export default function Basket(props) {
             <h2 className="text-3xl col-span-2 mb-8">Check ud</h2>
             <div className="grid grid-cols-3 mt-10 gap-4">
               <h3 className="col-span-2">Ordreværdi</h3>
-              <span className=" font-bold col-span-1">{totalPrice}</span>
+              <span className=" font-bold col-span-1">{totalPrice} DKK</span>
               <h3 className="col-span-2">Levering</h3>
               <span className=" font-bold col-span-1">
-                {totalPrice >= 500 ? <>0</> : <>{levering}</>}
+                {totalPrice >= 500 ? <>0 DKK</> : <>{levering} DKK</>}
               </span>
             </div>
             <hr className="h-0.2 bg-black mt-10" />
@@ -44,9 +44,9 @@ export default function Basket(props) {
               <h3 className="col-span-2">Total</h3>
               <span className=" font-bold col-span-1">
                 {totalPrice >= 500 ? (
-                  <>{totalPrice}</>
+                  <>{totalPrice} DKK</>
                 ) : (
-                  <>{levering + totalPrice}</>
+                  <>{levering + totalPrice} DKK</>
                 )}
               </span>
             </div>
