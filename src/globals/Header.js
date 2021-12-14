@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-import React from 'react';
-import { useState } from 'react';
-import Link from "next/link";
-import Image from "next/image";
-=======
+import React from "react";
 import { useState } from "react";
 import Link from "next/link";
->>>>>>> feature/products
 
 export default function Header(props) {
   const [settings, setSettings] = useState([
@@ -63,18 +57,17 @@ export default function Header(props) {
         <nav className="w-full bg-black relative z-30 shadow">
           <div className="2xl:container mx-auto grid grid-cols-6 gap-x-4 px-8">
             <div className="lg:absolute col-span-5 lg:col-span-1 py-2 flex flex-wrap items-center">
-              <Image priority={true} width="36" height="36" className="align-middle" src="/logo_white.svg" alt="Strikkestedet hvidt logo"></Image>
+              <img
+                className="logo align-middle"
+                src="./../logo_white.svg"
+              ></img>
               <Link href="/">
-<<<<<<< HEAD
-                <a className="text-white font-serif text-lg lg:text-xl align-middle" onClick={subNavItemClick}>{props.generalSettings.title}</a>
-=======
                 <a
-                  className="text-white font-serif text-lg lg:text-xl"
+                  className="text-white font-serif text-lg lg:text-xl align-middle"
                   onClick={subNavItemClick}
                 >
                   {props.generalSettings.title}
                 </a>
->>>>>>> feature/products
               </Link>
             </div>
             {/* TODO: this will become a burgermenu */}
@@ -88,17 +81,8 @@ export default function Header(props) {
             {/* TODO: this will become a burgermenu END */}
             <div className="hidden lg:flex lg:col-span-6 gap-x-4 justify-center items-center py-3">
               <div className="mx-8">
-<<<<<<< HEAD
-                <a className="text-white font-bold cursor-pointer hover:underline" onClick={() => toggleSubMenu(1)}>Produkter</a>
-              </div>
-              <div className="mx-8">
-                <a className="text-white font-bold cursor-pointer hover:underline" onClick={() => toggleSubMenu(2)}>Lær at strikke</a>
-              </div>
-              <div className="mx-8">
-                <a className="text-white font-bold cursor-pointer hover:underline" onClick={() => toggleSubMenu(3)}>Om os</a>
-=======
                 <a
-                  className="text-white text-bold cursor-pointer hover:underline"
+                  className="text-white font-bold cursor-pointer hover:underline"
                   onClick={() => toggleSubMenu(1)}
                 >
                   Produkter
@@ -106,7 +90,7 @@ export default function Header(props) {
               </div>
               <div className="mx-8">
                 <a
-                  className="text-white text-bold cursor-pointer hover:underline"
+                  className="text-white font-bold cursor-pointer hover:underline"
                   onClick={() => toggleSubMenu(2)}
                 >
                   Lær at strikke
@@ -114,19 +98,18 @@ export default function Header(props) {
               </div>
               <div className="mx-8">
                 <a
-                  className="text-white text-bold cursor-pointer hover:underline"
+                  className="text-white font-bold cursor-pointer hover:underline"
                   onClick={() => toggleSubMenu(3)}
                 >
                   Om os
                 </a>
               </div>
-              <div>
+              <div className="mx-8">
                 <Link href="/basket">
-                  <a className="text-white text-bold cursor-pointer hover:underline">
+                  <a className="text-white font-bold cursor-pointer hover:underline">
                     Kurv
                   </a>
                 </Link>
->>>>>>> feature/products
               </div>
             </div>
           </div>
@@ -248,24 +231,24 @@ function SubMenu(props) {
 function SubNavItem(props) {
   const SubNavLink = React.forwardRef(({ onClick, href }, ref) => {
     return (
-      <a className="transition-all text-black-70 hover:text-black hover:underline" href={href} onClick={() => props.subNavItemClick()} ref={ref}>{props.title}</a>
-    )
-  })
+      <a
+        className="transition-all text-black-70 hover:text-black hover:underline"
+        href={href}
+        onClick={() => props.subNavItemClick()}
+        ref={ref}
+      >
+        {props.title}
+      </a>
+    );
+  });
 
   return (
     <div className="mx-8">
-<<<<<<< HEAD
-      <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`} passHref>
+      <Link
+        href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`}
+        passHref
+      >
         <SubNavLink></SubNavLink>
-=======
-      <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`}>
-        <a
-          className="transition-all text-black-70 hover:text-black hover:underline"
-          onClick={() => props.subNavItemClick()}
-        >
-          {props.title}
-        </a>
->>>>>>> feature/products
       </Link>
     </div>
   );
