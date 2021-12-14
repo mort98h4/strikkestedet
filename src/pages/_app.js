@@ -71,9 +71,6 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        <title>Strikkestedet</title>
-      </Head>
       {
         data.length != 0 ? (
           <>
@@ -83,9 +80,8 @@ function MyApp({ Component, pageProps }) {
           </main>
           <Footer {...data}></Footer>
           </>
-        ) : ""
+        ) : "Loading..."
       }
-      {/* <Footer></Footer> */}
     </>
   )
 }
