@@ -2,8 +2,10 @@ import { getHomePage } from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
 import Image from "next/image";
+import Head from "next/head";
 
 export default function Home(props) {
+  console.log(props);
   const ctaSection1 = props.content.page.homepagectasection1;
   const ctaSection2 = props.content.page.homepagectasection2;
   const ctaSection3 = props.content.page.homepagectasection3;
@@ -19,6 +21,10 @@ export default function Home(props) {
 
   return (
     <>
+      <Head>
+        <title>{props.content.page.metaFields.sideTitel}</title>
+        <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta> 
+      </Head>
       <section className="grid grid-cols-6 gap-4">
         <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
           <Image priority={true} layout="fill" objectFit="cover" sizes="100vw, 66vw" src={ctaSection1.image1.guid} alt={ctaSection1.image1.altText}></Image>
