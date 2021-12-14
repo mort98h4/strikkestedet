@@ -1,6 +1,7 @@
 import { getHomePage } from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
+import Image from "next/image";
 
 export default function Home(props) {
   const ctaSection1 = props.content.page.homepagectasection1;
@@ -29,10 +30,12 @@ export default function Home(props) {
   return (
     <>
       <section className="grid grid-cols-6 gap-4">
-        <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center" style={patternsBgImage}>
+        <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
+          <Image priority={true} layout="fill" objectFit="cover" sizes="100vw, 66vw" src={ctaSection1.image1.guid}></Image>
           <Button href={ctaSection1.ctaHref1} fullWidth={false}>{ctaSection1.ctaText1}</Button>
         </div>
-        <div className="col-span-6 md:col-span-2 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center" style={yarnBgImage}>
+        <div className="col-span-6 md:col-span-2 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
+          <Image priority={true} layout="fill" objectFit="cover" sizes="100vw, 33vw" src={ctaSection2.image2.guid}></Image>
           <Button href={ctaSection2.ctaHref2}>{ctaSection2.ctaText2}</Button>
         </div>
       </section>
@@ -75,10 +78,8 @@ export default function Home(props) {
             </Button>
           </form>
         </div>
-        <div
-          className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center"
-          style={knitBgImage}
-        >
+        <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
+          <Image layout="fill" objectFit="cover" sizes="100vw, 66vw" src={ctaSection3.image3.guid}></Image>
           <Button href={ctaSection3.ctaHref3}>{ctaSection3.ctaText3}</Button>
         </div>
       </section>
