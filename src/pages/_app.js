@@ -88,11 +88,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        <title>Strikkestedet</title>
-      </Head>
-      {data.length != 0 ? (
-        <>
+      {
+        data.length != 0 ? (
+          <>
           <Header {...data}></Header>
           <main className="2xl:container mx-auto bg-background">
             <Component
@@ -102,11 +100,9 @@ function MyApp({ Component, pageProps }) {
             />
           </main>
           <Footer {...data}></Footer>
-        </>
-      ) : (
-        ""
-      )}
-      {/* <Footer></Footer> */}
+          </>
+        ) : "Loading..."
+      }
     </>
   );
 }

@@ -63,7 +63,7 @@ export default function Header(props) {
         <nav className="w-full bg-black relative z-30 shadow">
           <div className="2xl:container mx-auto grid grid-cols-6 gap-x-4 px-8">
             <div className="lg:absolute col-span-5 lg:col-span-1 py-2 flex flex-wrap items-center">
-              <Image priority={true} width="36" height="36" className="align-middle" src="/logo_white.svg"></Image>
+              <Image priority={true} width="36" height="36" className="align-middle" src="/logo_white.svg" alt="Strikkestedet hvidt logo"></Image>
               <Link href="/">
 <<<<<<< HEAD
                 <a className="text-white font-serif text-lg lg:text-xl align-middle" onClick={subNavItemClick}>{props.generalSettings.title}</a>

@@ -23,7 +23,7 @@ export default function CustomerReview(props) {
                 {getStarsArray(review.trustpilotStars).map((star) => {
                     return (
                         <Image height="32" width="32" key={props.node.id + "-" + star.toString()} src="/review_star.svg"
-                        className="inline-block mr-2"></Image>
+                        className="inline-block mr-2" alt="stjerne"></Image>
                     )
                 })}
             </div>
