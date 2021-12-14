@@ -1,20 +1,33 @@
 import { getYarnProduct } from "../../../../lib/api";
 import { useState } from "react";
 import clsx from "clsx";
-import Link from "next/link";
 import { Arrow } from "../../../components/arrow";
+import Link from "next/link";
 
 function Product(props) {
+  console.log(props);
   const [amount, setAmount] = useState(0);
   const [colorNav, setColorNav] = useState(false);
   const [infoNav, setInfoNav] = useState(false);
-  const [basket, setBasket] = useState([]);
+
   const [chosenColor, setChosenColor] = useState("");
   const [colorBtn, setColorBtn] = useState(false);
+  const [colorForBasket, setColorForBasket] = useState(false);
 
   const info = props.data.postBy.yarnproduct;
   const colors = props.data.postBy.color;
   const details = props.data.postBy;
+
+  function Color(color) {
+    setColorForBasket((item) => {
+      item = color;
+      return item;
+    });
+    setChosenColor((item) => {
+      item = color.title;
+      return item;
+    });
+  }
 
   function ColorBtn() {
     setColorBtn((btn) => {
@@ -76,10 +89,6 @@ function Product(props) {
     setAmount((prevState) => {
       return prevState * 0;
     });
-  }
-
-  function addToBasket(info, amount) {
-    console.log(info, amount);
   }
 
   const colorArray = [
@@ -179,7 +188,12 @@ function Product(props) {
                       ColorBtn();
                     }}
                   >
-                    Vælg farveVælg farve
+                    {chosenColor ? (
+                      <span>{chosenColor}</span>
+                    ) : (
+                      <span>Vælg en farve</span>
+                    )}
+
                     <div className="pt-1">
                       <Arrow></Arrow>
                     </div>
@@ -188,17 +202,28 @@ function Product(props) {
                     <div className="flex flex-col ">
                       <div className="absolute w-[300px]">
                         {usedColors.map((color) => {
-                          console.log(color.description);
                           return (
-                            <>
+                            <div key={color.title}>
                               <hr className="h-0.1 bg-black" />
                               <button
                                 className=" bg-gray-input py-2 px-4 hover:bg-gray-footer w-full"
-                                key={color.guid}
+                                onClick={() => {
+                                  Color(color);
+                                  ColorBtn();
+                                }}
                               >
-                                {color.title} {color.description}
+                                <div className="flex flex-row ">
+                                  <img
+                                    className="mr-10"
+                                    width="30px"
+                                    height="30px"
+                                    src={color.guid}
+                                    alt={color.alt}
+                                  />
+                                  {color.title}
+                                </div>
                               </button>
-                            </>
+                            </div>
                           );
                         })}
                       </div>
@@ -207,12 +232,12 @@ function Product(props) {
                 </div>
                 <button
                   onClick={() => {
-                    addToBasket(info, amount);
+                    props.addToBasket(info, amount, colorForBasket);
                     resetAmount();
                   }}
-                  disabled={amount === 0}
+                  disabled={amount === 0 || !chosenColor}
                   className={clsx(
-                    amount === 0
+                    amount === 0 || !chosenColor
                       ? "bg-black-20 text-white-60"
                       : "bg-black-70 text-white hover:bg-black",
                     "py-2 px-4 col-span-2"
