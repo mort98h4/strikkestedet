@@ -3,7 +3,6 @@ import Image from "next/image";
 import AddressList from "../components/AddressList";
 
 export default function Footer(props) {
-  console.log(props);
   const address = props.posts.nodes.map(item => {
     if (item.id === "cG9zdDo0NDE=") {
         return item;

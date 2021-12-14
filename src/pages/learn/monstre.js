@@ -2,7 +2,6 @@ import { getPatternsPage } from "../../../lib/api" ;
 import ImageSection from "../../components/ImageSection";
 
 export default function Patterns(props) {
-    console.log(props);
     const section1 = props.content.page.learnsection1;
     const learningImages = props.content.posts.nodes;
 

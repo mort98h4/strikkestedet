@@ -2,7 +2,6 @@ import { getConditionsPage } from "../../../lib/api";
 import ImageSection from "../../components/ImageSection";
 
 export default function AboutUs(props) {
-    console.log(props);
     const section1 = props.content.page.aboutsection1;
     const conditions = props.content.page.handelsbetingelser;
     const aboutImages = props.content.posts.nodes;
