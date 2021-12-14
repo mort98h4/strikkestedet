@@ -13,16 +13,6 @@ export default function Home(props) {
   const selectedItems = props.content.page.homepageselecteditems;
   const reviews = props.content.posts.edges;
 
-  const patternsBgImage = {
-    backgroundImage: "url('" + ctaSection1.image1.guid + "')",
-  };
-  const yarnBgImage = {
-    backgroundImage: "url('" + ctaSection2.image2.guid + "')",
-  };
-  const knitBgImage = {
-    backgroundImage: "url('" + ctaSection3.image3.guid + "')",
-  };
-
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -31,11 +21,11 @@ export default function Home(props) {
     <>
       <section className="grid grid-cols-6 gap-4">
         <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
-          <Image priority={true} layout="fill" objectFit="cover" sizes="100vw, 66vw" src={ctaSection1.image1.guid}></Image>
+          <Image priority={true} layout="fill" objectFit="cover" sizes="100vw, 66vw" src={ctaSection1.image1.guid} alt={ctaSection1.image1.altText}></Image>
           <Button href={ctaSection1.ctaHref1} fullWidth={false}>{ctaSection1.ctaText1}</Button>
         </div>
         <div className="col-span-6 md:col-span-2 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
-          <Image priority={true} layout="fill" objectFit="cover" sizes="100vw, 33vw" src={ctaSection2.image2.guid}></Image>
+          <Image priority={true} layout="fill" objectFit="cover" sizes="100vw, 33vw" src={ctaSection2.image2.guid} alt={ctaSection2.image2.altText}></Image>
           <Button href={ctaSection2.ctaHref2}>{ctaSection2.ctaText2}</Button>
         </div>
       </section>
@@ -79,7 +69,7 @@ export default function Home(props) {
           </form>
         </div>
         <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
-          <Image layout="fill" objectFit="cover" sizes="100vw, 66vw" src={ctaSection3.image3.guid}></Image>
+          <Image layout="fill" objectFit="cover" sizes="100vw, 66vw" src={ctaSection3.image3.guid} alt={ctaSection3.image3.altText}></Image>
           <Button href={ctaSection3.ctaHref3}>{ctaSection3.ctaText3}</Button>
         </div>
       </section>
