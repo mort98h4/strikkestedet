@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import AddressList from "../components/AddressList";
 
 export default function Footer(props) {
@@ -29,7 +30,7 @@ export default function Footer(props) {
       <footer className="bg-gray-footer w-full">
         <div className="2xl:container px-8 py-16 2xl:px-0 mx-auto grid grid-cols-6 gap-4">
               <div className="col-span-6 flex flex-wrap items-center justify-center lg:justify-start">
-                <img className="logo align-middle" src="./../logo_black.svg"></img>
+                <Image width="50" height="50" className="align-middle" src="/logo_black.svg"></Image>
                 <h3 className="font-serif footer-text-center text-xl lg:text-3xl align-middle">{props.generalSettings.title}</h3>
               </div>
               <div className="col-span-6 md:col-span-3 lg:col-span-1 mb-4">
@@ -71,10 +72,10 @@ export default function Footer(props) {
                 <h4 className="text-center font-bold mb-2 w-full">Følg os</h4>
                 <div className="flex justify-center">
                   <a className="mx-1 transition opacity-70 hover:opacity-100" href="https://www.facebook.com/strikkestedet2650" target="_blank">
-                    <img src="./../facebook_icon.svg" alt="Facebook icon"></img>
+                    <Image width="48" height="48" src="/facebook_icon.svg" alt="Facebook icon"></Image>
                   </a>
                   <a className="mx-1 transition opacity-70 hover:opacity-100" href="https://www.instagram.com/strikkestedet" target="_blank">
-                    <img src="./../instagram_icon.svg" alt="Instagram icon"></img>
+                    <Image width="48" height="48" src="/instagram_icon.svg" alt="Instagram icon"></Image>
                   </a>
                 </div>
               </div>

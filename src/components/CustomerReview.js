@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function CustomerReview(props) {
     const review = props.node.customerreview;
 
@@ -20,8 +22,8 @@ export default function CustomerReview(props) {
                 <h4 className="font-sans text-lg font-bold">Trustpilot</h4>
                 {getStarsArray(review.trustpilotStars).map((star) => {
                     return (
-                        <img key={props.node.id + "-" + star.toString()} src="./review_star.svg"
-                        className="inline-block mr-2"></img>
+                        <Image height="32" width="32" key={props.node.id + "-" + star.toString()} src="/review_star.svg"
+                        className="inline-block mr-2"></Image>
                     )
                 })}
             </div>
