@@ -4,7 +4,7 @@ module.exports = {
     "./src/globals/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'media', // or 'media' or 'class'
+  darkMode: "media", // or 'media' or 'class'
   theme: {
     colors: {
       background: {
@@ -67,9 +67,22 @@ module.exports = {
         "serif",
       ],
     },
-    // fontSize: {
-    //   h1: '2.8rem'
-    // },
+    fontSize: {
+      tiny: ".675rem",
+      xxs: ".80rem",
+      xs: ".85rem",
+      sm: ".875rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "4rem",
+      "7xl": "5rem",
+    },
+
     extend: {},
   },
 };
