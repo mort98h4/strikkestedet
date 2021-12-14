@@ -9,7 +9,8 @@ export default function ImageSection(props) {
                 <div className={"col-span-6 md:col-span-3 lg:col-span-2 md:px-8 "
                     + ((props.index % 2 > 0) ? " md:order-2" : " md:order-1 lg:col-start-2")}>
                     <div>
-                        <Image 
+                        <Image
+                            priority={props.index === 0 ? true : false} 
                             sizes={"100vw, 50vw"}
                             layout='responsive'
                             objectFit='cover'
