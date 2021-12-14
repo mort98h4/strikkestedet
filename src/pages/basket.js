@@ -14,8 +14,8 @@ export default function Basket(props) {
 
   return (
     <>
-      <div className="md:grid md:grid-cols-6 max-screen-w-2xl gap-x-4 mb-10">
-        <h1 className="md:text-3xl col-span-6 mt-10">Basket</h1>
+      <div className="p-4 md:p-0 md:grid lg:grid-cols-6 max-screen-w-2xl gap-x-4 mb-10">
+        <h1 className="text-3xl font-serif col-span-6 mt-6 md:mt-10">Basket</h1>
         <div className="md:col-span-4 md:grid md:grid-flow-row gap-y-8 mt-10">
           <nav>
             <ul>
@@ -28,9 +28,11 @@ export default function Basket(props) {
             </ul>
           </nav>
         </div>
-        <div className="col-span-2 mt-10 ml-6">
+        <div className="col-span-2 mt-10 md:ml-6">
           <div className="p-10 bg-white ">
-            <h2 className="text-3xl col-span-2 mb-8">Check ud</h2>
+            <h2 className="text-2xl font-serif md:text-3xl col-span-2 mb-8">
+              Check ud
+            </h2>
             <div className="grid grid-cols-3 mt-10 gap-4">
               <h3 className="col-span-2">Ordreværdi</h3>
               <span className=" font-bold col-span-1">{totalPrice} DKK</span>
@@ -50,7 +52,7 @@ export default function Basket(props) {
                 )}
               </span>
             </div>
-            <button className="mt-10 bg-black-70 text-white py-2 px-4 col-span-2">
+            <button className="mt-10 bg-black-70 text-white py-2 px-4 col-span-2 hover:bg-black">
               Fortsæt til betaling
             </button>
           </div>

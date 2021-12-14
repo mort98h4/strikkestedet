@@ -8,7 +8,7 @@ export default function BasketList(data) {
   return (
     <>
       <hr className="h-0.2 bg-black" />
-      <li className="md:row-span-1 bg-white p-4 grid grid-cols-4">
+      <li className="row-span-1 grid-cols-2 gap-y-10 lg:gap-y-0 md:bg-white p-4 grid lg:grid-cols-4 lg:gap-4">
         <img src={color.guid} alt="" width="100px" height="100px" />
         <div>
           <h3 className="font-bold">{info.title}</h3>
