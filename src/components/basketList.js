@@ -4,6 +4,7 @@ export default function BasketList(data) {
   const info = data.data[0];
   const amount = data.data[1].amount.amount;
   const color = data.data[2];
+
   return (
     <>
       <hr className="h-0.2 bg-black" />
@@ -20,22 +21,35 @@ export default function BasketList(data) {
           <div className="flex flex-row h-10 gap-1">
             <button
               className={clsx(
-                amount === 0 ? "text-black-40" : "",
+                amount ? "text-white" : "",
                 "inline bg-black-10 py-2 px-4"
               )}
-              disabled={amount === 0}
-              //onClick={clickedMinus}
+              disabled
             >
               -
             </button>
             <div className="bg-black-10 py-2 px-4">
               <p className="">{amount}</p>
             </div>
-            <button className="inline bg-black-10 py-2 px-4">+</button>
+            <button
+              disabled
+              className={clsx(
+                amount ? "bg-black-10 text-white" : "",
+                "py-2 px-4"
+              )}
+            >
+              +
+            </button>
           </div>
         </div>
+        <div>
+          <h3 className="font-bold">Pris</h3>
+          <span className="text-black-70 block">{`Stk: ${info.price}`}</span>
+          <span className="text-black-70 block">{`Total: ${
+            amount * info.price
+          }`}</span>
+        </div>
       </li>
-      ;
     </>
   );
 }
