@@ -1,4 +1,4 @@
-import { getYarnPage, getYarnProducts } from "../../../lib/api";
+import { getYarnPage, getYarnProducts } from "../../../../lib/api";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -7,10 +7,9 @@ export default function Garn(props) {
   const router = useRouter();
   const { slug } = router.query;
 
-  console.log(props);
   return (
     <>
-      <div className=" md:grid md:grid-cols-6 md:grid-flow-row md:gap-4 h-20">
+      <div className=" md:grid md:grid-cols-6 md:grid-flow-row md:gap-4 ">
         <aside className="h-20 md:col-start-0 md:col-end-3">
           <span>Aside bar</span>
         </aside>
@@ -20,15 +19,11 @@ export default function Garn(props) {
           </section>
           <section className="md:col-span-1 md:grid md:grid-cols-4 md:gap-4">
             {props.newData.map((item) => {
-              let colorArr = [];
-              console.log(item.node.color.color1);
-
-              console.log(item.node.slug);
               return (
                 <Link
                   key={item.node.id}
                   href={{
-                    pathname: "/products/[slug]",
+                    pathname: "/products/garn/[slug]",
                     query: { slug: item.node.slug },
                   }}
                 >
