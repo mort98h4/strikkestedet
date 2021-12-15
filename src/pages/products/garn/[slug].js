@@ -5,7 +5,6 @@ import { Arrow } from "../../../components/arrow";
 import Link from "next/link";
 
 function Product(props) {
-  console.log(props);
   const [amount, setAmount] = useState(0);
   const [colorNav, setColorNav] = useState(true);
   const [infoNav, setInfoNav] = useState(false);
@@ -17,6 +16,105 @@ function Product(props) {
   const info = props.data.postBy.yarnproduct;
   const colors = props.data.postBy.color;
   const details = props.data.postBy;
+  const colorImage = props.data.postBy.productimages;
+
+  const imageArray = [
+    colorImage.image1,
+    colorImage.image2,
+    colorImage.image3,
+    colorImage.image4,
+    colorImage.image5,
+    colorImage.image6,
+    colorImage.image7,
+    colorImage.image8,
+    colorImage.image9,
+    colorImage.image10,
+    colorImage.image11,
+    colorImage.image12,
+    colorImage.image13,
+    colorImage.image14,
+    colorImage.image15,
+    colorImage.image16,
+    colorImage.image17,
+    colorImage.image18,
+    colorImage.image19,
+    colorImage.image20,
+    colorImage.image21,
+    colorImage.image22,
+    colorImage.image23,
+    colorImage.image24,
+    colorImage.image25,
+    colorImage.image26,
+    colorImage.image27,
+    colorImage.image28,
+    colorImage.image29,
+    colorImage.image30,
+    colorImage.image31,
+    colorImage.image32,
+    colorImage.image33,
+    colorImage.image34,
+    colorImage.image35,
+    colorImage.image36,
+    colorImage.image37,
+    colorImage.image38,
+    colorImage.imagee39,
+    colorImage.image40,
+  ];
+  const usedImages = [];
+  imageArray.forEach((image) => {
+    if (image) {
+      usedImages.push(image);
+    }
+  });
+
+  const colorArray = [
+    colors.color1,
+    colors.color2,
+    colors.color3,
+    colors.color4,
+    colors.color5,
+    colors.color6,
+    colors.color7,
+    colors.color8,
+    colors.color9,
+    colors.color10,
+    colors.color11,
+    colors.color12,
+    colors.color13,
+    colors.color14,
+    colors.color15,
+    colors.color16,
+    colors.color17,
+    colors.color18,
+    colors.color19,
+    colors.color20,
+    colors.color21,
+    colors.color22,
+    colors.color23,
+    colors.color24,
+    colors.color25,
+    colors.color26,
+    colors.color27,
+    colors.color28,
+    colors.color29,
+    colors.color30,
+    colors.color31,
+    colors.color32,
+    colors.color33,
+    colors.color34,
+    colors.color35,
+    colors.color36,
+    colors.color37,
+    colors.color38,
+    colors.color39,
+    colors.color40,
+  ];
+  const usedColors = [];
+  colorArray.forEach((color) => {
+    if (color) {
+      usedColors.push(color);
+    }
+  });
 
   function Color(color) {
     setColorForBasket((item) => {
@@ -90,73 +188,56 @@ function Product(props) {
       return prevState * 0;
     });
   }
-
-  const colorArray = [
-    colors.color1,
-    colors.color2,
-    colors.color3,
-    colors.color4,
-    colors.color5,
-    colors.color6,
-    colors.color7,
-    colors.color8,
-    colors.color9,
-    colors.color10,
-    colors.color11,
-    colors.color12,
-    colors.color13,
-    colors.color14,
-    colors.color15,
-    colors.color16,
-    colors.color17,
-    colors.color18,
-    colors.color19,
-    colors.color20,
-    colors.color21,
-    colors.color22,
-    colors.color23,
-    colors.color24,
-    colors.color25,
-    colors.color26,
-    colors.color27,
-    colors.color28,
-    colors.color29,
-    colors.color30,
-    colors.color31,
-    colors.color32,
-    colors.color33,
-    colors.color34,
-    colors.color35,
-    colors.color36,
-    colors.color37,
-    colors.color38,
-    colors.color39,
-    colors.color40,
-  ];
-  let usedColors = [];
-  colorArray.forEach((color) => {
-    if (color) {
-      usedColors.push(color);
-    }
-  });
-
+  console.log(colorForBasket);
   return (
     <>
       <article className="md:grid md:grid-cols-6 text-sm">
         <section className="grid grid-cols-2 md:col-span-4 md:mt-10 md:grid-cols-4 md:gap-4">
           <div className="block col-span-1 md:col-span-2">
-            <img
-              src={info.image.guid}
-              alt={info.image.alt}
-              className="object-cover object-bottom h-[500px] w-[100%]"
-            />
+            {colorForBasket === false ? (
+              <img
+                src={info.colorimage.guid}
+                alt={info.colorimage.alt}
+                className="object-cover object-bottom h-[500px] w-[100%]"
+              />
+            ) : (
+              <>
+                {usedColors.map((item) => {
+                  if (item.title === colorForBasket.title) {
+                    return (
+                      <img
+                        src={colorForBasket.guid}
+                        alt={colorForBasket.alt}
+                        className="object-cover object-bottom h-[500px] w-[100%]"
+                      />
+                    );
+                  }
+                })}
+              </>
+            )}
           </div>
           <div className="col-span-1 md:col-span-2">
-            <img
-              src={info.image.guid}
-              alt={info.image.alt}
-              className="object-cover object-bottom h-[500px] w-[100%]"
-            />
+            {colorForBasket === false ? (
+              <img
+                src={info.image.guid}
+                alt={info.image.alt}
+                className="object-cover object-bottom h-[500px] w-[100%]"
+              />
+            ) : (
+              <>
+                {usedImages.map((item) => {
+                  if (item.title === colorForBasket.title) {
+                    return (
+                      <img
+                        src={item.guid}
+                        alt={item.alt}
+                        className="object-cover object-bottom h-[500px] w-[100%]"
+                      />
+                    );
+                  }
+                })}
+              </>
+            )}
           </div>
         </section>
         <div className="col-start-5 col-end-6">
@@ -225,7 +306,7 @@ function Product(props) {
                                 className=" bg-gray-input py-2 px-4 hover:bg-gray-footer w-full"
                                 onClick={() => {
                                   Color(color);
-                                  ColorBtn();
+                                  ColorBtn(color);
                                 }}
                               >
                                 <div className="flex flex-row ">
@@ -370,7 +451,12 @@ function Product(props) {
                         key={color.alt}
                         className="md:col-span-1 product-container"
                       >
-                        <div className="image-container">
+                        <div
+                          onClick={() => {
+                            Color(color);
+                          }}
+                          className="image-container"
+                        >
                           <img
                             src={color.guid}
                             alt={color.alt}
