@@ -10,7 +10,7 @@ export default function Garn(props) {
   console.log(props);
   const [filteredList, setFilteredList] = useState(props.newData);
   const [brandFilter, setBrandfilter] = useState(true);
-  const [fiberFilter, setFiberfilter] = useState(true);
+  const [fiberFilter, setFiberfilter] = useState(false);
   const router = useRouter();
   const { slug } = router.query;
 
@@ -85,7 +85,7 @@ export default function Garn(props) {
               >
                 <button className="font-bold mb-4 ">Brand</button>
                 <div className="pt-2">
-                  <Arrow />
+                  <Arrow rotate={brandFilter}/>
                 </div>
               </div>
               {brandFilter ? (
@@ -131,7 +131,7 @@ export default function Garn(props) {
               >
                 <button className="font-bold mb-4 ">Fibre</button>
                 <div className="pt-2">
-                  <Arrow />
+                  <Arrow rotate={fiberFilter} />
                 </div>
               </div>
               {fiberFilter ? (
