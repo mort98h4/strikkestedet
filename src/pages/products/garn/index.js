@@ -2,6 +2,7 @@ import { getYarnPage, getYarnProducts, getData } from "../../../../lib/api";
 import { getTags } from "../../../../lib/api";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Arrow } from "../../../components/arrow";
@@ -53,6 +54,13 @@ export default function Garn(props) {
 
   return (
     <>
+      <Head>
+          <title>{props.newPage.metaFields.sideTitel}</title>
+          <meta name="description" content={props.newPage.metaFields.sideBeskrivelse}></meta> 
+          <link rel="icon" type="image/png" sizez="180x180" href="./apple-touch-icon.png"></link>
+          <link rel="icon" type="image/png" sizez="32x32" href="./favicon32x32"></link>
+          <link rel="icon" type="image/png" sizez="16x16" href="./favicon16x16"></link>
+      </Head>  
       <div className="md:grid md:grid-cols-6 md:gap-4 mb-32 mt-4 p-4 2xl:p-0 md:mt-16">
         <div className="md:hidden">
           <h1 className="font-serif text-5xl mb-4">Garn</h1>
