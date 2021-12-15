@@ -57,7 +57,7 @@ export default function Header(props) {
       <header className="w-full fixed z-10">
         <nav className="w-full bg-black relative z-30 shadow">
           <div className="2xl:container mx-auto grid grid-cols-6 gap-x-4 px-8">
-            <div className="lg:absolute col-span-5 lg:col-span-1 py-2 flex flex-wrap items-center">
+            <div className="lg:absolute col-span-4 lg:col-span-1 py-2 flex flex-wrap items-center">
               <Image width="36" height="36" className="align-middle" src="/logo_white.svg"></Image>
               <Link href="/">
                 <a
@@ -68,15 +68,21 @@ export default function Header(props) {
                 </a>
               </Link>
             </div>
-            {/* TODO: this will become a burgermenu */}
-            <div className="col-span-1 flex justify-end items-center lg:hidden py-2">
-              <div className="burger" onClick={handleBurgerClick}>
+            <div className="col-span-2 flex justify-end items-center lg:absolute lg:right-8 py-2">
+              <Link href="/basket">
+                  <div className="flex items-center">
+                      <a className="hidden lg:inline-block text-white font-bold cursor-pointer hover:underline mr-2">
+                          Din kurv 
+                      </a>
+                      <Image height="36" width="36" src="/basket_new.svg" className="align-middle cursor-pointer"></Image>
+                  </div>
+              </Link>
+              <div className="ml-2 burger lg:hidden" onClick={handleBurgerClick}>
                 <div className="line1"></div>
                 <div className="line2"></div>
                 <div className="line3"></div>
               </div>
             </div>
-            {/* TODO: this will become a burgermenu END */}
             <div className="hidden lg:flex lg:col-span-6 gap-x-4 justify-center items-center py-3">
               <div className="mx-8">
                 <a
@@ -101,14 +107,6 @@ export default function Header(props) {
                 >
                   Om os
                 </a>
-              </div>
-              <div className="mx-8">
-                <Link href="/basket">
-                  <a className="text-white font-bold cursor-pointer hover:underline">
-                    <Image height="36" width="36" src="/basket.svg"></Image>
-                    Kurv 
-                  </a>
-                </Link>
               </div>
             </div>
           </div>
