@@ -1,6 +1,6 @@
 export default function AddressList(props) {
     return (
-        <ul className={props.color ? props.color : "text-color-60"}>
+        <ul className={props.color ? props.color : "text-black-60"}>
             <li className="">
                 E-mail: <a className="transition hover:text-black hover:underline" href={`mailto:${props.kontaktMap.email}`}>{props.kontaktMap.email}</a>
             </li>

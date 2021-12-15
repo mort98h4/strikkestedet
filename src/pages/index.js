@@ -1,4 +1,4 @@
-import { getHomePage } from "../../lib/api";
+import { getHomePage, getData } from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
 import Image from "next/image";
@@ -23,7 +23,10 @@ export default function Home(props) {
     <>
       <Head>
         <title>{props.content.page.metaFields.sideTitel}</title>
-        <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta> 
+        <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta>
+        <link rel="icon" type="image/png" sizez="180x180" href="./apple-touch-icon.png"></link>
+        <link rel="icon" type="image/png" sizez="32x32" href="./favicon32x32"></link>
+        <link rel="icon" type="image/png" sizez="16x16" href="./favicon16x16"></link>
       </Head>
       <section className="grid grid-cols-6 gap-4">
         <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
@@ -147,15 +150,11 @@ export default function Home(props) {
 
 export async function getStaticProps() {
   const content = await getHomePage();
+  const headerFooterData = await getData();
   return {
     props: {
       content,
+      headerFooterData
     }
   }
-  // const allPosts = await getAllPosts();
-  // return {
-  //   props: {
-  //     allPosts
-  //   }
-  // };
 }

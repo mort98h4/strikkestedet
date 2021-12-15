@@ -1,4 +1,4 @@
-import { getYarnProduct } from "../../../../lib/api";
+import { getData, getYarnProduct } from "../../../../lib/api";
 import { useState } from "react";
 import clsx from "clsx";
 import { Arrow } from "../../../components/arrow";
@@ -484,10 +484,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const data = await getYarnProduct(params.slug);
+  const headerFooterData = await getData();
 
   return {
     props: {
       data,
+      headerFooterData,
     },
   };
 }

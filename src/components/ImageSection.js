@@ -4,7 +4,7 @@ export default function ImageSection(props) {
     const image = props.learningimages ? props.learningimages : props.aboutimages;
 
     return (
-        <section className="w-full mb-4">
+        <section className="w-full mb-8 md:mb-16">
             <article className="grid grid-cols-6 gap-4 flex flex-wrap">
                 <div className={"col-span-6 md:col-span-3 lg:col-span-2 md:px-8 "
                     + ((props.index % 2 > 0) ? " md:order-2" : " md:order-1 lg:col-start-2")}>

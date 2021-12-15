@@ -1,4 +1,4 @@
-import { getContactPage } from "../../../lib/api";
+import { getContactPage, getData } from "../../../lib/api" ;
 import AddressList from "../../components/AddressList";
 import Head from "next/head";
 
@@ -14,7 +14,10 @@ export default function AboutUs(props) {
         <>
             <Head>
                 <title>{props.content.page.metaFields.sideTitel}</title>
-                <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta> 
+                <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta>
+                <link rel="icon" type="image/png" sizez="180x180" href="./apple-touch-icon.png"></link>
+                <link rel="icon" type="image/png" sizez="32x32" href="./favicon32x32"></link>
+                <link rel="icon" type="image/png" sizez="16x16" href="./favicon16x16"></link> 
             </Head>
             <section className="grid grid-cols-6 gap-4">
                 <article className="col-span-6 lg:col-span-3 lg:col-start-2 p-16">
@@ -23,8 +26,8 @@ export default function AboutUs(props) {
                 </article>
             </section>
 
-            <section className="grid grid-cols-6 gap-4 pb-16">
-                <div className="col-span-6 lg:col-span-2 lg:col-start-2 px-16 pb-8 lg:pb-0 self-center">
+            <section className="grid grid-cols-6 gap-4 mb-8 lg:mb-16">
+                <div className="col-span-6 md:col-span-3 lg:col-span-2 lg:col-start-2 px-8 pb-8 md:pb-0 self-center">
                     <p className="text-black-60 mb-4">
                         Butikken holder åbent tirsdag til fredag fra kl. 10-17.30, samt lørdag fra kl. 10-14.
                     </p>
@@ -32,7 +35,7 @@ export default function AboutUs(props) {
                         return <AddressList key={item.id} {...item} color="text-black-60"></AddressList>
                     })}
                 </div>
-                <div className="col-span-6 lg:col-span-2 embed-responsive embed-responsive-16by9">
+                <div className="col-span-6 md:col-span-3 lg:col-span-2 embed-responsive embed-responsive-16by9">
                     <iframe 
                         className="embed-responsive-item"
                         src={address[0].kontaktMap.googleMapsUrl} 
@@ -47,9 +50,11 @@ export default function AboutUs(props) {
 
 export async function getStaticProps() {
     const content = await getContactPage();
+    const headerFooterData = await getData();
     return {
-        props: {
-            content,
-        }
+      props: {
+        content,
+        headerFooterData
+      }
     }
-}
+  }

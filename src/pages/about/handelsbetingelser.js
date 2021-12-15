@@ -1,8 +1,11 @@
-import { getConditionsPage } from "../../../lib/api";
+import { getConditionsPage, getData } from "../../../lib/api" ;
 import ImageSection from "../../components/ImageSection";
+import AddressList from "../../components/AddressList";
+
 import Head from "next/head";
 
 export default function AboutUs(props) {
+    console.log(props);
     const section1 = props.content.page.aboutsection1;
     const conditions = props.content.page.handelsbetingelser;
     const aboutImages = props.content.posts.nodes;
@@ -11,7 +14,10 @@ export default function AboutUs(props) {
         <>
             <Head>
                 <title>{props.content.page.metaFields.sideTitel}</title>
-                <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta> 
+                <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta>
+                <link rel="icon" type="image/png" sizez="180x180" href="./apple-touch-icon.png"></link>
+                <link rel="icon" type="image/png" sizez="32x32" href="./favicon32x32"></link>
+                <link rel="icon" type="image/png" sizez="16x16" href="./favicon16x16"></link>
             </Head>
             <section className="grid grid-cols-6 gap-4">
                 <article className="col-span-6 lg:col-span-3 lg:col-start-2 p-16">
@@ -49,7 +55,8 @@ export default function AboutUs(props) {
                         <h2 className="font-bold text-lg">{conditions.header04}</h2> 
                         {conditions.subheader04 != null ? 
                         <h3 className="font-bold mb-2">{conditions.subheader04}</h3> : ""}
-                        <p className="text-black-60">{conditions.body04}</p>
+                        <p className="text-black-60 mb-4">{conditions.body04}</p>
+                        <AddressList {...props.headerFooterData.posts.nodes[0]}></AddressList>
                     </article>
                 ) : "")}
                 {(conditions.header05 != null || conditions.body05 != null ? (
@@ -119,9 +126,11 @@ export default function AboutUs(props) {
 
 export async function getStaticProps() {
     const content = await getConditionsPage();
+    const headerFooterData = await getData();
     return {
-        props: {
-            content,
-        }
+      props: {
+        content,
+        headerFooterData
+      }
     }
-}
+  }

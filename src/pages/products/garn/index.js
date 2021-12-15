@@ -1,4 +1,5 @@
-import { getTags, getYarnPage, getYarnProducts } from "../../../../lib/api";
+import { getYarnPage, getYarnProducts, getData } from "../../../../lib/api";
+import { getTags } from "../../../../lib/api";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -188,11 +189,15 @@ export default function Garn(props) {
                     }}
                   >
                     <a>
+                      {/* Transition css ligger i globals.css på linje 139-159 */}
                       <article className="col-span-1">
-                        <img
-                          src={item.node.yarnproduct.image.guid}
-                          alt={item.node.yarnproduct.image.alt}
-                        />
+                        <div className="image-container">
+                          <img
+                            className="product-image"
+                            src={item.node.yarnproduct.image.guid}
+                            alt={item.node.yarnproduct.image.alt}
+                          />
+                        </div>
                         <h2 className="">{item.node.yarnproduct.title}</h2>
                         <span className="block text-xs text-black-70">
                           More colors
@@ -216,6 +221,7 @@ export default function Garn(props) {
 export async function getStaticProps() {
   const page = await getYarnPage();
   const data = await getYarnProducts();
+  const headerFooterData = await getData();
   const tags = await getTags();
 
   const newData = data.posts.edges.map((item) => {
@@ -227,6 +233,7 @@ export async function getStaticProps() {
     props: {
       newData,
       newPage,
+      headerFooterData,
       tags,
     },
   };
