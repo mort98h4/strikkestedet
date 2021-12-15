@@ -1,4 +1,4 @@
-import { getLearnToKnitPage } from "../../../lib/api" ;
+import { getLearnToKnitPage, getData } from "../../../lib/api" ;
 import VideoSection from "../../components/VideoSection";
 import Head from "next/head";
 
@@ -28,9 +28,11 @@ export default function LearnToKnit(props) {
 
 export async function getStaticProps() {
     const content = await getLearnToKnitPage();
+    const headerFooterData = await getData();
     return {
-        props: {
-            content,
-        }
+      props: {
+        content,
+        headerFooterData
+      }
     }
-}
+  }

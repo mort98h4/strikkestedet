@@ -1,4 +1,4 @@
-import { getYarnPage, getYarnProducts } from "../../../../lib/api";
+import { getYarnPage, getYarnProducts, getData } from "../../../../lib/api";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -53,6 +53,7 @@ export default function Garn(props) {
 export async function getStaticProps() {
   const page = await getYarnPage();
   const data = await getYarnProducts();
+  const headerFooterData = await getData();
 
   const newData = data.posts.edges.map((item) => {
     return item;
@@ -62,6 +63,7 @@ export async function getStaticProps() {
     props: {
       newData,
       newPage,
+      headerFooterData,
     },
   };
 }

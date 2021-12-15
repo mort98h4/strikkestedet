@@ -1,4 +1,4 @@
-import { getHomePage } from "../../lib/api";
+import { getHomePage, getData } from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
 import Image from "next/image";
@@ -147,9 +147,11 @@ export default function Home(props) {
 
 export async function getStaticProps() {
   const content = await getHomePage();
+  const headerFooterData = await getData();
   return {
     props: {
       content,
+      headerFooterData
     }
   }
 }

@@ -1,4 +1,4 @@
-import { getAboutUsPage } from "../../../lib/api";
+import { getAboutUsPage, getData } from "../../../lib/api" ;
 import ImageSection from "../../components/ImageSection";
 import Head from "next/head";
 
@@ -28,9 +28,11 @@ export default function AboutUs(props) {
 
 export async function getStaticProps() {
     const content = await getAboutUsPage();
+    const headerFooterData = await getData();
     return {
-        props: {
-            content,
-        }
+      props: {
+        content,
+        headerFooterData
+      }
     }
-}
+  }

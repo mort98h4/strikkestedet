@@ -1,4 +1,4 @@
-import { getUnderstandPatternsPage } from "../../../lib/api" ;
+import { getUnderstandPatternsPage, getData } from "../../../lib/api" ;
 import ImageSection from "../../components/ImageSection";
 import Head from "next/head";
 
@@ -28,9 +28,11 @@ export default function Patterns(props) {
 
 export async function getStaticProps() {
     const content = await getUnderstandPatternsPage();
+    const headerFooterData = await getData();
     return {
-        props: {
-            content,
-        }
+      props: {
+        content,
+        headerFooterData
+      }
     }
-}
+  }
