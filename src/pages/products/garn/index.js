@@ -2,14 +2,17 @@ import { getYarnPage, getYarnProducts, getData } from "../../../../lib/api";
 import { getTags } from "../../../../lib/api";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Arrow } from "../../../components/arrow";
+import Button from "../../../globals/Button";
 
 export default function Garn(props) {
+  console.log(props);
   const [filteredList, setFilteredList] = useState(props.newData);
   const [brandFilter, setBrandfilter] = useState(true);
-  const [fiberFilter, setFiberfilter] = useState(true);
+  const [fiberFilter, setFiberfilter] = useState(false);
   const router = useRouter();
   const { slug } = router.query;
 
@@ -51,22 +54,29 @@ export default function Garn(props) {
 
   return (
     <>
+      <Head>
+          <title>{props.newPage.metaFields.sideTitel}</title>
+          <meta name="description" content={props.newPage.metaFields.sideBeskrivelse}></meta> 
+          <link rel="icon" type="image/png" sizez="180x180" href="./apple-touch-icon.png"></link>
+          <link rel="icon" type="image/png" sizez="32x32" href="./favicon32x32"></link>
+          <link rel="icon" type="image/png" sizez="16x16" href="./favicon16x16"></link>
+      </Head>  
       <div className="md:grid md:grid-cols-6 md:gap-4 mb-32 mt-4 p-4 2xl:p-0 md:mt-16">
         <div className="md:hidden">
           <h1 className="font-serif text-5xl mb-4">Garn</h1>
-          <p className="text-black-70">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            iaculis ultrices tortor at tempus. Sed est lacus, consectetur a mi
-            quis, sodales cursus quam. Ut sit amet egestas lectus. Pellentesque
-            laoreet velit porttitor dictum hendrerit. Ut sit amet arcu sed nulla
-            euismod fermentum. Vestibulum elit nulla, auctor vel volutpat id,
-            venenatis nec urna.
+          <p className="text-black-60 mb-4">
+            {props.newPage.yarnpage.text}
           </p>
+          <div className="w-full flex justify-center">
+          <Button href={'/learn/garntyper'}>{props.newPage.yarnpage.cta}</Button>
+
+          </div>
+
         </div>
         <aside className=" md:col-span-2 md:pr-10">
           <label
             onClick={() => setFilteredList(props.newData)}
-            className="block text-black-70 hover:underline hover:text-black font-bold m-10"
+            className="block text-black-60 transition hover:underline hover:text-black font-bold m-10"
           >
             Se alle produkter
           </label>
@@ -80,15 +90,14 @@ export default function Garn(props) {
                     return setBrandfilter(false);
                   }
                 }}
-                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 hover:bg-black-10"
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition cursor-pointer hover:bg-black-10"
               >
                 <button className="font-bold mb-4 ">Brand</button>
                 <div className="pt-2">
-                  <Arrow />
+                  <Arrow rotate={brandFilter}/>
                 </div>
               </div>
-              {brandFilter ? (
-                <ul className="grid grid-rows-flow gap-2 bg-white p-10 mb-6">
+              <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-6 transition-all overflow-scroll " + (brandFilter ? "max-h-[250px]" : "max-h-0 overflow-hidden py-0")}>
                   {usedTagsBrand.map((tag) => {
                     const items = [];
                     props.newData.map((item) => {
@@ -101,11 +110,11 @@ export default function Garn(props) {
                     return (
                       <li
                         key={tag.slug}
-                        className="text-black-70 hover:text-black hover:underline"
+                        className="text-black-60 transition hover:text-black hover:underline"
                       >
                         <label
                           onClick={() => setFilteredList(items)}
-                          className="ml-4"
+                          className="ml-4 cursor-pointer"
                         >
                           {tag.name}
                         </label>
@@ -113,7 +122,6 @@ export default function Garn(props) {
                     );
                   })}
                 </ul>
-              ) : null}
             </nav>
           </div>
           <div className="mb-10">
@@ -126,15 +134,14 @@ export default function Garn(props) {
                     return setFiberfilter(false);
                   }
                 }}
-                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 hover:bg-black-10"
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition hover:bg-black-10"
               >
                 <button className="font-bold mb-4 ">Fibre</button>
                 <div className="pt-2">
-                  <Arrow />
+                  <Arrow rotate={fiberFilter} />
                 </div>
               </div>
-              {fiberFilter ? (
-                <ul className="grid grid-rows-flow gap-2 bg-white p-10 mb-6 max-h-[250px] overflow-scroll">
+                <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-6 transition-all overflow-scroll " + (fiberFilter ? "max-h-[250px]" : "max-h-0 overflow-hidden py-0")}>
                   {usedTagsMaterial.map((tag) => {
                     const items = [];
                     props.newData.map((item) => {
@@ -147,7 +154,7 @@ export default function Garn(props) {
                     return (
                       <li
                         key={tag.slug}
-                        className="text-black-70 hover:text-black hover:underline"
+                        className="text-black-60 transition hover:text-black hover:underline"
                       >
                         <label
                           onClick={() => setFilteredList(items)}
@@ -159,21 +166,19 @@ export default function Garn(props) {
                     );
                   })}
                 </ul>
-              ) : null}
             </nav>
           </div>
         </aside>
         <div className="col-span-4 ">
-          <div className="pb-16 hidden md:block">
-            <h1 className="font-serif text-5xl mb-4">Garn</h1>
-            <p className="text-black-70">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              iaculis ultrices tortor at tempus. Sed est lacus, consectetur a mi
-              quis, sodales cursus quam. Ut sit amet egestas lectus.
-              Pellentesque laoreet velit porttitor dictum hendrerit. Ut sit amet
-              arcu sed nulla euismod fermentum. Vestibulum elit nulla, auctor
-              vel volutpat id, venenatis nec urna.
+          <div className="pb-16 hidden md:grid grid-cols-4 gap-4">
+            <h1 className="font-serif text-5xl mb-4 col-span-3">Garn</h1>
+            <p className="text-black-60 col-span-3">
+            {props.newPage.yarnpage.text}
             </p>
+            <div className="col-span-4">
+              <Button href={'/learn/garntyper'}>{props.newPage.yarnpage.cta}</Button>
+
+            </div>
           </div>
           <section className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 ">
             {filteredList.map((item) => {
@@ -190,21 +195,28 @@ export default function Garn(props) {
                   >
                     <a>
                       {/* Transition css ligger i globals.css på linje 139-159 */}
-                      <article className="col-span-1 product-container">
-                        <div className="image-container">
-                          <img
+                      <article className="col-span-1 product-container relative">
+                        <div className="image-container w-full">
+                          <Image
+                            width={item.node.yarnproduct.image.mediaDetails.width}
+                            height={item.node.yarnproduct.image.mediaDetails.height}
+                            sizes={"50vw"}
+                            layout='responsive'
+                            objectFit='cover'
                             className="product-image"
                             src={item.node.yarnproduct.image.guid}
                             alt={item.node.yarnproduct.image.alt}
                           />
                         </div>
-                        <h2 className="">{item.node.yarnproduct.title}</h2>
-                        <span className="block text-xs text-black-70">
-                          More colors
-                        </span>
-                        <span className="block mt-2">
-                          {item.node.yarnproduct.price} DKK
-                        </span>
+                        <div className="px-2 pb-2">
+                          <h2 className="">{item.node.yarnproduct.title}</h2>
+                          <span className="block text-xs text-black-60">
+                            More colors
+                          </span>
+                          <span className="block mt-2">
+                            {item.node.yarnproduct.price} DKK
+                          </span>
+                        </div>
                       </article>
                     </a>
                   </Link>

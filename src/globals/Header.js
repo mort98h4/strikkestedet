@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Header(props) {
-  console.log(props);
   const [settings, setSettings] = useState([
     {
       id: 1,
@@ -61,7 +60,7 @@ export default function Header(props) {
             <div className="lg:absolute col-span-4 lg:col-span-1 py-2 flex flex-wrap items-center">
               <Link href="/">
                 <div className="flex items-center cursor-pointer">
-                  <Image width="36" height="36" className="align-middle" src="/logo_white.svg"></Image>
+                  <Image alt="Strikkestedet hvidt logo" width="36" height="36" className="align-middle" src="/logo_white.svg"></Image>
                   <a
                     className="text-white font-serif text-lg lg:text-xl align-middle"
                     onClick={subNavItemClick}
@@ -72,12 +71,12 @@ export default function Header(props) {
               </Link>
             </div>
             <div className="col-span-2 flex justify-end items-center lg:absolute lg:right-8 py-2">
-              <Link href="/basket">
+              <Link href="/basket" passHref>
                   <div className="flex items-center">
                       <a className="hidden lg:inline-block text-white font-bold cursor-pointer hover:underline mr-2">
                           Din kurv 
                       </a>
-                      <Image height="36" width="36" src="/basket_new.svg" className="align-middle cursor-pointer"></Image>
+                      <Image alt="Indkøbskurv ikon" height="36" width="36" src="/basket_new.svg" className="align-middle cursor-pointer"></Image>
                   </div>
               </Link>
               <div className="ml-2 burger lg:hidden" onClick={handleBurgerClick}>
