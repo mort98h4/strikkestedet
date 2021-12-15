@@ -470,6 +470,13 @@ export async function getStaticPaths() {
       { params: { slug: "filcolana-arwetta" } },
       { params: { slug: "hjertegarn-natur" } },
       { params: { slug: "sandnes-alpakka-silke" } },
+      { params: { slug: "sandnes-boerstet-alpakka" } },
+      { params: { slug: "sandnes-kos" } },
+      { params: { slug: "sandnes-mandarin-petit" } },
+      { params: { slug: "sandnes-sunday" } },
+      { params: { slug: "sandnes-tynn-line" } },
+      { params: { slug: "sandnes-line" } },
+      { params: { slug: "sandnes-tynn-silk-mohair" } },
     ],
     fallback: false,
   };
