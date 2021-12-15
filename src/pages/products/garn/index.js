@@ -90,15 +90,14 @@ export default function Garn(props) {
                     return setBrandfilter(false);
                   }
                 }}
-                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition hover:bg-black-10"
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition cursor-pointer hover:bg-black-10"
               >
                 <button className="font-bold mb-4 ">Brand</button>
                 <div className="pt-2">
                   <Arrow rotate={brandFilter}/>
                 </div>
               </div>
-              {brandFilter ? (
-                <ul className="grid grid-rows-flow gap-2 bg-white p-10 mb-6">
+              <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-6 transition-all overflow-scroll " + (brandFilter ? "max-h-[250px]" : "max-h-0 overflow-hidden py-0")}>
                   {usedTagsBrand.map((tag) => {
                     const items = [];
                     props.newData.map((item) => {
@@ -115,7 +114,7 @@ export default function Garn(props) {
                       >
                         <label
                           onClick={() => setFilteredList(items)}
-                          className="ml-4"
+                          className="ml-4 cursor-pointer"
                         >
                           {tag.name}
                         </label>
@@ -123,7 +122,6 @@ export default function Garn(props) {
                     );
                   })}
                 </ul>
-              ) : null}
             </nav>
           </div>
           <div className="mb-10">
@@ -143,8 +141,7 @@ export default function Garn(props) {
                   <Arrow rotate={fiberFilter} />
                 </div>
               </div>
-              {fiberFilter ? (
-                <ul className="grid grid-rows-flow gap-2 bg-white p-10 mb-6 max-h-[250px] overflow-scroll">
+                <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-6 transition-all overflow-scroll " + (fiberFilter ? "max-h-[250px]" : "max-h-0 overflow-hidden py-0")}>
                   {usedTagsMaterial.map((tag) => {
                     const items = [];
                     props.newData.map((item) => {
@@ -169,7 +166,6 @@ export default function Garn(props) {
                     );
                   })}
                 </ul>
-              ) : null}
             </nav>
           </div>
         </aside>
