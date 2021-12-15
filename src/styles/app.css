@@ -136,6 +136,28 @@ input[type="radio"]:checked::before{
     transition: transform .5s ease-in-out;
 }
 
+.product-container {
+    transition: box-shadow .15s ease-in-out;
+}
+
+.image-container {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.product-image {
+    transform-origin: bottom;
+    transition: transform .15s ease-in-out;
+}
+
+.product-container:hover {
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.1);
+}
+
+.product-container:hover .product-image {
+    transform: scale(1.2);
+}
+
 @media screen and (min-width: 576px) {
     .sub-menu {
         width: 70vw;

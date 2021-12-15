@@ -28,17 +28,22 @@ export default function Garn(props) {
                   }}
                 >
                   <a>
-                    <article className="col-span-1">
-                      <img
-                        src={item.node.yarnproduct.image.guid}
-                        alt={item.node.yarnproduct.image.alt}
-                      />
+                    {/* Transition css ligger i globals.css på linje 139-159 */}
+                    <article className="col-span-1 product-container">
+                      <div className="image-container">
+                        <img className="product-image"
+                          src={item.node.yarnproduct.image.guid}
+                          alt={item.node.yarnproduct.image.alt}
+                        />
+
+                      </div>
                       <h2>{item.node.yarnproduct.title}</h2>
                       <span className="block">TO DO: colors</span>
                       <span className="block">
                         {item.node.yarnproduct.price}
                       </span>
                     </article>
+                    {/* Transition css ligger i globals.css på linje 139-159 */}
                   </a>
                 </Link>
               );
