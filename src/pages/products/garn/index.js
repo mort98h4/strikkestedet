@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { Arrow } from "../../../components/arrow";
 
 export default function Garn(props) {
   const [filteredList, setFilteredList] = useState(props.newData);
+  const [brandFilter, setBrandfilter] = useState(true);
+  const [fiberFilter, setFiberfilter] = useState(true);
   const router = useRouter();
   const { slug } = router.query;
 
@@ -45,287 +48,162 @@ export default function Garn(props) {
     }
   });
 
-  //Material arrays
-  const materialBabyAlpakka = [];
-  const materialBomuld = [];
-  const materialBoerstetAlpakka = [];
-  const materialFinmerinould = [];
-  const materialhoer = [];
-  const materialMerinould = [];
-  const materialMohair = [];
-  const materialMulberrySilke = [];
-  const materialNylon = [];
-  const materialSilke = [];
-  const materialSuperKidMohair = [];
-  const materialUld = [];
-  const materialUldSuperWash = [];
-  const materialViskose = [];
-
-  // get itemList og Materials
-  props.newData.map((item) => {
-    item.node.tags.nodes.map((itemTag) => {
-      usedTagsMaterial.map((tag) => {
-        if (itemTag.slug === tag.slug) {
-          if (tag.slug === "baby-alpakka") {
-            materialBabyAlpakka.push(item);
-          } else if (tag.slug === "bomuld") {
-            materialBomuld.push(item);
-          } else if (tag.slug === "boerstet-alpakka") {
-            materialBoerstetAlpakka.push(item);
-          } else if (tag.slug === "fin-merinould") {
-            materialFinmerinould.push(item);
-          } else if (tag.slug === "hoer") {
-            materialhoer.push(item);
-          } else if (tag.slug === "merinould") {
-            materialMerinould.push(item);
-          } else if (tag.slug === "mohair") {
-            materialMohair.push(item);
-          } else if (tag.slug === "mulberry-silke") {
-            materialMulberrySilke.push(item);
-          } else if (tag.slug === "nylon") {
-            materialNylon.push(item);
-          } else if (tag.slug === "silke") {
-            materialSilke.push(item);
-          } else if (tag.slug === "super-kid-mohair") {
-            materialSuperKidMohair.push(item);
-          } else if (tag.slug === "uld") {
-            materialUld.push(item);
-          } else if (tag.slug === "uld-superwash") {
-            materialUldSuperWash.push(item);
-          } else if (tag.slug === "viskose") {
-            materialViskose.push(item);
-          }
-        }
-      });
-    });
-  });
-
-  //Brand arrays
-  const brandSandnes = [];
-  const brandHjertegarn = [];
-  const brandPermin = [];
-  const brandFilcolana = [];
-  //get item list of brands
-  props.newData.map((item) => {
-    item.node.tags.nodes.map((tag) => {
-      usedTagsBrand.map((taglist) => {
-        if (taglist.name === tag.name) {
-          const brandSan = taglist.name.includes("Sandnes");
-          const brandHjerte = taglist.name.includes("Hjertegarn");
-          const brandPer = taglist.name.includes("Permin");
-          const brandFil = taglist.name.includes("Filcolana");
-          if (brandSan) {
-            brandSandnes.push(item);
-          } else if (brandHjerte) {
-            brandHjertegarn.push(item);
-          } else if (brandPer) {
-            brandPermin.push(item);
-          } else if (brandFil) {
-            brandFilcolana.push(item);
-          }
-        }
-      });
-    });
-  });
-
   return (
     <>
-      <section className="md:grid md:grid-cols-6 md:gap-4 mt-10">
-        <h1 className="md:col-start-3 text-3xl">hello</h1>
-      </section>
-      <div className="md:grid md:grid-cols-6 md:gap-4 mb-10">
-        <aside className=" md:col-span-2">
+      <div className="md:grid md:grid-cols-6 md:gap-4 mb-32 mt-4 p-4 2xl:p-0 md:mt-16">
+        <div className="md:hidden">
+          <h1 className="font-serif text-5xl mb-4">Garn</h1>
+          <p className="text-black-70">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            iaculis ultrices tortor at tempus. Sed est lacus, consectetur a mi
+            quis, sodales cursus quam. Ut sit amet egestas lectus. Pellentesque
+            laoreet velit porttitor dictum hendrerit. Ut sit amet arcu sed nulla
+            euismod fermentum. Vestibulum elit nulla, auctor vel volutpat id,
+            venenatis nec urna.
+          </p>
+        </div>
+        <aside className=" md:col-span-2 md:pr-10">
           <label
             onClick={() => setFilteredList(props.newData)}
-            className="block mt-12 font-bold p-10
-            "
+            className="block text-black-70 hover:underline hover:text-black font-bold m-10"
           >
             Se alle produkter
           </label>
-          <div className="bg-white p-10 mb-6">
+          <div className="mb-6">
             <nav>
-              <h3 className="font-bold mb-4">Brand</h3>
-              <ul className="grid grid-rows-flow gap-2">
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(brandFilcolana)}
-                    className="ml-4"
-                  >
-                    {usedTagsBrand[0].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(brandHjertegarn)}
-                    className="ml-4"
-                  >
-                    {usedTagsBrand[1].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(brandPermin)}
-                    className="ml-4"
-                  >
-                    {usedTagsBrand[2].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(brandSandnes)}
-                    className="ml-4"
-                  >
-                    {usedTagsBrand[3].name}
-                  </label>
-                </li>
-              </ul>
+              <div
+                onClick={() => {
+                  if (brandFilter === false) {
+                    return setBrandfilter(true);
+                  } else {
+                    return setBrandfilter(false);
+                  }
+                }}
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 hover:bg-black-10"
+              >
+                <button className="font-bold mb-4 ">Brand</button>
+                <div className="pt-2">
+                  <Arrow />
+                </div>
+              </div>
+              {brandFilter ? (
+                <ul className="grid grid-rows-flow gap-2 bg-white p-10 mb-6">
+                  {usedTagsBrand.map((tag) => {
+                    const items = [];
+                    props.newData.map((item) => {
+                      item.node.tags.nodes.map((itemTag) => {
+                        if (itemTag.slug === tag.slug) {
+                          items.push(item);
+                        }
+                      });
+                    });
+                    return (
+                      <li
+                        key={tag.slug}
+                        className="text-black-70 hover:text-black hover:underline"
+                      >
+                        <label
+                          onClick={() => setFilteredList(items)}
+                          className="ml-4"
+                        >
+                          {tag.name}
+                        </label>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : null}
             </nav>
           </div>
-          <div className="bg-white p-10 ">
+          <div className="mb-10">
             <nav>
-              <h3 className="font-bold mb-4">Fibre</h3>
-              <ul className="grid grid-rows-flow gap-2">
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialBabyAlpakka)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[0].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialBomuld)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[1].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialBoerstetAlpakka)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[2].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialFinmerinould)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[3].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialhoer)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[4].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialMerinould)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[5].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialMohair)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[6].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialMulberrySilke)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[7].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialNylon)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[8].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialSilke)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[9].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialSuperKidMohair)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[10].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialUld)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[11].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialUldSuperWash)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[12].name}
-                  </label>
-                </li>
-                <li className="text-black-70 hover:text-black hover:underline">
-                  <label
-                    onClick={() => setFilteredList(materialViskose)}
-                    className="ml-4"
-                  >
-                    {usedTagsMaterial[13].name}
-                  </label>
-                </li>
-              </ul>
+              <div
+                onClick={() => {
+                  if (fiberFilter === false) {
+                    return setFiberfilter(true);
+                  } else {
+                    return setFiberfilter(false);
+                  }
+                }}
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 hover:bg-black-10"
+              >
+                <button className="font-bold mb-4 ">Fibre</button>
+                <div className="pt-2">
+                  <Arrow />
+                </div>
+              </div>
+              {fiberFilter ? (
+                <ul className="grid grid-rows-flow gap-2 bg-white p-10 mb-6 max-h-[250px] overflow-scroll">
+                  {usedTagsMaterial.map((tag) => {
+                    const items = [];
+                    props.newData.map((item) => {
+                      item.node.tags.nodes.map((itemTag) => {
+                        if (itemTag.slug === tag.slug) {
+                          items.push(item);
+                        }
+                      });
+                    });
+                    return (
+                      <li
+                        key={tag.slug}
+                        className="text-black-70 hover:text-black hover:underline"
+                      >
+                        <label
+                          onClick={() => setFilteredList(items)}
+                          className="ml-4"
+                        >
+                          {tag.name}
+                        </label>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : null}
             </nav>
           </div>
         </aside>
-        <div className="md:grid md:grid-row-2 md:col-span-4">
-          <section className="md:col-span-1 md:grid md:grid-cols-4 md:gap-4">
+        <div className="col-span-4 ">
+          <div className="pb-16 hidden md:block">
+            <h1 className="font-serif text-5xl mb-4">Garn</h1>
+            <p className="text-black-70">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              iaculis ultrices tortor at tempus. Sed est lacus, consectetur a mi
+              quis, sodales cursus quam. Ut sit amet egestas lectus.
+              Pellentesque laoreet velit porttitor dictum hendrerit. Ut sit amet
+              arcu sed nulla euismod fermentum. Vestibulum elit nulla, auctor
+              vel volutpat id, venenatis nec urna.
+            </p>
+          </div>
+          <section className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 ">
             {filteredList.map((item) => {
               return (
-                <Link
-                  key={item.node.id}
-                  href={{
-                    pathname: "/products/garn/[slug]",
-                    query: { slug: item.node.slug },
-                  }}
+                <div
+                  key={`${item.node.slug}${item.node.id}`}
+                  className="col-span-1"
                 >
-                  <a>
-                    <article className="col-span-1">
-                      <img
-                        src={item.node.yarnproduct.image.guid}
-                        alt={item.node.yarnproduct.image.alt}
-                      />
-                      <h2>{item.node.yarnproduct.title}</h2>
-                      <span className="block">TO DO: colors</span>
-                      <span className="block">
-                        {item.node.yarnproduct.price}
-                      </span>
-                    </article>
-                  </a>
-                </Link>
+                  <Link
+                    href={{
+                      pathname: "/products/garn/[slug]",
+                      query: { slug: item.node.slug },
+                    }}
+                  >
+                    <a>
+                      <article className="col-span-1">
+                        <img
+                          src={item.node.yarnproduct.image.guid}
+                          alt={item.node.yarnproduct.image.alt}
+                        />
+                        <h2 className="">{item.node.yarnproduct.title}</h2>
+                        <span className="block text-xs text-black-70">
+                          More colors
+                        </span>
+                        <span className="block mt-2">
+                          {item.node.yarnproduct.price} DKK
+                        </span>
+                      </article>
+                    </a>
+                  </Link>
+                </div>
               );
             })}
           </section>
