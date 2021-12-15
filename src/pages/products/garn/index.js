@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Arrow } from "../../../components/arrow";
+import Button from "../../../globals/Button";
 
 export default function Garn(props) {
   console.log(props);
@@ -55,14 +56,14 @@ export default function Garn(props) {
       <div className="md:grid md:grid-cols-6 md:gap-4 mb-32 mt-4 p-4 2xl:p-0 md:mt-16">
         <div className="md:hidden">
           <h1 className="font-serif text-5xl mb-4">Garn</h1>
-          <p className="text-black-60">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            iaculis ultrices tortor at tempus. Sed est lacus, consectetur a mi
-            quis, sodales cursus quam. Ut sit amet egestas lectus. Pellentesque
-            laoreet velit porttitor dictum hendrerit. Ut sit amet arcu sed nulla
-            euismod fermentum. Vestibulum elit nulla, auctor vel volutpat id,
-            venenatis nec urna.
+          <p className="text-black-60 mb-4">
+            {props.newPage.yarnpage.text}
           </p>
+          <div className="w-full flex justify-center">
+          <Button href={'/learn/garntyper'}>{props.newPage.yarnpage.cta}</Button>
+
+          </div>
+
         </div>
         <aside className=" md:col-span-2 md:pr-10">
           <label
@@ -165,16 +166,15 @@ export default function Garn(props) {
           </div>
         </aside>
         <div className="col-span-4 ">
-          <div className="pb-16 hidden md:block">
-            <h1 className="font-serif text-5xl mb-4">Garn</h1>
-            <p className="text-black-60">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              iaculis ultrices tortor at tempus. Sed est lacus, consectetur a mi
-              quis, sodales cursus quam. Ut sit amet egestas lectus.
-              Pellentesque laoreet velit porttitor dictum hendrerit. Ut sit amet
-              arcu sed nulla euismod fermentum. Vestibulum elit nulla, auctor
-              vel volutpat id, venenatis nec urna.
+          <div className="pb-16 hidden md:grid grid-cols-4 gap-4">
+            <h1 className="font-serif text-5xl mb-4 col-span-3">Garn</h1>
+            <p className="text-black-60 col-span-3">
+            {props.newPage.yarnpage.text}
             </p>
+            <div className="col-span-4">
+              <Button href={'/learn/garntyper'}>{props.newPage.yarnpage.cta}</Button>
+
+            </div>
           </div>
           <section className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 ">
             {filteredList.map((item) => {
