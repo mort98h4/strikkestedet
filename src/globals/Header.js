@@ -1,10 +1,8 @@
+import React from "react";
 import { useState } from "react";
 import Link from "next/link";
 
 export default function Header(props) {
-  // const [productsVisible, setProductsVisible] = useState(false);
-  // const [learnVisible, setLearnVisible] = useState(false);
-  // const [aboutVisible, setAboutVisible] = useState(false);
   const [settings, setSettings] = useState([
     {
       id: 1,
@@ -58,10 +56,14 @@ export default function Header(props) {
       <header className="w-full fixed z-10">
         <nav className="w-full bg-black relative z-30 shadow">
           <div className="2xl:container mx-auto grid grid-cols-6 gap-x-4 px-8">
-            <div className="lg:absolute col-span-5 lg:col-span-1 py-2">
+            <div className="lg:absolute col-span-5 lg:col-span-1 py-2 flex flex-wrap items-center">
+              <img
+                className="logo align-middle"
+                src="./../logo_white.svg"
+              ></img>
               <Link href="/">
                 <a
-                  className="text-white font-serif text-lg lg:text-xl"
+                  className="text-white font-serif text-lg lg:text-xl align-middle"
                   onClick={subNavItemClick}
                 >
                   {props.generalSettings.title}
@@ -80,7 +82,7 @@ export default function Header(props) {
             <div className="hidden lg:flex lg:col-span-6 gap-x-4 justify-center items-center py-3">
               <div className="mx-8">
                 <a
-                  className="text-white text-bold cursor-pointer hover:underline"
+                  className="text-white font-bold cursor-pointer hover:underline"
                   onClick={() => toggleSubMenu(1)}
                 >
                   Produkter
@@ -88,7 +90,7 @@ export default function Header(props) {
               </div>
               <div className="mx-8">
                 <a
-                  className="text-white text-bold cursor-pointer hover:underline"
+                  className="text-white font-bold cursor-pointer hover:underline"
                   onClick={() => toggleSubMenu(2)}
                 >
                   Lær at strikke
@@ -96,15 +98,15 @@ export default function Header(props) {
               </div>
               <div className="mx-8">
                 <a
-                  className="text-white text-bold cursor-pointer hover:underline"
+                  className="text-white font-bold cursor-pointer hover:underline"
                   onClick={() => toggleSubMenu(3)}
                 >
                   Om os
                 </a>
               </div>
-              <div>
+              <div className="mx-8">
                 <Link href="/basket">
-                  <a className="text-white text-bold cursor-pointer hover:underline">
+                  <a className="text-white font-bold cursor-pointer hover:underline">
                     Kurv
                   </a>
                 </Link>
@@ -127,7 +129,6 @@ export default function Header(props) {
 }
 
 function SubMenu(props) {
-  console.log(props);
   const productsId = "cG9zdDo0MzA=";
   const learnId = "cG9zdDo0MDY=";
   const aboutId = "cG9zdDo0MjI=";
@@ -228,15 +229,26 @@ function SubMenu(props) {
 }
 
 function SubNavItem(props) {
+  const SubNavLink = React.forwardRef(({ onClick, href }, ref) => {
+    return (
+      <a
+        className="transition-all text-black-70 hover:text-black hover:underline"
+        href={href}
+        onClick={() => props.subNavItemClick()}
+        ref={ref}
+      >
+        {props.title}
+      </a>
+    );
+  });
+
   return (
     <div className="mx-8">
-      <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`}>
-        <a
-          className="transition-all text-black-70 hover:text-black hover:underline"
-          onClick={() => props.subNavItemClick()}
-        >
-          {props.title}
-        </a>
+      <Link
+        href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`}
+        passHref
+      >
+        <SubNavLink></SubNavLink>
       </Link>
     </div>
   );

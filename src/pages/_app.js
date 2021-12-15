@@ -62,6 +62,20 @@ function MyApp({ Component, pageProps }) {
             }
           }
         }
+        posts(where: {categoryId: 14, tag: "kontakt", orderby: {field: DATE, order: ASC}}) {
+          nodes {
+            id
+            title
+            kontaktMap {
+              address
+              city
+              country
+              email
+              phone
+              zipCode
+            }
+          }
+        }
       }
       `
     );
@@ -74,11 +88,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        <title>Strikkestedet</title>
-      </Head>
-      {data.length != 0 ? (
-        <>
+      {
+        data.length != 0 ? (
+          <>
           <Header {...data}></Header>
           <main className="2xl:container mx-auto bg-background">
             <Component
@@ -88,11 +100,9 @@ function MyApp({ Component, pageProps }) {
             />
           </main>
           <Footer {...data}></Footer>
-        </>
-      ) : (
-        ""
-      )}
-      {/* <Footer></Footer> */}
+          </>
+        ) : "Loading..."
+      }
     </>
   );
 }

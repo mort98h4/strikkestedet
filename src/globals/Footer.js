@@ -1,6 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
+import AddressList from "../components/AddressList";
 
 export default function Footer(props) {
+  const address = props.posts.nodes.map(item => {
+    if (item.id === "cG9zdDo0NDE=") {
+        return item;
+    }
+});
   const productsId = "cG9zdDo0MzA=";
   const learnId = "cG9zdDo0MDY=";
   const aboutId = "cG9zdDo0MjI=";
@@ -21,21 +28,14 @@ export default function Footer(props) {
     return (
       <footer className="bg-gray-footer w-full">
         <div className="2xl:container px-8 py-16 2xl:px-0 mx-auto grid grid-cols-6 gap-4">
-              <div className="col-span-6">
-                <h3 className="font-serif footer-text-center text-xl lg:text-3xl">{props.generalSettings.title}</h3>
+              <div className="col-span-6 flex flex-wrap items-center justify-center lg:justify-start">
+                <Image width="50" height="50" className="align-middle" src="/logo_black.svg" alt="Strikkestedet sort logo"></Image>
+                <h3 className="font-serif footer-text-center text-xl lg:text-3xl align-middle">{props.generalSettings.title}</h3>
               </div>
               <div className="col-span-6 md:col-span-3 lg:col-span-1 mb-4">
-                <ul className="footer-text-center text-black-70">
-                  <li>
-                    Tel: <a className="transition-all hover:text-black hover:underline" href="tel:24449392">+45 2444 9392</a>
-                  </li>
-                  <li className="mb-4">
-                    E-mail: <a className="transition-all hover:text-black hover:underline" href="mailto:lene@strikkestedet.dk">lene@strikkestedet.dk</a>
-                  </li>
-                  <li>Hvidovrevej 324</li>
-                  <li>2650 Hvidovre</li>
-                  <li>Danmark</li>
-                </ul>
+                {address.map(item => {
+                    return <AddressList key={item.id} {...item} color="text-black-70 footer-text-center"></AddressList>
+                })}
               </div>
               <div className="col-span-6 md:col-span-3 lg:col-span-1 mb-4">
                 <h4 className="footer-text-center font-bold mb-2">Produkter</h4>
@@ -70,11 +70,11 @@ export default function Footer(props) {
               <div className="col-span-6 lg:col-span-2 mb-4">
                 <h4 className="text-center font-bold mb-2 w-full">Følg os</h4>
                 <div className="flex justify-center">
-                  <a className="mx-1 transition opacity-70 hover:opacity-100" href="https://www.facebook.com/strikkestedet2650" target="_blank">
-                    <img src="./../facebook_icon.svg" alt="Facebook icon"></img>
+                  <a className="mx-1 transition opacity-70 hover:opacity-100" href="https://www.facebook.com/strikkestedet2650" target="_blank" rel="noreferrer">
+                    <Image width="48" height="48" src="/facebook_icon.svg" alt="Facebook icon"></Image>
                   </a>
-                  <a className="mx-1 transition opacity-70 hover:opacity-100" href="https://www.instagram.com/strikkestedet" target="_blank">
-                    <img src="./../instagram_icon.svg" alt="Instagram icon"></img>
+                  <a className="mx-1 transition opacity-70 hover:opacity-100" href="https://www.instagram.com/strikkestedet" target="_blank" rel="noreferrer">
+                    <Image width="48" height="48" src="/instagram_icon.svg" alt="Instagram icon"></Image>
                   </a>
                 </div>
               </div>
