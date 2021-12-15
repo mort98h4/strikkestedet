@@ -7,7 +7,7 @@ import Link from "next/link";
 function Product(props) {
   console.log(props);
   const [amount, setAmount] = useState(0);
-  const [colorNav, setColorNav] = useState(false);
+  const [colorNav, setColorNav] = useState(true);
   const [infoNav, setInfoNav] = useState(false);
 
   const [chosenColor, setChosenColor] = useState("");
@@ -143,18 +143,34 @@ function Product(props) {
   return (
     <>
       <article className="md:grid md:grid-cols-6 text-sm">
+        <section className="grid grid-cols-2 md:col-span-4 md:mt-10 md:grid-cols-4 md:gap-4">
+          <div className="block col-span-1 md:col-span-2">
+            <img
+              src={info.image.guid}
+              alt={info.image.alt}
+              className="object-cover object-bottom h-[500px] w-[100%]"
+            />
+          </div>
+          <div className="col-span-1 md:col-span-2">
+            <img
+              src={info.image.guid}
+              alt={info.image.alt}
+              className="object-cover object-bottom h-[500px] w-[100%]"
+            />
+          </div>
+        </section>
         <div className="col-start-5 col-end-6">
-          <aside className="fixed mr-4 bg-background z-5 pl-10 pr-10 h-full max-w-[700px]">
-            <h1 className=" font-serif mt-4 text-3xl lg:text-5xl">
+          <aside className="md:fixed md:mr-4 bg-background z-5 pl-10 pr-10 h-full max-w-[700px]">
+            <h1 className=" font-serif mt-10 md:mt-10 text-3xl lg:text-5xl">
               {info.title}
             </h1>
             <p className="font-sans">{info.text}</p>
             <div className="flex justify-end">
-              <span className="md:text-3xl">{info.price} DKK</span>
+              <span className="text-2xl md:text-3xl">{info.price} DKK</span>
             </div>
             <div>
-              <div className="grid grid-cols-3 gap-4">
-                <div>
+              <div className="grid grid-cols-3 gap-4 mt-4">
+                <div className="col-span-3 mt-4 md:mt-0">
                   <h3 className="font-bold">Antal</h3>
                   <div className="flex flex-row gap-1">
                     <button
@@ -180,10 +196,10 @@ function Product(props) {
                     </button>
                   </div>
                 </div>
-                <div className="col-span-2 ">
+                <div className="col-span-3 md:col-span-2 mt-4 md:mt-0">
                   <h3 className="font-bold"> Vælg farve</h3>
                   <button
-                    className="bg-gray-input py-2 px-4 hover:bg-gray-footer w-full flex flex-row justify-between w-[300px]"
+                    className="bg-gray-input py-2 px-4 hover:bg-gray-footer w-full flex flex-row justify-between lg:w-[300px]"
                     onClick={() => {
                       ColorBtn();
                     }}
@@ -214,7 +230,7 @@ function Product(props) {
                               >
                                 <div className="flex flex-row ">
                                   <img
-                                    className="mr-10"
+                                    className="mr-10 object-cover"
                                     width="30px"
                                     height="30px"
                                     src={color.guid}
@@ -240,17 +256,17 @@ function Product(props) {
                     amount === 0 || !chosenColor
                       ? "bg-black-20 text-white-60"
                       : "bg-black-70 text-white hover:bg-black",
-                    "py-2 px-4 col-span-2"
+                    "py-2 px-4 col-span-3 md:col-span-2 mt-6 md:mt-0"
                   )}
                 >
                   Add to cart
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mt-10  mb-10 md:mb-0">
               <div className="col-span-1">
                 <span className="block font-bold">Fragt</span>
-                <span className="block">Fri fragt ved køb over 500DKK</span>
+                <span className="block">Fri fragt ved køb over 500 DKK</span>
               </div>
               <div className="col-span-1">
                 <span className="block font-bold">Returnering</span>
@@ -299,18 +315,10 @@ function Product(props) {
           </aside>
         </div>
         <div className="md:col-end-5 md:col-span-4 mt-4">
-          <section className="md:grid md:grid-cols-4 md:gap-4 ">
-            <div className="md:col-span-2">
-              <img src={info.image.guid} alt="" />
-            </div>
-            <div className="md:col-span-2">
-              <img src={info.image.guid} alt="" />
-            </div>
-          </section>
-          <section className="md:grid md:grid-cols-6 gap-x-4 px-20 py-14 mt-4 bg-white ">
+          <section className="md:grid md:grid-cols-6 gap-x-4 p-10 md:px-20 md:py-14 mt-4 bg-white ">
             <nav className="col-span-6">
-              <ul className="md:grid md:grid-cols-4">
-                <li className="col-span-1">
+              <ul className="grid grid-cols-4 gap-4 md:gap-0">
+                <li className="col-span-2 md:col-span-1">
                   <button
                     className={clsx(
                       colorNav === true
@@ -322,7 +330,7 @@ function Product(props) {
                     Farvekort
                   </button>
                 </li>
-                <li className="col-span-1">
+                <li className="col-span-2 md:col-span-1">
                   <button
                     className={clsx(
                       infoNav === true
@@ -337,34 +345,38 @@ function Product(props) {
               </ul>
             </nav>
             <hr className="h-0.2 bg-black col-span-6" />
-            <div className="col-span-6">
-              <div className="md:grid md:grid-cols-4 mb-10">
+            <div className="md:col-span-6">
+              <div className="grid grid-cols-4 gap-4 md:gap-0 mb-10">
                 {colorNav === true && infoNav === false ? (
-                  <div className="md:col-span-1">
+                  <div className="col-span-2 md:col-span-1">
                     <Arrow />
                   </div>
                 ) : null}
 
                 {infoNav === true && colorNav === false ? (
-                  <div className="md:col-span-1 md:col-start-2">
+                  <div className="col-span-2 md:col-span-1 col-start-3 md:col-start-2">
                     <Arrow />
                   </div>
                 ) : null}
               </div>
             </div>
 
-            <div className="md:col-span-6 md:grid md:grid-cols-6 gap-x-4 gap-y-10">
+            <nav className="md:col-span-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-10">
               {colorNav === true ? (
-                <div className="md:max-h-[400px] overflow-y-scroll md:col-span-6 md:grid md:grid-cols-6 gap-x-4 gap-y-10 ">
+                <ul className="max-h-[350px] md:max-h-[400px] overflow-y-scroll col-span-2 sm:col-span-4 lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-6 gap-x-4 gap-y-10 ">
                   {usedColors.map((color) => {
                     return (
-                      <div key={color.alt} className="md:col-span-1">
-                        <img src={color.guid} alt={color.alt} />
+                      <li key={color.alt} className="md:col-span-1">
+                        <img
+                          src={color.guid}
+                          alt={color.alt}
+                          className="object-cover"
+                        />
                         <h3>{color.title}</h3>
-                      </div>
+                      </li>
                     );
                   })}
-                </div>
+                </ul>
               ) : null}
 
               {infoNav === true ? (
@@ -440,7 +452,7 @@ function Product(props) {
                   </span>
                 </div>
               ) : null}
-            </div>
+            </nav>
           </section>
         </div>
       </article>
@@ -456,6 +468,8 @@ export async function getStaticPaths() {
       { params: { slug: "permin-rigmor" } },
       { params: { slug: "filcolana-tilia" } },
       { params: { slug: "filcolana-arwetta" } },
+      { params: { slug: "hjertegarn-natur" } },
+      { params: { slug: "sandnes-alpakka-silke" } },
     ],
     fallback: false,
   };
