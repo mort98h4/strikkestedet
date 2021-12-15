@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header(props) {
   const [settings, setSettings] = useState([
@@ -57,10 +58,7 @@ export default function Header(props) {
         <nav className="w-full bg-black relative z-30 shadow">
           <div className="2xl:container mx-auto grid grid-cols-6 gap-x-4 px-8">
             <div className="lg:absolute col-span-5 lg:col-span-1 py-2 flex flex-wrap items-center">
-              <img
-                className="logo align-middle"
-                src="./../logo_white.svg"
-              ></img>
+              <Image width="36" height="36" className="align-middle" src="/logo_white.svg"></Image>
               <Link href="/">
                 <a
                   className="text-white font-serif text-lg lg:text-xl align-middle"
@@ -107,7 +105,8 @@ export default function Header(props) {
               <div className="mx-8">
                 <Link href="/basket">
                   <a className="text-white font-bold cursor-pointer hover:underline">
-                    Kurv
+                    <Image height="36" width="36" src="/basket.svg"></Image>
+                    Kurv 
                   </a>
                 </Link>
               </div>
