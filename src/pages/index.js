@@ -5,7 +5,6 @@ import Image from "next/image";
 import Head from "next/head";
 
 export default function Home(props) {
-  console.log(props);
   const ctaSection1 = props.content.page.homepagectasection1;
   const ctaSection2 = props.content.page.homepagectasection2;
   const ctaSection3 = props.content.page.homepagectasection3;
