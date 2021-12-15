@@ -1,8 +1,11 @@
 import { getConditionsPage, getData } from "../../../lib/api" ;
 import ImageSection from "../../components/ImageSection";
+import AddressList from "../../components/AddressList";
+
 import Head from "next/head";
 
 export default function AboutUs(props) {
+    console.log(props);
     const section1 = props.content.page.aboutsection1;
     const conditions = props.content.page.handelsbetingelser;
     const aboutImages = props.content.posts.nodes;
@@ -49,7 +52,8 @@ export default function AboutUs(props) {
                         <h2 className="font-bold text-lg">{conditions.header04}</h2> 
                         {conditions.subheader04 != null ? 
                         <h3 className="font-bold mb-2">{conditions.subheader04}</h3> : ""}
-                        <p className="text-black-60">{conditions.body04}</p>
+                        <p className="text-black-60 mb-4">{conditions.body04}</p>
+                        <AddressList {...props.headerFooterData.posts.nodes[0]}></AddressList>
                     </article>
                 ) : "")}
                 {(conditions.header05 != null || conditions.body05 != null ? (
