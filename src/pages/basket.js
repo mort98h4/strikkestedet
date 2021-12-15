@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import clsx from "clsx";
 import { useState } from "react";
 import BasketList from "../components/basketList";
+import { getData } from "../../lib/api";
 
 export default function Basket(props) {
   let totalPrice = 0;
@@ -60,4 +61,13 @@ export default function Basket(props) {
       </div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const headerFooterData = await getData();
+  return {
+    props: {
+      headerFooterData
+    }
+  }
 }
