@@ -195,21 +195,28 @@ export default function Garn(props) {
                   >
                     <a>
                       {/* Transition css ligger i globals.css på linje 139-159 */}
-                      <article className="col-span-1 product-container">
-                        <div className="image-container">
-                          <img
+                      <article className="col-span-1 product-container relative">
+                        <div className="image-container w-full">
+                          <Image
+                            width={item.node.yarnproduct.image.mediaDetails.width}
+                            height={item.node.yarnproduct.image.mediaDetails.height}
+                            sizes={"50vw"}
+                            layout='responsive'
+                            objectFit='cover'
                             className="product-image"
                             src={item.node.yarnproduct.image.guid}
                             alt={item.node.yarnproduct.image.alt}
                           />
                         </div>
-                        <h2 className="">{item.node.yarnproduct.title}</h2>
-                        <span className="block text-xs text-black-60">
-                          More colors
-                        </span>
-                        <span className="block mt-2">
-                          {item.node.yarnproduct.price} DKK
-                        </span>
+                        <div className="px-2 pb-2">
+                          <h2 className="">{item.node.yarnproduct.title}</h2>
+                          <span className="block text-xs text-black-60">
+                            More colors
+                          </span>
+                          <span className="block mt-2">
+                            {item.node.yarnproduct.price} DKK
+                          </span>
+                        </div>
                       </article>
                     </a>
                   </Link>
