@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Header(props) {
+  console.log(props);
   const [settings, setSettings] = useState([
     {
       id: 1,
@@ -65,7 +66,7 @@ export default function Header(props) {
                     className="text-white font-serif text-lg lg:text-xl align-middle"
                     onClick={subNavItemClick}
                   >
-                    {props.generalSettings.title}
+                    {props.headerFooterData.generalSettings.title}
                   </a>
                 </div>               
               </Link>
@@ -118,7 +119,7 @@ export default function Header(props) {
           onClick={handleBurgerClick}
         ></div>
         <SubMenu
-          {...props.pages}
+          {...props.headerFooterData.pages}
           settings={settings}
           subNavItemClick={subNavItemClick}
         ></SubMenu>

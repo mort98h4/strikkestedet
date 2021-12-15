@@ -3,7 +3,7 @@ import Image from "next/image";
 import AddressList from "../components/AddressList";
 
 export default function Footer(props) {
-  const address = props.posts.nodes.map(item => {
+  const address = props.headerFooterData.posts.nodes.map(item => {
     if (item.id === "cG9zdDo0NDE=") {
         return item;
     }
@@ -15,7 +15,7 @@ export default function Footer(props) {
   const learnPages = [];
   const aboutPages = [];
 
-  props.pages.nodes.forEach(page => {
+  props.headerFooterData.pages.nodes.forEach(page => {
     if (page.ancestors != null && page.ancestors.edges.findIndex(item => item.node.id === productsId) != -1) {
       productPages.unshift(page);
     } else if (page.ancestors != null && page.ancestors.edges.findIndex(item => item.node.id === learnId) != -1) {
@@ -32,7 +32,7 @@ export default function Footer(props) {
                 <Link href="/">
                   <div className="flex items-center cursor-pointer">
                     <Image width="50" height="50" className="align-middle" src="/logo_black.svg" alt="Strikkestedet sort logo"></Image>
-                    <h3 className="font-serif footer-text-center text-xl lg:text-3xl align-middle">{props.generalSettings.title}</h3>
+                    <h3 className="font-serif footer-text-center text-xl lg:text-3xl align-middle">{props.headerFooterData.generalSettings.title}</h3>
                   </div>
                 </Link>
               </div>
