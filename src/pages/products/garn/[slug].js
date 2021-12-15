@@ -366,13 +366,18 @@ function Product(props) {
                 <ul className="max-h-[350px] md:max-h-[400px] overflow-y-scroll col-span-2 sm:col-span-4 lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-6 gap-x-4 gap-y-10 ">
                   {usedColors.map((color) => {
                     return (
-                      <li key={color.alt} className="md:col-span-1">
-                        <img
-                          src={color.guid}
-                          alt={color.alt}
-                          className="object-cover"
-                        />
-                        <h3>{color.title}</h3>
+                      <li
+                        key={color.alt}
+                        className="md:col-span-1 product-container"
+                      >
+                        <div className="image-container">
+                          <img
+                            src={color.guid}
+                            alt={color.alt}
+                            className="object-cover product-image"
+                          />
+                          <h3>{color.title}</h3>
+                        </div>
                       </li>
                     );
                   })}

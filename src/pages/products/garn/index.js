@@ -190,7 +190,7 @@ export default function Garn(props) {
                   >
                     <a>
                       {/* Transition css ligger i globals.css på linje 139-159 */}
-                      <article className="col-span-1">
+                      <article className="col-span-1 product-container">
                         <div className="image-container">
                           <img
                             className="product-image"
