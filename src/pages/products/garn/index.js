@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Arrow } from "../../../components/arrow";
 
 export default function Garn(props) {
+  console.log(props);
   const [filteredList, setFilteredList] = useState(props.newData);
   const [brandFilter, setBrandfilter] = useState(true);
   const [fiberFilter, setFiberfilter] = useState(true);
@@ -54,7 +55,7 @@ export default function Garn(props) {
       <div className="md:grid md:grid-cols-6 md:gap-4 mb-32 mt-4 p-4 2xl:p-0 md:mt-16">
         <div className="md:hidden">
           <h1 className="font-serif text-5xl mb-4">Garn</h1>
-          <p className="text-black-70">
+          <p className="text-black-60">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             iaculis ultrices tortor at tempus. Sed est lacus, consectetur a mi
             quis, sodales cursus quam. Ut sit amet egestas lectus. Pellentesque
@@ -66,7 +67,7 @@ export default function Garn(props) {
         <aside className=" md:col-span-2 md:pr-10">
           <label
             onClick={() => setFilteredList(props.newData)}
-            className="block text-black-70 hover:underline hover:text-black font-bold m-10"
+            className="block text-black-60 transition hover:underline hover:text-black font-bold m-10"
           >
             Se alle produkter
           </label>
@@ -80,7 +81,7 @@ export default function Garn(props) {
                     return setBrandfilter(false);
                   }
                 }}
-                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 hover:bg-black-10"
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition hover:bg-black-10"
               >
                 <button className="font-bold mb-4 ">Brand</button>
                 <div className="pt-2">
@@ -101,7 +102,7 @@ export default function Garn(props) {
                     return (
                       <li
                         key={tag.slug}
-                        className="text-black-70 hover:text-black hover:underline"
+                        className="text-black-60 transition hover:text-black hover:underline"
                       >
                         <label
                           onClick={() => setFilteredList(items)}
@@ -126,7 +127,7 @@ export default function Garn(props) {
                     return setFiberfilter(false);
                   }
                 }}
-                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 hover:bg-black-10"
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition hover:bg-black-10"
               >
                 <button className="font-bold mb-4 ">Fibre</button>
                 <div className="pt-2">
@@ -147,7 +148,7 @@ export default function Garn(props) {
                     return (
                       <li
                         key={tag.slug}
-                        className="text-black-70 hover:text-black hover:underline"
+                        className="text-black-60 transition hover:text-black hover:underline"
                       >
                         <label
                           onClick={() => setFilteredList(items)}
@@ -166,7 +167,7 @@ export default function Garn(props) {
         <div className="col-span-4 ">
           <div className="pb-16 hidden md:block">
             <h1 className="font-serif text-5xl mb-4">Garn</h1>
-            <p className="text-black-70">
+            <p className="text-black-60">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
               iaculis ultrices tortor at tempus. Sed est lacus, consectetur a mi
               quis, sodales cursus quam. Ut sit amet egestas lectus.
@@ -199,7 +200,7 @@ export default function Garn(props) {
                           />
                         </div>
                         <h2 className="">{item.node.yarnproduct.title}</h2>
-                        <span className="block text-xs text-black-70">
+                        <span className="block text-xs text-black-60">
                           More colors
                         </span>
                         <span className="block mt-2">
