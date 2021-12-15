@@ -1,10 +1,16 @@
-import { getHomePage, getData } from "../../lib/api";
+import { getHomePage, getData, getSelectedYarnItems, getSelectedPatternsItems } from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
 import Image from "next/image";
 import Head from "next/head";
+import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Home(props) {
+  console.log(props);
+  const [selectedItemsList, setSelectedItemsList] = useState(props.yarn);
+  const [categoryIsYarn, setCategoryIsYarn] = useState(true)
+
   const ctaSection1 = props.content.page.homepagectasection1;
   const ctaSection2 = props.content.page.homepagectasection2;
   const ctaSection3 = props.content.page.homepagectasection3;
@@ -16,6 +22,37 @@ export default function Home(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+  }
+
+  function handleChange(e) {
+    console.log(e.currentTarget.value);
+    e.currentTarget.value === "knittingPatterns" ? setSelectedItemsList({
+      posts: {
+        edges: [
+          {
+            node: {
+              id: "dakewf",
+              title: "something",
+              slug: "something",
+              patternproduct: {
+                title: "something",
+                text: "longer something",
+                price: "500",
+                image: {
+                  altText: "something",
+                  guid: "https://mortengross.dk/kea/17_eksamen/strikkestedet/wordpress/wp-content/uploads/2021/12/Tynn-Silk-Mohair-5.png",
+                  mediaDetails: {
+                    height: 1283,
+                    width: 850
+                  },
+                }
+              }
+            }
+          }   
+        ]
+      }
+    }) : setSelectedItemsList(props.yarn);
+    setCategoryIsYarn(categoryIsYarn = !categoryIsYarn)
   }
 
   return (
@@ -92,7 +129,7 @@ export default function Home(props) {
       </section>
 
       <section className="grid grid-cols-6 md:gap-4">
-        <div className="col-span-6 md:col-span-2 bg-white p-16 md:p-8 flex flex-wrap content-center">
+        <div className="col-span-6 lg:col-span-2 bg-white p-16 md:p-8 self-center h-full">
           <h2 className="font-serif text-3xl lg:text-5xl mb-4">
             {selectedItems.headerSelecteditems}
           </h2>
@@ -109,6 +146,7 @@ export default function Home(props) {
               name="selectedProducts"
               value="yarn"
               defaultChecked
+              onChange={handleChange}
             ></input>
             <label
               htmlFor="yarnRadio"
@@ -123,6 +161,7 @@ export default function Home(props) {
               id="knittingPatternsRadio"
               name="selectedProducts"
               value="knittingPatterns"
+              onChange={handleChange}
             ></input>
             <label
               htmlFor="knittingPatternsRadio"
@@ -132,7 +171,49 @@ export default function Home(props) {
             </label>
           </div>
         </div>
-        <div className="col-span-1"></div>
+        <div className="col-span-6 lg:col-span-4 grid grid-cols-4 gap-4 px-4 lg:px-0 lg:pr-4">
+          {selectedItemsList.posts.edges.map((item) => {
+            const product = categoryIsYarn ? item.node.yarnproduct : item.node.patternproduct;
+
+            return (
+              <div key={item.node.id} className="col-span-2 md:col-span-1">
+                <Link
+                      href={{
+                        pathname: "/products/garn/[slug]",
+                        query: { slug: item.node.slug },
+                      }}
+                >
+                  <a>
+                    <article className="col-span-1 product-container relative">
+                      <div className="image-container w-full">
+                        <Image
+                          width={product.image.mediaDetails.width}
+                          height={product.image.mediaDetails.height}
+                          sizes={"50vw"}
+                          layout='responsive'
+                          objectFit='cover'
+                          className="product-image"
+                          src={product.image.guid}
+                          alt={product.image.alt}
+                        ></Image>
+                      </div>
+                      <div className="px-2 pb-2">
+                        <h4 className="">{product.title}</h4>
+                        <span className="block text-xs text-black-60">
+                          More colors
+                        </span>
+                        <span className="block mt-2">
+                          {product.price} DKK
+                        </span>
+                      </div>
+                    </article>
+                  </a>
+                </Link>
+              </div>
+            )
+          })}
+        </div>
+        
       </section>
 
       <section className="grid grid-cols-6 gap-4 md:mt-8">
@@ -150,10 +231,14 @@ export default function Home(props) {
 export async function getStaticProps() {
   const content = await getHomePage();
   const headerFooterData = await getData();
+  const yarn = await getSelectedYarnItems();
+  const patterns = await getSelectedPatternsItems();
   return {
     props: {
       content,
-      headerFooterData
+      headerFooterData,
+      yarn,
+      patterns
     }
   }
 }
