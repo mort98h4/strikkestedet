@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "../styles/globals.css";
 import "../styles/app.css";
-import Head from "next/head";
 import Header from "../globals/Header";
 import Footer from "../globals/Footer";
 
