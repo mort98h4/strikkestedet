@@ -152,10 +152,4 @@ export async function getStaticProps() {
       content,
     }
   }
-  // const allPosts = await getAllPosts();
-  // return {
-  //   props: {
-  //     allPosts
-  //   }
-  // };
 }
