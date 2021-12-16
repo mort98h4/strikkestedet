@@ -1,4 +1,5 @@
 import { getData } from "../../lib/api";
+import Head from "next/head";
 
 export default function Custom404(props) {
     return (

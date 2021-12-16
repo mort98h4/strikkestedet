@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import BasketList from "../components/basketList";
 import { getData } from "../../lib/api";
+import Head from "next/head";
 
 export default function Basket(props) {
   let totalPrice = 0;
