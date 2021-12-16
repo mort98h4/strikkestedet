@@ -41,6 +41,15 @@ export default function Opskrift(props) {
 
   return (
     <>
+      <Head>
+        {/* <title>{props.page.metaFields.sideTitel}</title> */}
+        <title>Strikkestedet | Opskrifter</title>
+        {/* <meta name="description" content={props.page.metaFields.sideBeskrivelse}></meta> */}
+        <meta name="description" content="Her finder du Strikkestedet store udvalg af strikkeopskrifter fra kendte mærker og designere, som eksempelvis PetitKnit, Sandnes, Permin og mange flere."></meta> 
+        <link rel="icon" type="image/png" sizez="180x180" href="./../apple-touch-icon.ico"></link>
+        <link rel="icon" type="image/png" sizez="32x32" href="./../favicon32x32"></link>
+        <link rel="icon" type="image/png" sizez="16x16" href="./../favicon16x16"></link>
+      </Head>
       <div className="md:grid md:grid-cols-6 md:gap-4 mb-32 mt-4 p-4 2xl:p-0 md:mt-16">
         <div className="md:hidden">
           <h1 className="font-serif text-5xl mb-4">
