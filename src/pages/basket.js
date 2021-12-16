@@ -53,7 +53,7 @@ export default function Basket(props) {
                 )}
               </span>
             </div>
-            <button className="mt-10 bg-black-70 text-white py-2 px-4 col-span-2 hover:bg-black">
+            <button className="mt-10 bg-btn text-white py-2 px-4 col-span-2 transition hover:bg-btn-hover">
               Fortsæt til betaling
             </button>
           </div>

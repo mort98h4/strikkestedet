@@ -3,6 +3,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import { Arrow } from "../../../components/arrow";
 import Link from "next/link";
+import Image from "next/image";
 
 function Product(props) {
   const [amount, setAmount] = useState(0);
@@ -188,27 +189,34 @@ function Product(props) {
       return prevState * 0;
     });
   }
-  console.log(colorForBasket);
   return (
     <>
       <article className="md:grid md:grid-cols-6 text-sm">
         <section className="grid grid-cols-2 md:col-span-4 md:mt-10 md:grid-cols-4 md:gap-4">
           <div className="block col-span-1 md:col-span-2">
             {colorForBasket === false ? (
-              <img
+              <Image
+                priority={true}
+                layout="responsive"
+                width="500"
+                height="600"
                 src={info.colorimage.guid}
                 alt={info.colorimage.alt}
-                className="object-cover object-bottom h-[500px] w-[100%]"
+                className="object-cover object-bottom"
               />
             ) : (
               <>
                 {usedColors.map((item) => {
                   if (item.title === colorForBasket.title) {
                     return (
-                      <img
+                      <Image
+                        priority={true}
+                        layout="responsive"
+                        width="500"
+                        height="600"
                         src={colorForBasket.guid}
                         alt={colorForBasket.alt}
-                        className="object-cover object-bottom h-[500px] w-[100%]"
+                        className="object-cover object-bottom"
                       />
                     );
                   }
@@ -218,20 +226,28 @@ function Product(props) {
           </div>
           <div className="col-span-1 md:col-span-2">
             {colorForBasket === false ? (
-              <img
+              <Image
+                priority={true}
+                layout="responsive"
+                width="500"
+                height="600"
                 src={info.image.guid}
                 alt={info.image.alt}
-                className="object-cover object-bottom h-[500px] w-[100%]"
+                className="object-cover object-bottom"
               />
             ) : (
               <>
                 {usedImages.map((item) => {
                   if (item.title === colorForBasket.title) {
                     return (
-                      <img
+                      <Image
+                        priority={true}
+                        layout="responsive"
+                        width="500"
+                        height="600"
                         src={item.guid}
                         alt={item.alt}
-                        className="object-cover object-bottom h-[500px] w-[100%]"
+                        className="object-cover object-bottom"
                       />
                     );
                   }
@@ -241,7 +257,7 @@ function Product(props) {
           </div>
         </section>
         <div className="col-start-5 col-end-6">
-          <aside className="md:fixed md:mr-4 bg-background z-5 pl-10 pr-10 h-full max-w-[700px]">
+          <aside className="md:fixed md:mr-4 bg-background z-[5] pl-10 pr-10 h-full max-w-[700px] overflow-scroll">
             <h1 className=" font-serif mt-10 md:mt-10 text-3xl lg:text-5xl">
               {info.title}
             </h1>
@@ -256,8 +272,8 @@ function Product(props) {
                   <div className="flex flex-row gap-1">
                     <button
                       className={clsx(
-                        amount === 0 ? "text-black-40" : "",
-                        "inline bg-black-10 py-2 px-4"
+                        amount === 0 ? "text-black-40" : " hover:bg-gray-footer",
+                        "inline bg-gray-input transition py-2 px-4"
                       )}
                       disabled={amount === 0}
                       onClick={clickedMinus}
@@ -268,7 +284,7 @@ function Product(props) {
                       <p className="">{amount}</p>
                     </div>
                     <button
-                      className="inline bg-black-10 py-2 px-4"
+                      className="inline bg-gray-input transition hover:bg-gray-footer py-2 px-4"
                       onClick={() => {
                         clickedPlus();
                       }}
@@ -277,10 +293,11 @@ function Product(props) {
                     </button>
                   </div>
                 </div>
-                <div className="col-span-3 md:col-span-2 mt-4 md:mt-0">
+                <div className="col-span-3 xl:col-span-2 mt-4 md:mt-0">
                   <h3 className="font-bold"> Vælg farve</h3>
+                  <div className="w-full lg:w-[300px] relative">
                   <button
-                    className="bg-gray-input py-2 px-4 hover:bg-gray-footer w-full flex flex-row justify-between lg:w-[300px]"
+                    className="bg-gray-input py-2 px-4 transition hover:bg-gray-footer w-full flex flex-row justify-between"
                     onClick={() => {
                       ColorBtn();
                     }}
@@ -292,31 +309,33 @@ function Product(props) {
                     )}
 
                     <div className="pt-1">
-                      <Arrow></Arrow>
+                      <Arrow rotate={colorBtn}></Arrow>
                     </div>
                   </button>
-                  {colorBtn ? (
-                    <div className="flex flex-col ">
-                      <div className="absolute w-[300px]">
+                  <div className={"absolute w-full flex flex-col transition-all " + (colorBtn ? "max-h-[220px]" : "max-h-0 overflow-hidden")}>
+                      <div className="w-full z-[5]">
                         {usedColors.map((color) => {
                           return (
-                            <div key={color.title}>
+                            <div key={color.title} className="relative">
                               <hr className="h-0.1 bg-black" />
                               <button
-                                className=" bg-gray-input py-2 px-4 hover:bg-gray-footer w-full"
+                                className=" bg-gray-input py-2 px-4 transition hover:bg-gray-footer w-full"
                                 onClick={() => {
                                   Color(color);
                                   ColorBtn(color);
                                 }}
                               >
-                                <div className="flex flex-row ">
-                                  <img
+                                <div className="flex flex-row items-center">
+                                  <div className="relative block w-[30px] h-[30px] mr-2">
+                                  <Image
+                                    layout="responsive"
+                                    width="30"
+                                    height="30"
                                     className="mr-10 object-cover"
-                                    width="30px"
-                                    height="30px"
                                     src={color.guid}
                                     alt={color.alt}
                                   />
+                                  </div>
                                   {color.title}
                                 </div>
                               </button>
@@ -325,7 +344,8 @@ function Product(props) {
                         })}
                       </div>
                     </div>
-                  ) : null}
+                  </div>
+                  
                 </div>
                 <button
                   onClick={() => {
@@ -336,7 +356,7 @@ function Product(props) {
                   className={clsx(
                     amount === 0 || !chosenColor
                       ? "bg-black-20 text-white-60"
-                      : "bg-black-70 text-white hover:bg-black",
+                      : "bg-black-70 text-white transition hover:bg-black",
                     "py-2 px-4 col-span-3 md:col-span-2 mt-6 md:mt-0"
                   )}
                 >
@@ -356,41 +376,58 @@ function Product(props) {
                 </span>
               </div>
               <div>
-                <img
-                  className="w-24 "
-                  src="./../../trustpilot.svg"
+                <div className="max-w-[96px] max-h-[24px] relative">
+                <Image
+                  layout="responsive"
+                  width="96"
+                  height="24"
+                  className="w-24"
+                  src="/trustpilot.svg"
                   alt="TrustPilot"
-                ></img>
-                <img
+                ></Image>
+                </div>
+                <div className="relative max-w-[96px] flex justify-center">
+                <Image
+                  layout="fixed"
+                  width="15"
+                  height="15"
                   className="inline"
-                  width="15px"
-                  src="./../../review_star.svg"
+                  src="/review_star.svg"
                   alt="star"
                 />
-                <img
+                <Image
+                  layout="fixed"
+                  width="15"
+                  height="15"
                   className="inline"
-                  width="15px"
-                  src="./../../review_star.svg"
+                  src="/review_star.svg"
                   alt="star"
                 />
-                <img
+                <Image
+                  layout="fixed"
+                  width="15"
+                  height="15"
                   className="inline"
-                  width="15px"
-                  src="./../../review_star.svg"
+                  src="/review_star.svg"
                   alt="star"
                 />
-                <img
+                <Image
+                  layout="fixed"
+                  width="15"
+                  height="15"
                   className="inline"
-                  width="15px"
-                  src="./../../review_star.svg"
+                  src="/review_star.svg"
                   alt="star"
                 />
-                <img
+                <Image
+                  layout="fixed"
+                  width="15"
+                  height="15"
                   className="inline"
-                  width="15px"
-                  src="./../../review_star.svg"
+                  src="/review_star.svg"
                   alt="star"
                 />
+                </div>
               </div>
             </div>
           </aside>
@@ -449,20 +486,25 @@ function Product(props) {
                     return (
                       <li
                         key={color.alt}
-                        className="md:col-span-1 product-container"
+                        className="md:col-span-1 product-container relative mb-2"
                       >
                         <div
                           onClick={() => {
                             Color(color);
                           }}
-                          className="image-container"
+                          className="image-container w-full"
                         >
-                          <img
+                          <Image
                             src={color.guid}
                             alt={color.alt}
-                            className="object-cover product-image"
+                            sizes="10vw"
+                            layout="responsive"
+                            objectFit="cover"
+                            width="115"
+                            height="115"
+                            className="product-image"
                           />
-                          <h3>{color.title}</h3>
+                          <h3 className="px-2 pb-2">{color.title}</h3>
                         </div>
                       </li>
                     );
@@ -472,21 +514,36 @@ function Product(props) {
 
               {infoNav === true ? (
                 <>
-                  <div className="md:col-span-2 ">
-                    <h3 className="font-bold">Vejledende Pind</h3>
-                    <span className="text-black-60 ">
-                      {details.vejledende_pind.pind}
-                    </span>
+                  <div className="md:col-span-2 flex">
+                    <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
+                      <Image width="40" height="40" layout="responsive" src="/pinde.svg" alt="Vejledende pinde str. ikon"></Image>
+                    </div>
+                    <div className="inline-block">
+                      <h3 className="font-bold">Vejledende Pind</h3>
+                        <span className="text-black-60 ">
+                          {details.vejledende_pind.pind}
+                        </span>
+                      </div>
                   </div>
-                  <div className="md:col-span-2 ">
-                    <h3 className="font-bold">Vaskeanvisning</h3>
-                    <span className="text-black-60">
-                      {details.vaskeanvisning.vaskeanvisning}
-                    </span>
+                  <div className="md:col-span-2 flex">
+                    <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
+                      <Image width="40" height="40" layout="responsive" src="/vaskeanvisning.svg" alt="vaskekanvisning ikon"></Image>
+                    </div>
+                    <div className="inline-block">
+                      <h3 className="font-bold">Vaskeanvisning</h3>
+                      <span className="text-black-60">
+                        {details.vaskeanvisning.vaskeanvisning}
+                      </span>
+
+                    </div>
                   </div>
-                  <div className="md:col-span-2 ">
-                    <h3 className="font-bold">Garn/Fiber</h3>
-                    <ul>
+                  <div className="md:col-span-2 flex">
+                    <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
+                      <Image width="40" height="40" layout="responsive" src="/fibre.svg" alt="Fibre ikon"></Image>
+                    </div>
+                    <div className="inline-block">
+                      <h3 className="font-bold">Garn/Fiber</h3>
+                      <ul>
                       {details.materiale.garn1 ? (
                         <li>
                           <span className="text-black-60">
@@ -522,25 +579,38 @@ function Product(props) {
                           </span>
                         </li>
                       ) : null}
-                    </ul>
+                      </ul>
+                    </div>
+                    
+                    
                   </div>
                 </>
               ) : null}
               {infoNav === true ? (
-                <div className="md:col-span-2 ">
-                  <h3 className="font-bold">Strikkefasthed</h3>
-                  <span className="text-black-60">
-                    {details.stikkefasthed.strikkefasthed}
-                  </span>
+                <div className="md:col-span-2 flex">
+                  <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
+                    <Image width="40" height="40" layout="responsive" src="/strikkefasthed.svg" alt="Strikkefasthed ikon"></Image>
+                  </div>
+                  <div className="inline-block">
+                    <h3 className="font-bold">Strikkefasthed</h3>
+                    <span className="text-black-60">
+                      {details.stikkefasthed.strikkefasthed}
+                    </span>
+                  </div>
                 </div>
               ) : null}
 
               {infoNav === true ? (
-                <div className="md:col-span-2 ">
-                  <h3 className="font-bold">Løbelængde</h3>
-                  <span className="text-black-60">
-                    {details.loebelaengde.lobelaengde}
-                  </span>
+                <div className="md:col-span-2 flex">
+                  <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
+                    <Image width="40" height="40" layout="responsive" src="/lobelaengde.svg" alt="Strikkefasthed ikon"></Image>
+                  </div>
+                  <div className="inline-block">
+                    <h3 className="font-bold">Løbelængde</h3>
+                    <span className="text-black-60">
+                      {details.loebelaengde.lobelaengde}
+                    </span>
+                  </div>
                 </div>
               ) : null}
             </nav>
