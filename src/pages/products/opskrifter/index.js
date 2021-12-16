@@ -12,6 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { number } from "tailwindcss/lib/util/dataTypes";
+import Head from "next/head";
 
 export default function Opskrift(props) {
   const posts = props.data.posts.edges;
@@ -174,13 +175,6 @@ export default function Opskrift(props) {
             {filteredList.map((item) => {
               return (
                 <div key={item.slug} className="col-span-1">
-                  <Link
-                    href={{
-                      pathname: "/products/opskrifter/[slug]",
-                      query: { slug: item.node.slug },
-                    }}
-                  >
-                    <a>
                       {/* Transition css ligger i globals.css på linje 139-159 */}
                       <article className="col-span-1 product-container relative">
                         <div className="image-container w-full">
@@ -206,8 +200,6 @@ export default function Opskrift(props) {
                           </span>
                         </div>
                       </article>
-                    </a>
-                  </Link>
                 </div>
               );
             })}
