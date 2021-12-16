@@ -168,8 +168,8 @@ export default function Home(props) {
                           layout='responsive'
                           objectFit='cover'
                           className="product-image"
-                          src={categoryIsYarn ? product.image.guid : product.imageforlist.guid}
-                          alt={categoryIsYarn ? product.image.alt : product.imageforlist.alt}
+                          src={(categoryIsYarn ? product.image.guid : product.imageforlist.guid)}
+                          alt={"Udvalgt produkt"}
                         ></Image>
                       </div>
                       <div className="px-2 pb-2">
