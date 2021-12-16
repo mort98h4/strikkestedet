@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Home(props) {
-  console.log(props);
   const [selectedItemsList, setSelectedItemsList] = useState(props.yarn);
   const [categoryIsYarn, setCategoryIsYarn] = useState(true)
 
@@ -25,7 +24,6 @@ export default function Home(props) {
   }
 
   function handleChange(e) {
-    console.log(e.currentTarget.value);
     e.currentTarget.value === "knittingPatterns" ? setSelectedItemsList(props.patterns) : setSelectedItemsList(props.yarn);
     setCategoryIsYarn(categoryIsYarn = !categoryIsYarn)
   }

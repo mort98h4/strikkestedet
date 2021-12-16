@@ -5,7 +5,6 @@ import AddressList from "../../components/AddressList";
 import Head from "next/head";
 
 export default function AboutUs(props) {
-    console.log(props);
     const section1 = props.content.page.aboutsection1;
     const conditions = props.content.page.handelsbetingelser;
     const aboutImages = props.content.posts.nodes;

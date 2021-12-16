@@ -9,7 +9,6 @@ import { Arrow } from "../../../components/arrow";
 import Button from "../../../globals/Button";
 
 export default function Garn(props) {
-  console.log(props);
   const [filteredList, setFilteredList] = useState(props.newData);
   const [brandFilter, setBrandfilter] = useState(true);
   const [fiberFilter, setFiberfilter] = useState(false);
