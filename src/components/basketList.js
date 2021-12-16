@@ -12,7 +12,7 @@ export default function BasketList(data) {
       <li className="row-span-1 grid-cols-2 gap-y-10 lg:gap-y-0 md:bg-white p-4 grid lg:grid-cols-4 lg:gap-4">
         <div className="col-span-2 flex">
           <div className="block relative w-full max-w-[100px]">
-          <Image src={color.guid} alt="" width="50" height="50" layout="responsive"/>
+          <Image src={color.guid} alt="Valgt produkt" width="50" height="50" layout="responsive"/>
         </div>
         
         <div className="ml-4 self-center">
