@@ -35,7 +35,7 @@ export default function Home(props) {
       <Head>
         <title>{props.content.page.metaFields.sideTitel}</title>
         <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta>
-        <link rel="icon" type="image/png" sizez="180x180" href="./apple-touch-icon.png"></link>
+        <link rel="icon" type="image/png" sizez="180x180" href="./apple-touch-icon.ico"></link>
         <link rel="icon" type="image/png" sizez="32x32" href="./favicon32x32"></link>
         <link rel="icon" type="image/png" sizez="16x16" href="./favicon16x16"></link>
       </Head>
