@@ -29,20 +29,20 @@ export default function BasketList(data) {
             <button
               className={clsx(
                 amount ? "text-white" : "",
-                "inline bg-black-10 py-2 px-4"
+                "inline bg-gray-input py-2 px-4 transition hover:text-black hover:bg-gray-footer cursor-pointer"
               )}
               disabled
             >
               -
             </button>
-            <div className="bg-black-10 py-2 px-4">
+            <div className="bg-gray-input py-2 px-4">
               <p className="">{amount}</p>
             </div>
             <button
               disabled
               className={clsx(
-                amount ? "bg-black-10 text-white" : "",
-                "py-2 px-4"
+                amount ? "bg-gray-input text-white" : "",
+                "py-2 px-4 transition hover:text-black hover:bg-gray-footer cursor-pointer"
               )}
             >
               +
