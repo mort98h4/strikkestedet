@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { Arrow } from "../../../components/arrow";
 import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head";
 
 function Product(props) {
   const [amount, setAmount] = useState(0);
@@ -191,6 +192,13 @@ function Product(props) {
   }
   return (
     <>
+    <Head>
+        <title>{`${props.headerFooterData.generalSettings.title} | ${info.title}`}</title>
+        <meta name="description" content={info.text}></meta> 
+        <link rel="icon" type="image/png" sizez="180x180" href="./../apple-touch-icon.ico"></link>
+        <link rel="icon" type="image/png" sizez="32x32" href="./../favicon32x32"></link>
+        <link rel="icon" type="image/png" sizez="16x16" href="./../favicon16x16"></link>
+    </Head> 
       <article className="md:grid md:grid-cols-6 text-sm">
         <section className="grid grid-cols-2 md:col-span-4 md:mt-10 md:grid-cols-4 md:gap-4">
           <div className="block col-span-1 md:col-span-2">
