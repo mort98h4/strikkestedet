@@ -26,32 +26,7 @@ export default function Home(props) {
 
   function handleChange(e) {
     console.log(e.currentTarget.value);
-    e.currentTarget.value === "knittingPatterns" ? setSelectedItemsList({
-      posts: {
-        edges: [
-          {
-            node: {
-              id: "dakewf",
-              title: "something",
-              slug: "something",
-              patternproduct: {
-                title: "something",
-                text: "longer something",
-                price: "500",
-                image: {
-                  altText: "something",
-                  guid: "https://mortengross.dk/kea/17_eksamen/strikkestedet/wordpress/wp-content/uploads/2021/12/Tynn-Silk-Mohair-5.png",
-                  mediaDetails: {
-                    height: 1283,
-                    width: 850
-                  },
-                }
-              }
-            }
-          }   
-        ]
-      }
-    }) : setSelectedItemsList(props.yarn);
+    e.currentTarget.value === "knittingPatterns" ? setSelectedItemsList(props.patterns) : setSelectedItemsList(props.yarn);
     setCategoryIsYarn(categoryIsYarn = !categoryIsYarn)
   }
 
@@ -173,7 +148,7 @@ export default function Home(props) {
         </div>
         <div className="col-span-6 lg:col-span-4 grid grid-cols-4 gap-4 px-4 lg:px-0 lg:pr-4">
           {selectedItemsList.posts.edges.map((item) => {
-            const product = categoryIsYarn ? item.node.yarnproduct : item.node.patternproduct;
+            const product = categoryIsYarn ? item.node.yarnproduct : item.node.opskriftprodukt;
 
             return (
               <div key={item.node.id} className="col-span-2 md:col-span-1">
@@ -184,17 +159,17 @@ export default function Home(props) {
                       }}
                 >
                   <a>
-                    <article className="col-span-1 product-container relative">
+                    <article className="col-span-1 product-container h-100 relative">
                       <div className="image-container w-full">
                         <Image
-                          width={product.image.mediaDetails.width}
-                          height={product.image.mediaDetails.height}
+                          width={categoryIsYarn ? product.image.mediaDetails.width : product.imageforlist.mediaDetails.width}
+                          height={categoryIsYarn ? product.image.mediaDetails.height : product.imageforlist.mediaDetails.height}
                           sizes={"50vw"}
                           layout='responsive'
                           objectFit='cover'
                           className="product-image"
-                          src={product.image.guid}
-                          alt={product.image.alt}
+                          src={categoryIsYarn ? product.image.guid : product.imageforlist.guid}
+                          alt={categoryIsYarn ? product.image.alt : product.imageforlist.alt}
                         ></Image>
                       </div>
                       <div className="px-2 pb-2">
@@ -203,7 +178,7 @@ export default function Home(props) {
                           More colors
                         </span>
                         <span className="block mt-2">
-                          {product.price} DKK
+                          {categoryIsYarn ? product.price : product.pris} DKK
                         </span>
                       </div>
                     </article>
