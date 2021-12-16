@@ -189,7 +189,6 @@ function Product(props) {
       return prevState * 0;
     });
   }
-  console.log(colorForBasket);
   return (
     <>
       <article className="md:grid md:grid-cols-6 text-sm">
@@ -197,6 +196,7 @@ function Product(props) {
           <div className="block col-span-1 md:col-span-2">
             {colorForBasket === false ? (
               <Image
+                priority={true}
                 layout="responsive"
                 width="500"
                 height="600"
@@ -210,6 +210,7 @@ function Product(props) {
                   if (item.title === colorForBasket.title) {
                     return (
                       <Image
+                        priority={true}
                         layout="responsive"
                         width="500"
                         height="600"
@@ -226,6 +227,7 @@ function Product(props) {
           <div className="col-span-1 md:col-span-2">
             {colorForBasket === false ? (
               <Image
+                priority={true}
                 layout="responsive"
                 width="500"
                 height="600"
@@ -239,6 +241,7 @@ function Product(props) {
                   if (item.title === colorForBasket.title) {
                     return (
                       <Image
+                        priority={true}
                         layout="responsive"
                         width="500"
                         height="600"
