@@ -10,7 +10,7 @@ export default function BasketList(data) {
     <>
       <hr className="h-0.2 bg-black" />
       <li className="row-span-1 grid-cols-2 gap-y-10 lg:gap-y-0 md:bg-white p-4 grid lg:grid-cols-4 lg:gap-4">
-        <div className="lg:col-span-2 flex">
+        <div className="col-span-2 flex">
           <div className="block relative w-full max-w-[100px]">
           <Image src={color.guid} alt="" width="50" height="50" layout="responsive"/>
         </div>
@@ -29,20 +29,20 @@ export default function BasketList(data) {
             <button
               className={clsx(
                 amount ? "text-white" : "",
-                "inline bg-black-10 py-2 px-4"
+                "inline bg-gray-input py-2 px-4 transition hover:text-black hover:bg-gray-footer cursor-pointer"
               )}
               disabled
             >
               -
             </button>
-            <div className="bg-black-10 py-2 px-4">
+            <div className="bg-gray-input py-2 px-4">
               <p className="">{amount}</p>
             </div>
             <button
               disabled
               className={clsx(
-                amount ? "bg-black-10 text-white" : "",
-                "py-2 px-4"
+                amount ? "bg-gray-input text-white" : "",
+                "py-2 px-4 transition hover:text-black hover:bg-gray-footer cursor-pointer"
               )}
             >
               +
