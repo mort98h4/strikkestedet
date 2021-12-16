@@ -241,7 +241,7 @@ function Product(props) {
           </div>
         </section>
         <div className="col-start-5 col-end-6">
-          <aside className="md:fixed md:mr-4 bg-background z-5 pl-10 pr-10 h-full max-w-[700px]">
+          <aside className="md:fixed md:mr-4 bg-background z-[5] pl-10 pr-10 h-full max-w-[700px] overflow-scroll">
             <h1 className=" font-serif mt-10 md:mt-10 text-3xl lg:text-5xl">
               {info.title}
             </h1>
