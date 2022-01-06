@@ -5,6 +5,6 @@ module.exports = {
     defaultLocale: 'da',
   },
   images: {
-    domains: ['mortengross.dk']
+    domains: ['siwmehlin.dk']
   }
 };
