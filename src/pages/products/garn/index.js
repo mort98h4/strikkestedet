@@ -9,47 +9,100 @@ import { Arrow } from "../../../components/arrow";
 import Button from "../../../globals/Button";
 
 export default function Garn(props) {
-  const [filteredList, setFilteredList] = useState(props.newData);
+  const [products, setProducts] = useState(props.newData);
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [activeFilters, setActiveFilters] = useState([]);
   const [brandFilter, setBrandfilter] = useState(true);
   const [fiberFilter, setFiberfilter] = useState(false);
+  const [needleFilter, setNeedleFilter] = useState(false);
   const router = useRouter();
   const { slug } = router.query;
 
+  console.log(props);
+
   const tags = props.tags.tags;
   const usedTagsBrand = [];
+  const brandTags = props.newData.map(product => {
+    product.node.tags.nodes.forEach(tag => {
+      const tagIndex = usedTagsBrand.indexOf(tag.name);
+      if (tag.tagType.brand && tagIndex === -1) {
+        usedTagsBrand.push(tag.name);
+      }
+    })
+  });
+
   const usedTagsMaterial = [];
-
-  tags.nodes.map((tag) => {
-    if (
-      tag.slug === "baby-alpakka" ||
-      tag.slug === "bomuld" ||
-      tag.slug === "boerstet-alpakka" ||
-      tag.slug === "fin-merinould" ||
-      tag.slug === "hoer" ||
-      tag.slug === "merinould" ||
-      tag.slug === "mohair" ||
-      tag.slug === "mulberry-silke" ||
-      tag.slug === "nylon" ||
-      tag.slug === "silke" ||
-      tag.slug === "super-kid-mohair" ||
-      tag.slug === "uld" ||
-      tag.slug === "uld-superwash" ||
-      tag.slug === "viskose"
-    ) {
-      usedTagsMaterial.push(tag);
-    }
+  const materialTags = props.newData.map(product => {
+    product.node.tags.nodes.forEach(tag => {
+      const tagIndex = usedTagsMaterial.indexOf(tag.name);
+      if (tag.tagType.fibre && tagIndex === -1) {
+        usedTagsMaterial.push(tag.name);
+      }
+    })
   });
 
-  tags.nodes.map((tag) => {
-    if (
-      tag.id === "dGVybToxOA==" ||
-      tag.id === "dGVybToxNw==" ||
-      tag.id === "dGVybToxNg==" ||
-      tag.id === "dGVybToxNQ=="
-    ) {
-      usedTagsBrand.push(tag);
+  const usedTagsNeedle = [];
+  const needleTags = props.newData.map(product => {
+    product.node.tags.nodes.forEach(tag => {
+      const tagIndex = usedTagsNeedle.indexOf(tag.name);
+      if (tag.tagType.pind && tagIndex === -1) {
+        usedTagsNeedle.push(tag.name);
+      }
+    })
+  })
+
+  function addFilter(filter) {
+    console.log(filter);
+    if (activeFilters.findIndex(item => item === filter) === -1) {
+      activeFilters.push(filter);
+      setActiveFilters(activeFilters);
+    } 
+
+    const filterProducts = filteredProducts.filter(product => {
+      if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+        return product.node;
+      };
+    })
+    setFilteredProducts(filterProducts);
+  }
+
+  function removeFilter(filter) {
+    console.log(filter);
+    const newActiveFilters = activeFilters.filter(item => {
+      if (item != filter) {
+        return item;
+      }
+    });
+    setActiveFilters(newActiveFilters);
+    if (newActiveFilters.length != 0) {
+      const newFilteredProducts = [];
+      newActiveFilters.forEach(filter => {
+        const index = newActiveFilters.indexOf(filter);
+        if (index === 0) {
+          products.filter(product => {
+            if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+              newFilteredProducts.push(product);
+            }
+          })
+        } else {
+          const filterNewProducts = newFilteredProducts.filter(product => {
+            if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+              return product.node;
+            }
+          })
+          newFilteredProducts = filterNewProducts;
+        }
+      })
+      setFilteredProducts(newFilteredProducts);
+    } else {
+      setFilteredProducts(products);
     }
-  });
+  }
+
+  function clearFilter() {
+    setActiveFilters([]);
+    setFilteredProducts(products);
+  }
 
   return (
     <>
@@ -73,13 +126,24 @@ export default function Garn(props) {
 
         </div>
         <aside className=" md:col-span-2 md:pr-10">
-          <label
-            onClick={() => setFilteredList(props.newData)}
-            className="block text-black-60 transition hover:underline hover:text-black font-bold m-10"
-          >
-            Se alle produkter
-          </label>
-          <div className="mb-6">
+          <div className="w-full pb-8">
+            <label 
+              onClick={activeFilters.length != 0 ? clearFilter : () => {}} 
+              className={"block text-black-60 font-bold mb-4" + (activeFilters.length != 0 ? " transition cursor-pointer hover:underline hover:text-black" : "")}
+            >
+              {activeFilters.length != 0 ? "Nulstil filtre" : "Ingen filtre valgt"}
+            </label>
+            {activeFilters.length != 0 ?
+              activeFilters.map(item => {
+                return (
+                  <button key={item} className="active-filter mr-2 mb-2 p-2 bg-white transition hover:bg-black-10 inline-flex" onClick={() => removeFilter(item)}><img src="./../cross.svg" className="inline-block self-center mr-1 w-4 h-4"/>{item}</button>
+                )
+              }) 
+            : 
+            ""}
+          </div>
+          
+          <div className="">
             <nav>
               <div
                 onClick={() => {
@@ -89,41 +153,31 @@ export default function Garn(props) {
                     return setBrandfilter(false);
                   }
                 }}
-                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition cursor-pointer hover:bg-black-10"
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 transition cursor-pointer hover:bg-black-10"
               >
                 <button className="font-bold mb-4 ">Brand</button>
                 <div className="pt-2">
                   <Arrow rotate={brandFilter}/>
                 </div>
               </div>
-              <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-6 transition-all overflow-scroll " + (brandFilter ? "max-h-[250px]" : "max-h-0 overflow-hidden py-0")}>
-                  {usedTagsBrand.map((tag) => {
-                    const items = [];
-                    props.newData.map((item) => {
-                      item.node.tags.nodes.map((itemTag) => {
-                        if (itemTag.slug === tag.slug) {
-                          items.push(item);
-                        }
-                      });
-                    });
+              <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-1 transition-all overflow-scroll " + (brandFilter ? "max-h-[250px] pt-4 pb-10" : "max-h-0 overflow-hidden py-0")}>
+                  {
+                  usedTagsBrand.map(item => {
                     return (
-                      <li
-                        key={tag.slug}
-                        className="text-black-60 transition hover:text-black hover:underline"
+                      <li 
+                        key={item} 
+                        className="text-black-60 transition cursor-pointer ml-4 hover:text-black hover:underline" 
+                        onClick={() => addFilter(item)}
                       >
-                        <label
-                          onClick={() => setFilteredList(items)}
-                          className="ml-4 cursor-pointer"
-                        >
-                          {tag.name}
-                        </label>
+                        {item}
                       </li>
-                    );
-                  })}
+                    )
+                  })
+                  }
                 </ul>
             </nav>
           </div>
-          <div className="mb-10">
+          <div className="">
             <nav>
               <div
                 onClick={() => {
@@ -133,37 +187,53 @@ export default function Garn(props) {
                     return setFiberfilter(false);
                   }
                 }}
-                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition hover:bg-black-10"
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 transition cursor-pointer hover:bg-black-10"
               >
                 <button className="font-bold mb-4 ">Fibre</button>
                 <div className="pt-2">
                   <Arrow rotate={fiberFilter} />
                 </div>
               </div>
-                <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-6 transition-all overflow-scroll " + (fiberFilter ? "max-h-[250px]" : "max-h-0 overflow-hidden py-0")}>
-                  {usedTagsMaterial.map((tag) => {
-                    const items = [];
-                    props.newData.map((item) => {
-                      item.node.tags.nodes.map((itemTag) => {
-                        if (itemTag.slug === tag.slug) {
-                          items.push(item);
-                        }
-                      });
-                    });
+                <ul className={"grid grid-rows-flow gap-2 bg-white px-10 mb-1 transition-all overflow-scroll " + (fiberFilter ? "max-h-[250px] pt-4 pb-10" : "max-h-0 overflow-hidden py-0")}>
+                  {
+                  usedTagsMaterial.map(item => {
                     return (
-                      <li
-                        key={tag.slug}
-                        className="text-black-60 transition hover:text-black hover:underline"
-                      >
-                        <label
-                          onClick={() => setFilteredList(items)}
-                          className="ml-4"
-                        >
-                          {tag.name}
-                        </label>
+                      <li key={item} className="text-black-60 transition cursor-pointer ml-4 hover:text-black hover:underline" onClick={() => addFilter(item)}>
+                        {item}
                       </li>
-                    );
-                  })}
+                    )
+                  })
+                  }
+                </ul>
+            </nav>
+          </div>
+          <div className="mb-10">
+            <nav>
+              <div
+                onClick={() => {
+                  if (needleFilter === false) {
+                    return setNeedleFilter(true);
+                  } else {
+                    return setNeedleFilter(false);
+                  }
+                }}
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 transition cursor-pointer hover:bg-black-10"
+              >
+                <button className="font-bold mb-4 ">Vejledende pinde</button>
+                <div className="pt-2">
+                  <Arrow rotate={needleFilter} />
+                </div>
+              </div>
+                <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-1 transition-all overflow-scroll " + (needleFilter ? "max-h-[250px] pt-4 pb-10" : "max-h-0 overflow-hidden py-0")}>
+                  {
+                  usedTagsNeedle.map(item => {
+                    return (
+                      <li key={item} className="text-black-60 transition cursor-pointer ml-4 hover:text-black hover:underline" onClick={() => addFilter(item)}>
+                        {item}
+                      </li>
+                    )
+                  })
+                  }
                 </ul>
             </nav>
           </div>
@@ -180,7 +250,11 @@ export default function Garn(props) {
             </div>
           </div>
           <section className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 ">
-            {filteredList.map((item) => {
+            {filteredProducts.length === 0 ? 
+              <p className="col-span-full text-lg md:text-xl text-black-60">
+                Der er desværre ingen produkter, der passer til din filtrering.
+              </p> 
+              : filteredProducts.map((item) => {
               return (
                 <div
                   key={`${item.node.slug}${item.node.id}`}
