@@ -1,5 +1,4 @@
 import { getYarnPage, getYarnProducts, getData } from "../../../../lib/api";
-import { getTags } from "../../../../lib/api";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
@@ -20,7 +19,6 @@ export default function Garn(props) {
 
   console.log(props);
 
-  const tags = props.tags.tags;
   const usedTagsBrand = [];
   const brandTags = props.newData.map(product => {
     product.node.tags.nodes.forEach(tag => {
@@ -175,7 +173,7 @@ export default function Garn(props) {
                   usedTagsBrand.map(item => {
                     return (
                       <>
-                      <div key={item} className="flex items-center">
+                      <li key={item} className="flex items-center">
                         <input
                           type="checkbox" 
                           id={item + "-check"} 
@@ -184,7 +182,7 @@ export default function Garn(props) {
                           disabled={isDisabled(item)}
                           onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
-                      </div>
+                      </li>
                       </>
                     )
                   })
@@ -214,10 +212,10 @@ export default function Garn(props) {
                   usedTagsMaterial.map(item => {
                     return (
                       <>
-                      <div className="flex items-center">
+                      <li className="flex items-center">
                         <input key={item} type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
-                      </div>
+                      </li>
                       </>
                     )
                   })
@@ -225,7 +223,7 @@ export default function Garn(props) {
                 </ul>
             </nav>
           </div>
-          <div className="mb-10">
+          <div className="">
             <nav>
               <div
                 onClick={() => {
@@ -247,10 +245,10 @@ export default function Garn(props) {
                   usedTagsNeedle.map(item => {
                     return (
                       <>
-                      <div className="flex items-center">
+                      <li className="flex items-center">
                         <input key={item} type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
-                      </div>
+                      </li>
                       </>
                     )
                   })
@@ -328,7 +326,6 @@ export async function getStaticProps() {
   const page = await getYarnPage();
   const data = await getYarnProducts();
   const headerFooterData = await getData();
-  const tags = await getTags();
 
   const newData = data.posts.edges.map((item) => {
     return item;
@@ -340,7 +337,6 @@ export async function getStaticProps() {
       newData,
       newPage,
       headerFooterData,
-      tags,
     },
   };
 }
