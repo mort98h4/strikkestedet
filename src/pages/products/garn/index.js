@@ -17,8 +17,6 @@ export default function Garn(props) {
   const router = useRouter();
   const { slug } = router.query;
 
-  console.log(props);
-
   const usedTagsBrand = [];
   const brandTags = props.newData.map(product => {
     product.node.tags.nodes.forEach(tag => {
@@ -50,7 +48,6 @@ export default function Garn(props) {
   })
 
   function toggleFilter(filter) {
-    console.log(filter);
     if (activeFilters.findIndex(item => item === filter) === -1) {
       const newActiveFilters = activeFilters.concat(filter);
       setActiveFilters(newActiveFilters);
@@ -101,7 +98,6 @@ export default function Garn(props) {
   }
 
   function isDisabled(filter) {
-    console.log(filter);
     const disabled = [];
     filteredProducts.forEach(product => {
       product.node.tags.nodes.forEach(tag => {
@@ -112,7 +108,6 @@ export default function Garn(props) {
         }
       })
     })
-    console.log(disabled);
     if (disabled.length != 0) {
       return false;
     } else {
