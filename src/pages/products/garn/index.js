@@ -198,7 +198,6 @@ export default function Garn(props) {
                   {
                   usedTagsBrand.map(item => {
                     return (
-                      <>
                       <li key={item} className="flex items-center">
                         <input
                           type="checkbox" 
@@ -209,7 +208,6 @@ export default function Garn(props) {
                           onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
                       </li>
-                      </>
                     )
                   })
                   }
@@ -237,12 +235,10 @@ export default function Garn(props) {
                   {
                   usedTagsMaterial.map(item => {
                     return (
-                      <>
-                      <li className="flex items-center">
-                        <input key={item} type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
+                      <li key={item} className="flex items-center">
+                        <input type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
                       </li>
-                      </>
                     )
                   })
                   }
@@ -270,12 +266,10 @@ export default function Garn(props) {
                   {
                   usedTagsNeedle.map(item => {
                     return (
-                      <>
-                      <li className="flex items-center">
-                        <input key={item} type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
+                      <li key={item} className="flex items-center">
+                        <input type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
                       </li>
-                      </>
                     )
                   })
                   }
