@@ -7,7 +7,7 @@ import Button from "../../../globals/Button";
 import { Arrow } from "../../../components/arrow";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -17,6 +17,7 @@ export default function Opskrift(props) {
 
   const posts = props.data.posts.edges;
   const page = props.page.page;
+  let filterSlug;
 
   const [products, setProducts] = useState(posts);
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -25,6 +26,34 @@ export default function Opskrift(props) {
   const [genderFilter, setGenderFilter] = useState(false);
   const [itemFilter, setItemFilter] = useState(false);
   const [difficultyFilter, setdifficultyFilter] = useState(false);
+
+  useEffect(() => {
+    let params = new URLSearchParams(document.location.search);
+    filterSlug = params.get("filter");
+
+    if (filterSlug != null) {
+      const tagName = [];
+      posts.forEach(product => {
+        product.node.tags.nodes.forEach(tag => {
+          const tagIndex = tagName.indexOf(item => item.slug === filterSlug);
+          if (tagIndex === -1 && tag.slug === filterSlug) {
+            tagName.push(tag.name);
+          }
+        })
+      })
+      
+      const filter = tagName[0];
+      const newActiveFilters = activeFilters.concat(filter);
+      setActiveFilters(newActiveFilters);
+
+      const filterProducts = filteredProducts.filter(product => {
+        if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+          return product.node;
+        };
+      })
+      setFilteredProducts(filterProducts);
+    }
+  }, [])
 
   const usedTagsBrand = [];
   const brandTags = posts.map(product => {
@@ -255,7 +284,7 @@ export default function Opskrift(props) {
                 }}
                 className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 transition cursor-pointer hover:bg-black-10"
               >
-                <button className="font-bold mb-4 ">Genstand</button>
+                <button className="font-bold mb-4 ">Produkt</button>
                 <div className="pt-2">
                   <Arrow rotate={itemFilter}/>
                 </div>

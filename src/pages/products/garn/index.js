@@ -3,11 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Arrow } from "../../../components/arrow";
 import Button from "../../../globals/Button";
 
 export default function Garn(props) {
+  console.log(props);
   const [products, setProducts] = useState(props.newData);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [activeFilters, setActiveFilters] = useState([]);
@@ -16,6 +17,36 @@ export default function Garn(props) {
   const [needleFilter, setNeedleFilter] = useState(false);
   const router = useRouter();
   const { slug } = router.query;
+  let filterSlug;
+
+  useEffect(() => {
+    let params = new URLSearchParams(document.location.search);
+    filterSlug = params.get("filter");
+
+    if (filterSlug != null) {
+      const tagName = [];
+      props.newData.forEach(product => {
+        
+        product.node.tags.nodes.forEach(tag => {
+          const tagIndex = tagName.indexOf(item => item.slug === filterSlug);
+          if (tagIndex === -1 && tag.slug === filterSlug) {
+            tagName.push(tag.name);
+          }
+        })
+      })
+      
+      const filter = tagName[0];
+      const newActiveFilters = activeFilters.concat(filter);
+      setActiveFilters(newActiveFilters);
+
+      const filterProducts = filteredProducts.filter(product => {
+        if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+          return product.node;
+        };
+      })
+      setFilteredProducts(filterProducts);
+    }
+  }, [])
 
   const usedTagsBrand = [];
   const brandTags = props.newData.map(product => {
