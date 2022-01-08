@@ -215,7 +215,6 @@ export default function Opskrift(props) {
                   {
                   usedTagsBrand.map(item => {
                     return (
-                      <>
                       <li key={item} className="flex items-center">
                         <input
                           type="checkbox" 
@@ -226,7 +225,6 @@ export default function Opskrift(props) {
                           onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
                       </li>
-                      </>
                     )
                   })
                   }
@@ -254,7 +252,6 @@ export default function Opskrift(props) {
                   {
                   usedTagsGender.map(item => {
                     return (
-                      <>
                       <li key={item} className="flex items-center">
                         <input
                           type="checkbox" 
@@ -265,7 +262,6 @@ export default function Opskrift(props) {
                           onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
                       </li>
-                      </>
                     )
                   })
                   }
@@ -293,7 +289,6 @@ export default function Opskrift(props) {
                   {
                   usedTagsItem.map(item => {
                     return (
-                      <>
                       <li key={item} className="flex items-center">
                         <input
                           type="checkbox" 
@@ -304,7 +299,6 @@ export default function Opskrift(props) {
                           onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
                       </li>
-                      </>
                     )
                   })
                   }
@@ -332,7 +326,6 @@ export default function Opskrift(props) {
                   {
                   usedTagsDifficulty.map(item => {
                     return (
-                      <>
                       <li key={item} className="flex items-center">
                         <input
                           type="checkbox" 
@@ -343,7 +336,6 @@ export default function Opskrift(props) {
                           onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
                         <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
                       </li>
-                      </>
                     )
                   })
                   }
