@@ -198,6 +198,18 @@ input[type="checkbox"]:not(:disabled):hover + label, input[type="checkbox"]:not(
     transition: transform .5s ease-in-out;
 }
 
+.item-sub-menu {
+    display: none;
+}
+
+.item-sub-menu:hover {
+    display: flex;
+}
+
+#garn-sub-menu:hover + .item-sub-menu, #opskrifter-sub-menu:hover + .item-sub-menu {
+    display: flex;
+}
+
 .product-container {
     transition: box-shadow .15s ease-in-out;
 }

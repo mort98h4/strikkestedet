@@ -167,7 +167,7 @@ function SubMenu(props) {
           : "translate-x-full lg:translate-x-0 lg:-translate-y-20")
       }
     >
-      <div className="2xl:container mx-auto px-8 py-2">
+      <div className="2xl:container mx-auto px-8">
         <div className="hidden lg:flex justify-center items-center">
           {(props.settings[0].visible
             ? productPages
@@ -242,13 +242,179 @@ function SubNavItem(props) {
   });
 
   return (
-    <div className="mx-8">
-      <Link
-        href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`}
-        passHref
-      >
-        <SubNavLink></SubNavLink>
-      </Link>
-    </div>
+    <>
+      <div id={props.slug + "-sub-menu"} className="px-8 lg:py-2">
+        <Link
+          href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`}
+          passHref
+        >
+          <SubNavLink></SubNavLink>
+        </Link>
+      </div>
+      {props.slug === "garn" ? 
+        <nav className="item-sub-menu absolute bg-white w-full flex justify-evenly" style={{top: "100%"}}>
+          <ul className="d-flex flex-column px-8 pt-8 pb-16">
+            <li className="text-black font-bold mb-1">Brand</li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=sandnes`}>
+                Sandnes
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=hjertegarn`}>
+                Hjertegarn
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=permin`}>
+                Permin
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=filcolana`}>
+                Filcolana
+              </Link>
+            </li>
+          </ul>
+          <ul className="d-flex flex-column px-8 pt-8 pb-16">
+            <li className="text-black font-bold mb-1">Fibre</li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=uld`}>
+                Uld
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=mohair`}>
+                Mohair
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=bomuld`}>
+                Bomuld
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=merinould`}>
+                Merinould
+              </Link>
+            </li>
+          </ul>
+          <ul className="d-flex flex-column px-8 pt-8 pb-16">
+            <li className="text-black font-bold mb-1">Vejledende pind</li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=3-mm`}>
+                3 mm
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=3-5-mm`}>
+                3.5 mm
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=4-mm`}>
+                4 mm
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=4-5-mm`}>
+                4.5 mm
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      : props.slug === "opskrifter" ? 
+        <nav className="item-sub-menu absolute bg-white w-full flex justify-evenly" style={{top: "100%"}}>
+          <ul className="d-flex flex-column px-8 pt-8 pb-16">
+            <li className="text-black font-bold mb-1">Brand</li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=sandnes`}>
+                Sandnes
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=petiteknit`}>
+                PetiteKnit
+              </Link>
+            </li>
+          </ul>
+          <ul className="d-flex flex-column px-8 pt-8 pb-16">
+            <li className="text-black font-bold mb-1">Køn</li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=dame`}>
+                Dame
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=herre`}>
+                Herre
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=unisex`}>
+                Unisex
+              </Link>
+            </li>
+          </ul>
+          <ul className="d-flex flex-column px-8 pt-8 pb-16">
+            <li className="text-black font-bold mb-1">Produkt</li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=bluse`}>
+                Bluse
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=sweater`}>
+                Sweater
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=cardigan`}>
+                Cardigan
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=top`}>
+                Top
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=tilbehoer`}>
+                Tilbehør
+              </Link>
+            </li>
+          </ul>
+          <ul className="d-flex flex-column px-8 pt-8 pb-16">
+            <li className="text-black font-bold mb-1">Sværhedsgrad</li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=svaerhedsgrad1`}>
+                Begynder
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=svaerhedsgrad2`}>
+                Letøvede
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=svaerhedsgrad3`}>
+                Middel
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=svaerhedsgrad4`}>
+                Overmiddel
+              </Link>
+            </li>
+            <li className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestors.edges[0].node.slug}/${props.slug}?filter=svaerhedsgrad5`}>
+                Svær
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      : ""
+      }
+    </>
   );
 }
