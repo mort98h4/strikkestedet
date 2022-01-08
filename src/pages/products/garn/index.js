@@ -51,57 +51,75 @@ export default function Garn(props) {
     })
   })
 
-  function addFilter(filter) {
+  function toggleFilter(filter) {
     console.log(filter);
     if (activeFilters.findIndex(item => item === filter) === -1) {
-      activeFilters.push(filter);
-      setActiveFilters(activeFilters);
-    } 
+      const newActiveFilters = activeFilters.concat(filter);
+      setActiveFilters(newActiveFilters);
 
-    const filterProducts = filteredProducts.filter(product => {
-      if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
-        return product.node;
-      };
-    })
-    setFilteredProducts(filterProducts);
-  }
-
-  function removeFilter(filter) {
-    console.log(filter);
-    const newActiveFilters = activeFilters.filter(item => {
-      if (item != filter) {
-        return item;
-      }
-    });
-    setActiveFilters(newActiveFilters);
-    if (newActiveFilters.length != 0) {
-      const newFilteredProducts = [];
-      newActiveFilters.forEach(filter => {
-        const index = newActiveFilters.indexOf(filter);
-        if (index === 0) {
-          products.filter(product => {
-            if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
-              newFilteredProducts.push(product);
-            }
-          })
-        } else {
-          const filterNewProducts = newFilteredProducts.filter(product => {
-            if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
-              return product.node;
-            }
-          })
-          newFilteredProducts = filterNewProducts;
-        }
+      const filterProducts = filteredProducts.filter(product => {
+        if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+          return product.node;
+        };
       })
-      setFilteredProducts(newFilteredProducts);
+      setFilteredProducts(filterProducts);      
     } else {
-      setFilteredProducts(products);
+      const newActiveFilters = activeFilters.filter(item => {
+        if (item != filter) {
+          return item;
+        }
+      });
+      setActiveFilters(newActiveFilters);
+
+      if (newActiveFilters.length != 0) {
+        const newFilteredProducts = [];
+        newActiveFilters.forEach(filter => {
+          const index = newActiveFilters.indexOf(filter);
+          if (index === 0) {
+            products.filter(product => {
+              if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+                newFilteredProducts.push(product);
+              }
+            })
+          } else {
+            const filterNewProducts = newFilteredProducts.filter(product => {
+              if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+                return product.node;
+              }
+            })
+            newFilteredProducts = filterNewProducts;
+          }
+        })
+        setFilteredProducts(newFilteredProducts);
+      } else {
+        setFilteredProducts(products);
+      }
     }
   }
 
   function clearFilter() {
     setActiveFilters([]);
     setFilteredProducts(products);
+  }
+
+  function isDisabled(filter) {
+    console.log(filter);
+    const disabled = [];
+    filteredProducts.forEach(product => {
+      product.node.tags.nodes.forEach(tag => {
+        if (tag.name === filter) {
+          if (disabled.findIndex(item => item === tag.name) === -1) {
+            disabled.push(tag.name);
+          }
+        }
+      })
+    })
+    console.log(disabled);
+    if (disabled.length != 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   return (
@@ -126,21 +144,13 @@ export default function Garn(props) {
 
         </div>
         <aside className=" md:col-span-2 md:pr-10">
-          <div className="w-full pb-8">
+          <div className="w-full pl-10 pt-16">
             <label 
               onClick={activeFilters.length != 0 ? clearFilter : () => {}} 
-              className={"block text-black-60 font-bold mb-4" + (activeFilters.length != 0 ? " transition cursor-pointer hover:underline hover:text-black" : "")}
+              className={"block text-black-60 font-bold mb-4" + (activeFilters.length != 0 ? " transition opacity-100 cursor-pointer hover:underline hover:text-black" : " opacity-50")}
             >
               {activeFilters.length != 0 ? "Nulstil filtre" : "Ingen filtre valgt"}
             </label>
-            {activeFilters.length != 0 ?
-              activeFilters.map(item => {
-                return (
-                  <button key={item} className="active-filter mr-2 mb-2 p-2 bg-white transition hover:bg-black-10 inline-flex" onClick={() => removeFilter(item)}><img src="./../cross.svg" className="inline-block self-center mr-1 w-4 h-4"/>{item}</button>
-                )
-              }) 
-            : 
-            ""}
           </div>
           
           <div className="">
@@ -164,13 +174,18 @@ export default function Garn(props) {
                   {
                   usedTagsBrand.map(item => {
                     return (
-                      <li 
-                        key={item} 
-                        className="text-black-60 transition cursor-pointer ml-4 hover:text-black hover:underline" 
-                        onClick={() => addFilter(item)}
-                      >
-                        {item}
-                      </li>
+                      <>
+                      <div key={item} className="flex items-center">
+                        <input
+                          type="checkbox" 
+                          id={item + "-check"} 
+                          name="brand" 
+                          value={item} 
+                          disabled={isDisabled(item)}
+                          onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
+                        <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
+                      </div>
+                      </>
                     )
                   })
                   }
@@ -198,9 +213,12 @@ export default function Garn(props) {
                   {
                   usedTagsMaterial.map(item => {
                     return (
-                      <li key={item} className="text-black-60 transition cursor-pointer ml-4 hover:text-black hover:underline" onClick={() => addFilter(item)}>
-                        {item}
-                      </li>
+                      <>
+                      <div className="flex items-center">
+                        <input key={item} type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
+                        <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
+                      </div>
+                      </>
                     )
                   })
                   }
@@ -228,9 +246,12 @@ export default function Garn(props) {
                   {
                   usedTagsNeedle.map(item => {
                     return (
-                      <li key={item} className="text-black-60 transition cursor-pointer ml-4 hover:text-black hover:underline" onClick={() => addFilter(item)}>
-                        {item}
-                      </li>
+                      <>
+                      <div className="flex items-center">
+                        <input key={item} type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
+                        <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
+                      </div>
+                      </>
                     )
                   })
                   }
