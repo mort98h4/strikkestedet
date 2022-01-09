@@ -1,4 +1,4 @@
-import { getData } from "../../lib/api";
+import { getData, getTags } from "../../lib/api";
 import Head from "next/head";
 
 export default function Custom500(props) {
@@ -18,9 +18,11 @@ export default function Custom500(props) {
 
 export async function getStaticProps() {
     const headerFooterData = await getData();
+    const tags = await getTags();
     return {
       props: {
-        headerFooterData
+        headerFooterData,
+        tags
       }
     }
   }

@@ -2,6 +2,7 @@ import {
   getData,
   getOpskriftPage,
   getOpskriftProducts,
+  getTags
 } from "../../../../lib/api";
 import Button from "../../../globals/Button";
 import { Arrow } from "../../../components/arrow";
@@ -403,12 +404,14 @@ export async function getStaticProps() {
   const data = await getOpskriftProducts();
   const page = await getOpskriftPage();
   const headerFooterData = await getData();
+  const tags = await getTags();
 
   return {
     props: {
       page,
       data,
       headerFooterData,
+      tags
     },
   };
 }

@@ -1,4 +1,4 @@
-import { getPatternsPage, getData } from "../../../lib/api" ;
+import { getPatternsPage, getData, getTags } from "../../../lib/api" ;
 import ImageSection from "../../components/ImageSection";
 import Head from "next/head";
 
@@ -32,10 +32,12 @@ export default function Patterns(props) {
 export async function getStaticProps() {
     const content = await getPatternsPage();
     const headerFooterData = await getData();
+    const tags = await getTags();
     return {
       props: {
         content,
-        headerFooterData
+        headerFooterData,
+        tags
       }
     }
   }

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import clsx from "clsx";
 import { useState } from "react";
 import BasketList from "../components/basketList";
-import { getData } from "../../lib/api";
+import { getData, getTags } from "../../lib/api";
 import Head from "next/head";
 
 export default function Basket(props) {
@@ -73,9 +73,11 @@ export default function Basket(props) {
 
 export async function getStaticProps() {
   const headerFooterData = await getData();
+  const tags = await getTags();
   return {
     props: {
-      headerFooterData
+      headerFooterData,
+      tags
     }
   }
 }

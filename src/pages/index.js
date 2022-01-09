@@ -1,4 +1,4 @@
-import { getHomePage, getData, getSelectedYarnItems, getSelectedPatternsItems } from "../../lib/api";
+import { getHomePage, getData, getSelectedYarnItems, getSelectedPatternsItems, getTags } from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
 import Image from "next/image";
@@ -206,12 +206,14 @@ export async function getStaticProps() {
   const headerFooterData = await getData();
   const yarn = await getSelectedYarnItems();
   const patterns = await getSelectedPatternsItems();
+  const tags = await getTags();
   return {
     props: {
       content,
       headerFooterData,
       yarn,
-      patterns
+      patterns,
+      tags
     }
   }
 }

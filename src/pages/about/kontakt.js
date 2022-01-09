@@ -1,4 +1,4 @@
-import { getContactPage, getData } from "../../../lib/api" ;
+import { getContactPage, getData, getTags } from "../../../lib/api" ;
 import AddressList from "../../components/AddressList";
 import Head from "next/head";
 
@@ -51,10 +51,12 @@ export default function AboutUs(props) {
 export async function getStaticProps() {
     const content = await getContactPage();
     const headerFooterData = await getData();
+    const tags = await getTags();
     return {
       props: {
         content,
-        headerFooterData
+        headerFooterData,
+        tags
       }
     }
   }

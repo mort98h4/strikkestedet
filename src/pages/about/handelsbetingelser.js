@@ -1,4 +1,4 @@
-import { getConditionsPage, getData } from "../../../lib/api" ;
+import { getConditionsPage, getData, getTags } from "../../../lib/api" ;
 import ImageSection from "../../components/ImageSection";
 import AddressList from "../../components/AddressList";
 
@@ -126,10 +126,12 @@ export default function AboutUs(props) {
 export async function getStaticProps() {
     const content = await getConditionsPage();
     const headerFooterData = await getData();
+    const tags = await getTags();
     return {
       props: {
         content,
-        headerFooterData
+        headerFooterData,
+        tags
       }
     }
   }

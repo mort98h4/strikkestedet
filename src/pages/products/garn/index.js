@@ -1,4 +1,4 @@
-import { getYarnPage, getYarnProducts, getData } from "../../../../lib/api";
+import { getYarnPage, getYarnProducts, getData, getTags } from "../../../../lib/api";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
@@ -346,6 +346,7 @@ export async function getStaticProps() {
   const page = await getYarnPage();
   const data = await getYarnProducts();
   const headerFooterData = await getData();
+  const tags = await getTags();
 
   const newData = data.posts.edges.map((item) => {
     return item;
@@ -357,6 +358,7 @@ export async function getStaticProps() {
       newData,
       newPage,
       headerFooterData,
+      tags
     },
   };
 }
