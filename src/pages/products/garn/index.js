@@ -151,9 +151,9 @@ export default function Garn(props) {
       <Head>
           <title>{props.newPage.metaFields.sideTitel}</title>
           <meta name="description" content={props.newPage.metaFields.sideBeskrivelse}></meta> 
-          <link rel="icon" type="image/png" sizez="180x180" href="./../apple-touch-icon.ico"></link>
-          <link rel="icon" type="image/png" sizez="32x32" href="./../favicon32x32"></link>
-          <link rel="icon" type="image/png" sizez="16x16" href="./../favicon16x16"></link>
+          <link rel="icon" type="image/png" size="180x180" href="./../apple-touch-icon.ico"></link>
+          <link rel="icon" type="image/png" size="32x32" href="./../favicon32x32"></link>
+          <link rel="icon" type="image/png" size="16x16" href="./../favicon16x16"></link>
       </Head>  
       <div className="md:grid md:grid-cols-6 md:gap-4 mb-32 mt-4 p-4 2xl:p-0 md:mt-16">
         <div className="md:hidden">
