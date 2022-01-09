@@ -203,11 +203,11 @@ input[type="checkbox"]:not(:disabled):hover + label, input[type="checkbox"]:not(
 }
 
 .item-sub-menu:hover {
-    display: flex;
+    display: block;
 }
 
 #garn-sub-menu:hover + .item-sub-menu, #opskrifter-sub-menu:hover + .item-sub-menu {
-    display: flex;
+    display: block;
 }
 
 .product-container {
