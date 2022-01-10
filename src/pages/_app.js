@@ -6,6 +6,11 @@ import Footer from "../globals/Footer";
 
 function MyApp({ Component, pageProps }) {
   const [basket, setBasket] = useState([]);
+  const [knittingPatternAmount, setKnittingPatternAmount] = useState({});
+
+  function setNewSize(size) {
+    setKnittingPatternAmount(size);
+  }
 
   function addToBasket(info, amount, colorForBasket) {
     const amountObj = { amount: { amount } };
@@ -26,6 +31,8 @@ function MyApp({ Component, pageProps }) {
           {...pageProps}
           addToBasket={addToBasket}
           basket={basket}
+          setNewSize={setNewSize}
+          knittingPatternAmount={knittingPatternAmount}
         />
       </main>
       <Footer {...pageProps}></Footer>

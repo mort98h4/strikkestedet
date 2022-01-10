@@ -3,18 +3,19 @@ import {
   getOpskriftPage,
   getOpskriftProducts,
   getTags,
-  getYarnPage,
-  getYarnProducts,
 } from "../../../../lib/api";
 import Button from "../../../globals/Button";
 import { Arrow } from "../../../components/arrow";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { number } from "tailwindcss/lib/util/dataTypes";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function Opskrift(props) {
+  const router = useRouter();
+  const { slug } = router.query;
+
   const posts = props.data.posts.edges;
   const page = props.page.page;
   const tags = props.tags.tags;
@@ -45,10 +46,28 @@ export default function Opskrift(props) {
         {/* <title>{props.page.metaFields.sideTitel}</title> */}
         <title>Strikkestedet | Opskrifter</title>
         {/* <meta name="description" content={props.page.metaFields.sideBeskrivelse}></meta> */}
-        <meta name="description" content="Her finder du Strikkestedet store udvalg af strikkeopskrifter fra kendte mærker og designere, som eksempelvis PetitKnit, Sandnes, Permin og mange flere."></meta> 
-        <link rel="icon" type="image/png" sizez="180x180" href="./../apple-touch-icon.ico"></link>
-        <link rel="icon" type="image/png" sizez="32x32" href="./../favicon32x32"></link>
-        <link rel="icon" type="image/png" sizez="16x16" href="./../favicon16x16"></link>
+        <meta
+          name="description"
+          content="Her finder du Strikkestedet store udvalg af strikkeopskrifter fra kendte mærker og designere, som eksempelvis PetitKnit, Sandnes, Permin og mange flere."
+        ></meta>
+        <link
+          rel="icon"
+          type="image/png"
+          sizez="180x180"
+          href="./../apple-touch-icon.ico"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          sizez="32x32"
+          href="./../favicon32x32"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          sizez="16x16"
+          href="./../favicon16x16"
+        ></link>
       </Head>
       <div className="md:grid md:grid-cols-6 md:gap-4 mb-32 mt-4 p-4 2xl:p-0 md:mt-16">
         <div className="md:hidden">
@@ -184,7 +203,14 @@ export default function Opskrift(props) {
             {filteredList.map((item) => {
               return (
                 <div key={item.slug} className="col-span-1">
-                      {/* Transition css ligger i globals.css på linje 139-159 */}
+                  {/* Transition css ligger i globals.css på linje 139-159 */}
+                  <Link
+                    href={{
+                      pathname: "/products/opskrifter/[slug]",
+                      query: { slug: item.node.slug },
+                    }}
+                  >
+                    <a>
                       <article className="col-span-1 product-container relative">
                         <div className="image-container w-full">
                           <Image
@@ -209,6 +235,8 @@ export default function Opskrift(props) {
                           </span>
                         </div>
                       </article>
+                    </a>
+                  </Link>
                 </div>
               );
             })}
