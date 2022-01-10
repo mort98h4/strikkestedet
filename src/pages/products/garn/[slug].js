@@ -192,13 +192,28 @@ function Product(props) {
   }
   return (
     <>
-    <Head>
+      <Head>
         <title>{`${props.headerFooterData.generalSettings.title} | ${info.title}`}</title>
-        <meta name="description" content={info.text}></meta> 
-        <link rel="icon" type="image/png" size="180x180" href="./../apple-touch-icon.ico"></link>
-        <link rel="icon" type="image/png" size="32x32" href="./../favicon32x32"></link>
-        <link rel="icon" type="image/png" size="16x16" href="./../favicon16x16"></link>
-    </Head> 
+        <meta name="description" content={info.text}></meta>
+        <link
+          rel="icon"
+          type="image/png"
+          size="180x180"
+          href="./../apple-touch-icon.ico"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          size="32x32"
+          href="./../favicon32x32"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          size="16x16"
+          href="./../favicon16x16"
+        ></link>
+      </Head>
       <article className="md:grid md:grid-cols-6 text-sm">
         <section className="grid grid-cols-2 md:col-span-4 md:mt-10 md:grid-cols-4 md:gap-4">
           <div className="block col-span-1 md:col-span-2">
@@ -280,7 +295,9 @@ function Product(props) {
                   <div className="flex flex-row gap-1">
                     <button
                       className={clsx(
-                        amount === 0 ? "text-black-40" : " hover:bg-gray-footer",
+                        amount === 0
+                          ? "text-black-40"
+                          : " hover:bg-gray-footer",
                         "inline bg-gray-input transition py-2 px-4"
                       )}
                       disabled={amount === 0}
@@ -302,25 +319,32 @@ function Product(props) {
                   </div>
                 </div>
                 <div className="col-span-3 xl:col-span-2 mt-4 md:mt-0">
-                  <h3 className="font-bold"> Vælg farve</h3>
+                  <h3 className="font-bold">Vælg farve</h3>
                   <div className="w-full lg:w-[300px] relative">
-                  <button
-                    className="bg-gray-input py-2 px-4 transition hover:bg-gray-footer w-full flex flex-row justify-between"
-                    onClick={() => {
-                      ColorBtn();
-                    }}
-                  >
-                    {chosenColor ? (
-                      <span>{chosenColor}</span>
-                    ) : (
-                      <span>Vælg en farve</span>
-                    )}
+                    <button
+                      className="bg-gray-input py-2 px-4 transition hover:bg-gray-footer w-full flex flex-row justify-between"
+                      onClick={() => {
+                        ColorBtn();
+                      }}
+                    >
+                      {chosenColor ? (
+                        <span>{chosenColor}</span>
+                      ) : (
+                        <span>Vælg en farve</span>
+                      )}
 
-                    <div className="pt-1">
-                      <Arrow rotate={colorBtn}></Arrow>
-                    </div>
-                  </button>
-                  <div className={"absolute w-full flex flex-col transition-all " + (colorBtn ? "max-h-[220px]" : "max-h-0 overflow-hidden")}>
+                      <div className="pt-1">
+                        <Arrow rotate={colorBtn}></Arrow>
+                      </div>
+                    </button>
+                    <div
+                      className={
+                        "absolute w-full flex flex-col transition-all " +
+                        (colorBtn
+                          ? "max-h-48 overflow-scroll"
+                          : "max-h-0 overflow-hidden")
+                      }
+                    >
                       <div className="w-full z-[5]">
                         {usedColors.map((color) => {
                           return (
@@ -335,14 +359,14 @@ function Product(props) {
                               >
                                 <div className="flex flex-row items-center">
                                   <div className="relative block w-[30px] h-[30px] mr-2">
-                                  <Image
-                                    layout="responsive"
-                                    width="30"
-                                    height="30"
-                                    className="mr-10 object-cover"
-                                    src={color.guid}
-                                    alt={color.alt}
-                                  />
+                                    <Image
+                                      layout="responsive"
+                                      width="30"
+                                      height="30"
+                                      className="mr-10 object-cover"
+                                      src={color.guid}
+                                      alt={color.alt}
+                                    />
                                   </div>
                                   {color.title}
                                 </div>
@@ -353,7 +377,6 @@ function Product(props) {
                       </div>
                     </div>
                   </div>
-                  
                 </div>
                 <button
                   onClick={() => {
@@ -385,56 +408,56 @@ function Product(props) {
               </div>
               <div>
                 <div className="max-w-[96px] max-h-[24px] relative">
-                <Image
-                  layout="responsive"
-                  width="96"
-                  height="24"
-                  className="w-24"
-                  src="/trustpilot.svg"
-                  alt="TrustPilot"
-                ></Image>
+                  <Image
+                    layout="responsive"
+                    width="96"
+                    height="24"
+                    className="w-24"
+                    src="/trustpilot.svg"
+                    alt="TrustPilot"
+                  ></Image>
                 </div>
                 <div className="relative max-w-[96px] flex justify-center">
-                <Image
-                  layout="fixed"
-                  width="15"
-                  height="15"
-                  className="inline"
-                  src="/review_star.svg"
-                  alt="star"
-                />
-                <Image
-                  layout="fixed"
-                  width="15"
-                  height="15"
-                  className="inline"
-                  src="/review_star.svg"
-                  alt="star"
-                />
-                <Image
-                  layout="fixed"
-                  width="15"
-                  height="15"
-                  className="inline"
-                  src="/review_star.svg"
-                  alt="star"
-                />
-                <Image
-                  layout="fixed"
-                  width="15"
-                  height="15"
-                  className="inline"
-                  src="/review_star.svg"
-                  alt="star"
-                />
-                <Image
-                  layout="fixed"
-                  width="15"
-                  height="15"
-                  className="inline"
-                  src="/review_star.svg"
-                  alt="star"
-                />
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
                 </div>
               </div>
             </div>
@@ -524,80 +547,101 @@ function Product(props) {
                 <>
                   <div className="md:col-span-2 flex">
                     <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
-                      <Image width="40" height="40" layout="responsive" src="/pinde.svg" alt="Vejledende pinde str. ikon"></Image>
+                      <Image
+                        width="40"
+                        height="40"
+                        layout="responsive"
+                        src="/pinde.svg"
+                        alt="Vejledende pinde str. ikon"
+                      ></Image>
                     </div>
                     <div className="inline-block">
                       <h3 className="font-bold">Vejledende Pind</h3>
-                        <span className="text-black-60 ">
-                          {details.vejledende_pind.pind}
-                        </span>
-                      </div>
+                      <span className="text-black-60 ">
+                        {details.vejledende_pind.pind}
+                      </span>
+                    </div>
                   </div>
                   <div className="md:col-span-2 flex">
                     <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
-                      <Image width="40" height="40" layout="responsive" src="/vaskeanvisning.svg" alt="vaskekanvisning ikon"></Image>
+                      <Image
+                        width="40"
+                        height="40"
+                        layout="responsive"
+                        src="/vaskeanvisning.svg"
+                        alt="vaskekanvisning ikon"
+                      ></Image>
                     </div>
                     <div className="inline-block">
                       <h3 className="font-bold">Vaskeanvisning</h3>
                       <span className="text-black-60">
                         {details.vaskeanvisning.vaskeanvisning}
                       </span>
-
                     </div>
                   </div>
                   <div className="md:col-span-2 flex">
                     <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
-                      <Image width="40" height="40" layout="responsive" src="/fibre.svg" alt="Fibre ikon"></Image>
+                      <Image
+                        width="40"
+                        height="40"
+                        layout="responsive"
+                        src="/fibre.svg"
+                        alt="Fibre ikon"
+                      ></Image>
                     </div>
                     <div className="inline-block">
                       <h3 className="font-bold">Garn/Fiber</h3>
                       <ul>
-                      {details.materiale.garn1 ? (
-                        <li>
-                          <span className="text-black-60">
-                            {details.materiale.garn1}
-                          </span>
-                        </li>
-                      ) : null}
-                      {details.materiale.garn2 ? (
-                        <li>
-                          <span className="text-black-60">
-                            {details.materiale.garn2}
-                          </span>
-                        </li>
-                      ) : null}
-                      {details.materiale.garn3 ? (
-                        <li>
-                          <span className="text-black-60">
-                            {details.materiale.garn3}
-                          </span>
-                        </li>
-                      ) : null}
-                      {details.materiale.garn4 ? (
-                        <li>
-                          <span className="text-black-60">
-                            {details.materiale.garn4}
-                          </span>
-                        </li>
-                      ) : null}
-                      {details.materiale.garn5 ? (
-                        <li>
-                          <span className="text-black-60">
-                            {details.materiale.garn5}
-                          </span>
-                        </li>
-                      ) : null}
+                        {details.materiale.garn1 ? (
+                          <li>
+                            <span className="text-black-60">
+                              {details.materiale.garn1}
+                            </span>
+                          </li>
+                        ) : null}
+                        {details.materiale.garn2 ? (
+                          <li>
+                            <span className="text-black-60">
+                              {details.materiale.garn2}
+                            </span>
+                          </li>
+                        ) : null}
+                        {details.materiale.garn3 ? (
+                          <li>
+                            <span className="text-black-60">
+                              {details.materiale.garn3}
+                            </span>
+                          </li>
+                        ) : null}
+                        {details.materiale.garn4 ? (
+                          <li>
+                            <span className="text-black-60">
+                              {details.materiale.garn4}
+                            </span>
+                          </li>
+                        ) : null}
+                        {details.materiale.garn5 ? (
+                          <li>
+                            <span className="text-black-60">
+                              {details.materiale.garn5}
+                            </span>
+                          </li>
+                        ) : null}
                       </ul>
                     </div>
-                    
-                    
                   </div>
                 </>
               ) : null}
               {infoNav === true ? (
                 <div className="md:col-span-2 flex">
                   <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
-                    <Image width="40" height="40" layout="responsive" src="/strikkefasthed.svg" alt="Strikkefasthed ikon"></Image>
+                    <Image
+                      width="40"
+                      height="40"
+                      layout="responsive"
+                      src="/strikkefasthed.svg"
+                      alt="Strikkefasthed ikon"
+                    ></Image>
                   </div>
                   <div className="inline-block">
                     <h3 className="font-bold">Strikkefasthed</h3>
@@ -611,7 +655,13 @@ function Product(props) {
               {infoNav === true ? (
                 <div className="md:col-span-2 flex">
                   <div className="inline-block w-full max-w-[40px] max-h-[40px] relative mr-2">
-                    <Image width="40" height="40" layout="responsive" src="/lobelaengde.svg" alt="Strikkefasthed ikon"></Image>
+                    <Image
+                      width="40"
+                      height="40"
+                      layout="responsive"
+                      src="/lobelaengde.svg"
+                      alt="Strikkefasthed ikon"
+                    ></Image>
                   </div>
                   <div className="inline-block">
                     <h3 className="font-bold">Løbelængde</h3>
@@ -660,7 +710,7 @@ export async function getStaticProps({ params }) {
     props: {
       data,
       headerFooterData,
-      tags
+      tags,
     },
   };
 }
