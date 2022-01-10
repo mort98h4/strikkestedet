@@ -1,4 +1,4 @@
-import { getConditionsPage, getData } from "../../../lib/api" ;
+import { getConditionsPage, getData, getTags } from "../../../lib/api" ;
 import ImageSection from "../../components/ImageSection";
 import AddressList from "../../components/AddressList";
 
@@ -14,9 +14,9 @@ export default function AboutUs(props) {
             <Head>
                 <title>{props.content.page.metaFields.sideTitel}</title>
                 <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta>
-                <link rel="icon" type="image/png" sizez="180x180" href="./../apple-touch-icon.ico"></link>
-                <link rel="icon" type="image/png" sizez="32x32" href="./../favicon32x32"></link>
-                <link rel="icon" type="image/png" sizez="16x16" href="./../favicon16x16"></link>
+                <link rel="icon" type="image/png" size="180x180" href="./../apple-touch-icon.ico"></link>
+                <link rel="icon" type="image/png" size="32x32" href="./../favicon32x32"></link>
+                <link rel="icon" type="image/png" size="16x16" href="./../favicon16x16"></link>
             </Head>
             <section className="grid grid-cols-6 gap-4">
                 <article className="col-span-6 lg:col-span-3 lg:col-start-2 p-16">
@@ -126,10 +126,12 @@ export default function AboutUs(props) {
 export async function getStaticProps() {
     const content = await getConditionsPage();
     const headerFooterData = await getData();
+    const tags = await getTags();
     return {
       props: {
         content,
-        headerFooterData
+        headerFooterData,
+        tags
       }
     }
   }

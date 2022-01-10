@@ -3,6 +3,7 @@ import {
   getData,
   getSelectedYarnItems,
   getSelectedPatternsItems,
+  getTags,
 } from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
@@ -46,19 +47,19 @@ export default function Home(props) {
         <link
           rel="icon"
           type="image/png"
-          sizez="180x180"
+          size="180x180"
           href="./apple-touch-icon.ico"
         ></link>
         <link
           rel="icon"
           type="image/png"
-          sizez="32x32"
+          size="32x32"
           href="./favicon32x32"
         ></link>
         <link
           rel="icon"
           type="image/png"
-          sizez="16x16"
+          size="16x16"
           href="./favicon16x16"
         ></link>
       </Head>
@@ -264,12 +265,14 @@ export async function getStaticProps() {
   const headerFooterData = await getData();
   const yarn = await getSelectedYarnItems();
   const patterns = await getSelectedPatternsItems();
+  const tags = await getTags();
   return {
     props: {
       content,
       headerFooterData,
       yarn,
       patterns,
+      tags,
     },
   };
 }

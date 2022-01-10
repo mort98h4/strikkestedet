@@ -1,4 +1,4 @@
-import { getData, getYarnProduct } from "../../../../lib/api";
+import { getData, getYarnProduct, getTags } from "../../../../lib/api";
 import { useState } from "react";
 import clsx from "clsx";
 import { Arrow } from "../../../components/arrow";
@@ -195,9 +195,9 @@ function Product(props) {
     <Head>
         <title>{`${props.headerFooterData.generalSettings.title} | ${info.title}`}</title>
         <meta name="description" content={info.text}></meta> 
-        <link rel="icon" type="image/png" sizez="180x180" href="./../apple-touch-icon.ico"></link>
-        <link rel="icon" type="image/png" sizez="32x32" href="./../favicon32x32"></link>
-        <link rel="icon" type="image/png" sizez="16x16" href="./../favicon16x16"></link>
+        <link rel="icon" type="image/png" size="180x180" href="./../apple-touch-icon.ico"></link>
+        <link rel="icon" type="image/png" size="32x32" href="./../favicon32x32"></link>
+        <link rel="icon" type="image/png" size="16x16" href="./../favicon16x16"></link>
     </Head> 
       <article className="md:grid md:grid-cols-6 text-sm">
         <section className="grid grid-cols-2 md:col-span-4 md:mt-10 md:grid-cols-4 md:gap-4">
@@ -654,11 +654,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const data = await getYarnProduct(params.slug);
   const headerFooterData = await getData();
+  const tags = await getTags();
 
   return {
     props: {
       data,
       headerFooterData,
+      tags
     },
   };
 }

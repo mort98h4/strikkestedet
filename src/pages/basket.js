@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import clsx from "clsx";
 import { useState } from "react";
 import BasketList from "../components/basketList";
-import { getData } from "../../lib/api";
+import { getData, getTags } from "../../lib/api";
 import Head from "next/head";
 
 export default function Basket(props) {
@@ -19,9 +19,9 @@ export default function Basket(props) {
       <Head>
         <title>{`${props.headerFooterData.generalSettings.title} | Indkøbskurv`}</title>
         <meta name="robots" content="noindex"></meta>
-        <link rel="icon" type="image/png" sizez="180x180" href="./apple-touch-icon.ico"></link>
-        <link rel="icon" type="image/png" sizez="32x32" href="./favicon32x32"></link>
-        <link rel="icon" type="image/png" sizez="16x16" href="./favicon16x16"></link>
+        <link rel="icon" type="image/png" size="180x180" href="./apple-touch-icon.ico"></link>
+        <link rel="icon" type="image/png" size="32x32" href="./favicon32x32"></link>
+        <link rel="icon" type="image/png" size="16x16" href="./favicon16x16"></link>
       </Head>
       <div className="p-4 md:p-0 md:grid lg:grid-cols-6 max-screen-w-2xl gap-x-4 mb-10">
         <h1 className="text-3xl font-serif col-span-6 mt-6 md:mt-10">Basket</h1>
@@ -73,9 +73,11 @@ export default function Basket(props) {
 
 export async function getStaticProps() {
   const headerFooterData = await getData();
+  const tags = await getTags();
   return {
     props: {
-      headerFooterData
+      headerFooterData,
+      tags
     }
   }
 }

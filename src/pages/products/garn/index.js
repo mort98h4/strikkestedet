@@ -1,64 +1,159 @@
-import { getYarnPage, getYarnProducts, getData } from "../../../../lib/api";
-import { getTags } from "../../../../lib/api";
+import { getYarnPage, getYarnProducts, getData, getTags } from "../../../../lib/api";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Arrow } from "../../../components/arrow";
 import Button from "../../../globals/Button";
 
 export default function Garn(props) {
-  const [filteredList, setFilteredList] = useState(props.newData);
+  console.log(props);
+  const [products, setProducts] = useState(props.newData);
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [activeFilters, setActiveFilters] = useState([]);
   const [brandFilter, setBrandfilter] = useState(true);
   const [fiberFilter, setFiberfilter] = useState(false);
+  const [needleFilter, setNeedleFilter] = useState(false);
   const router = useRouter();
   const { slug } = router.query;
+  let filterSlug;
 
-  const tags = props.tags.tags;
+  useEffect(() => {
+    let params = new URLSearchParams(document.location.search);
+    filterSlug = params.get("filter");
+
+    if (filterSlug != null) {
+      const tagName = [];
+      props.newData.forEach(product => {
+        
+        product.node.tags.nodes.forEach(tag => {
+          const tagIndex = tagName.indexOf(item => item.slug === filterSlug);
+          if (tagIndex === -1 && tag.slug === filterSlug) {
+            tagName.push(tag.name);
+          }
+        })
+      })
+      
+      const filter = tagName[0];
+      const newActiveFilters = activeFilters.concat(filter);
+      setActiveFilters(newActiveFilters);
+
+      const filterProducts = filteredProducts.filter(product => {
+        if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+          return product.node;
+        };
+      })
+      setFilteredProducts(filterProducts);
+    }
+  }, [])
+
   const usedTagsBrand = [];
+  const brandTags = props.newData.map(product => {
+    product.node.tags.nodes.forEach(tag => {
+      const tagIndex = usedTagsBrand.indexOf(tag.name);
+      if (tag.tagType.brand && tagIndex === -1) {
+        usedTagsBrand.push(tag.name);
+      }
+    })
+  });
+
   const usedTagsMaterial = [];
-
-  tags.nodes.map((tag) => {
-    if (
-      tag.slug === "baby-alpakka" ||
-      tag.slug === "bomuld" ||
-      tag.slug === "boerstet-alpakka" ||
-      tag.slug === "fin-merinould" ||
-      tag.slug === "hoer" ||
-      tag.slug === "merinould" ||
-      tag.slug === "mohair" ||
-      tag.slug === "mulberry-silke" ||
-      tag.slug === "nylon" ||
-      tag.slug === "silke" ||
-      tag.slug === "super-kid-mohair" ||
-      tag.slug === "uld" ||
-      tag.slug === "uld-superwash" ||
-      tag.slug === "viskose"
-    ) {
-      usedTagsMaterial.push(tag);
-    }
+  const materialTags = props.newData.map(product => {
+    product.node.tags.nodes.forEach(tag => {
+      const tagIndex = usedTagsMaterial.indexOf(tag.name);
+      if (tag.tagType.fibre && tagIndex === -1) {
+        usedTagsMaterial.push(tag.name);
+      }
+    })
   });
 
-  tags.nodes.map((tag) => {
-    if (
-      tag.id === "dGVybToxOA==" ||
-      tag.id === "dGVybToxNw==" ||
-      tag.id === "dGVybToxNg==" ||
-      tag.id === "dGVybToxNQ=="
-    ) {
-      usedTagsBrand.push(tag);
+  const usedTagsNeedle = [];
+  const needleTags = props.newData.map(product => {
+    product.node.tags.nodes.forEach(tag => {
+      const tagIndex = usedTagsNeedle.indexOf(tag.name);
+      if (tag.tagType.pind && tagIndex === -1) {
+        usedTagsNeedle.push(tag.name);
+      }
+    })
+  })
+
+  function toggleFilter(filter) {
+    if (activeFilters.findIndex(item => item === filter) === -1) {
+      const newActiveFilters = activeFilters.concat(filter);
+      setActiveFilters(newActiveFilters);
+
+      const filterProducts = filteredProducts.filter(product => {
+        if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+          return product.node;
+        };
+      })
+      setFilteredProducts(filterProducts);      
+    } else {
+      const newActiveFilters = activeFilters.filter(item => {
+        if (item != filter) {
+          return item;
+        }
+      });
+      setActiveFilters(newActiveFilters);
+
+      if (newActiveFilters.length != 0) {
+        const newFilteredProducts = [];
+        newActiveFilters.forEach(filter => {
+          const index = newActiveFilters.indexOf(filter);
+          if (index === 0) {
+            products.filter(product => {
+              if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+                newFilteredProducts.push(product);
+              }
+            })
+          } else {
+            const filterNewProducts = newFilteredProducts.filter(product => {
+              if (product.node.tags.nodes.findIndex(item => item.name === filter) != -1) {
+                return product.node;
+              }
+            })
+            newFilteredProducts = filterNewProducts;
+          }
+        })
+        setFilteredProducts(newFilteredProducts);
+      } else {
+        setFilteredProducts(products);
+      }
     }
-  });
+  }
+
+  function clearFilter() {
+    setActiveFilters([]);
+    setFilteredProducts(products);
+  }
+
+  function isDisabled(filter) {
+    const disabled = [];
+    filteredProducts.forEach(product => {
+      product.node.tags.nodes.forEach(tag => {
+        if (tag.name === filter) {
+          if (disabled.findIndex(item => item === tag.name) === -1) {
+            disabled.push(tag.name);
+          }
+        }
+      })
+    })
+    if (disabled.length != 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   return (
     <>
       <Head>
           <title>{props.newPage.metaFields.sideTitel}</title>
           <meta name="description" content={props.newPage.metaFields.sideBeskrivelse}></meta> 
-          <link rel="icon" type="image/png" sizez="180x180" href="./../apple-touch-icon.ico"></link>
-          <link rel="icon" type="image/png" sizez="32x32" href="./../favicon32x32"></link>
-          <link rel="icon" type="image/png" sizez="16x16" href="./../favicon16x16"></link>
+          <link rel="icon" type="image/png" size="180x180" href="./../apple-touch-icon.ico"></link>
+          <link rel="icon" type="image/png" size="32x32" href="./../favicon32x32"></link>
+          <link rel="icon" type="image/png" size="16x16" href="./../favicon16x16"></link>
       </Head>  
       <div className="md:grid md:grid-cols-6 md:gap-4 mb-32 mt-4 p-4 2xl:p-0 md:mt-16">
         <div className="md:hidden">
@@ -73,13 +168,16 @@ export default function Garn(props) {
 
         </div>
         <aside className=" md:col-span-2 md:pr-10">
-          <label
-            onClick={() => setFilteredList(props.newData)}
-            className="block text-black-60 transition hover:underline hover:text-black font-bold m-10"
-          >
-            Se alle produkter
-          </label>
-          <div className="mb-6">
+          <div className="w-full pl-10 pt-16">
+            <label 
+              onClick={activeFilters.length != 0 ? clearFilter : () => {}} 
+              className={"block text-black-60 font-bold mb-4" + (activeFilters.length != 0 ? " transition opacity-100 cursor-pointer hover:underline hover:text-black" : " opacity-50")}
+            >
+              {activeFilters.length != 0 ? "Nulstil filtre" : "Ingen filtre valgt"}
+            </label>
+          </div>
+          
+          <div className="">
             <nav>
               <div
                 onClick={() => {
@@ -89,41 +187,34 @@ export default function Garn(props) {
                     return setBrandfilter(false);
                   }
                 }}
-                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition cursor-pointer hover:bg-black-10"
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 transition cursor-pointer hover:bg-black-10"
               >
                 <button className="font-bold mb-4 ">Brand</button>
                 <div className="pt-2">
                   <Arrow rotate={brandFilter}/>
                 </div>
               </div>
-              <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-6 transition-all overflow-scroll " + (brandFilter ? "max-h-[250px]" : "max-h-0 overflow-hidden py-0")}>
-                  {usedTagsBrand.map((tag) => {
-                    const items = [];
-                    props.newData.map((item) => {
-                      item.node.tags.nodes.map((itemTag) => {
-                        if (itemTag.slug === tag.slug) {
-                          items.push(item);
-                        }
-                      });
-                    });
+              <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-1 transition-all overflow-scroll " + (brandFilter ? "max-h-[250px] pt-4 pb-10" : "max-h-0 overflow-hidden py-0")}>
+                  {
+                  usedTagsBrand.map(item => {
                     return (
-                      <li
-                        key={tag.slug}
-                        className="text-black-60 transition hover:text-black hover:underline"
-                      >
-                        <label
-                          onClick={() => setFilteredList(items)}
-                          className="ml-4 cursor-pointer"
-                        >
-                          {tag.name}
-                        </label>
+                      <li key={item} className="flex items-center">
+                        <input
+                          type="checkbox" 
+                          id={item + "-check"} 
+                          name="brand" 
+                          value={item} 
+                          disabled={isDisabled(item)}
+                          onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
+                        <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
                       </li>
-                    );
-                  })}
+                    )
+                  })
+                  }
                 </ul>
             </nav>
           </div>
-          <div className="mb-10">
+          <div className="">
             <nav>
               <div
                 onClick={() => {
@@ -133,37 +224,55 @@ export default function Garn(props) {
                     return setFiberfilter(false);
                   }
                 }}
-                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 mb-1 transition hover:bg-black-10"
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 transition cursor-pointer hover:bg-black-10"
               >
                 <button className="font-bold mb-4 ">Fibre</button>
                 <div className="pt-2">
                   <Arrow rotate={fiberFilter} />
                 </div>
               </div>
-                <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-6 transition-all overflow-scroll " + (fiberFilter ? "max-h-[250px]" : "max-h-0 overflow-hidden py-0")}>
-                  {usedTagsMaterial.map((tag) => {
-                    const items = [];
-                    props.newData.map((item) => {
-                      item.node.tags.nodes.map((itemTag) => {
-                        if (itemTag.slug === tag.slug) {
-                          items.push(item);
-                        }
-                      });
-                    });
+                <ul className={"grid grid-rows-flow gap-2 bg-white px-10 mb-1 transition-all overflow-scroll " + (fiberFilter ? "max-h-[250px] pt-4 pb-10" : "max-h-0 overflow-hidden py-0")}>
+                  {
+                  usedTagsMaterial.map(item => {
                     return (
-                      <li
-                        key={tag.slug}
-                        className="text-black-60 transition hover:text-black hover:underline"
-                      >
-                        <label
-                          onClick={() => setFilteredList(items)}
-                          className="ml-4"
-                        >
-                          {tag.name}
-                        </label>
+                      <li key={item} className="flex items-center">
+                        <input type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
+                        <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
                       </li>
-                    );
-                  })}
+                    )
+                  })
+                  }
+                </ul>
+            </nav>
+          </div>
+          <div className="">
+            <nav>
+              <div
+                onClick={() => {
+                  if (needleFilter === false) {
+                    return setNeedleFilter(true);
+                  } else {
+                    return setNeedleFilter(false);
+                  }
+                }}
+                className="flex flex-row justify-between bg-white p-x-10 pl-10 pr-10 pt-4 transition cursor-pointer hover:bg-black-10"
+              >
+                <button className="font-bold mb-4 ">Vejledende pinde</button>
+                <div className="pt-2">
+                  <Arrow rotate={needleFilter} />
+                </div>
+              </div>
+                <ul className={"grid grid-rows-flow gap-2 bg-white p-10 mb-1 transition-all overflow-scroll " + (needleFilter ? "max-h-[250px] pt-4 pb-10" : "max-h-0 overflow-hidden py-0")}>
+                  {
+                  usedTagsNeedle.map(item => {
+                    return (
+                      <li key={item} className="flex items-center">
+                        <input type="checkbox" id={item + "-check"} name="brand" value={item} disabled={isDisabled(item)} onChange={() => toggleFilter(item)} checked={activeFilters.findIndex(value => value === item) === -1 ? false : true}></input>
+                        <label htmlFor={item + "-check"} className="pl-2 text-black-60">{item}</label>
+                      </li>
+                    )
+                  })
+                  }
                 </ul>
             </nav>
           </div>
@@ -180,7 +289,11 @@ export default function Garn(props) {
             </div>
           </div>
           <section className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 ">
-            {filteredList.map((item) => {
+            {filteredProducts.length === 0 ? 
+              <p className="col-span-full text-lg md:text-xl text-black-60">
+                Der er desværre ingen produkter, der passer til din filtrering.
+              </p> 
+              : filteredProducts.map((item) => {
               return (
                 <div
                   key={`${item.node.slug}${item.node.id}`}
@@ -245,7 +358,7 @@ export async function getStaticProps() {
       newData,
       newPage,
       headerFooterData,
-      tags,
+      tags
     },
   };
 }

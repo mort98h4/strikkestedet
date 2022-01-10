@@ -121,6 +121,7 @@ export default function Header(props) {
           {...props.headerFooterData.pages}
           settings={settings}
           subNavItemClick={subNavItemClick}
+          tags={props.tags.tags}
         ></SubMenu>
       </header>
     </>
@@ -167,7 +168,7 @@ function SubMenu(props) {
           : "translate-x-full lg:translate-x-0 lg:-translate-y-20")
       }
     >
-      <div className="2xl:container mx-auto px-8 py-2">
+      <div className="2xl:container mx-auto px-8">
         <div className="hidden lg:flex justify-center items-center">
           {(props.settings[0].visible
             ? productPages
@@ -176,11 +177,12 @@ function SubMenu(props) {
             : aboutPages
           ).map((item) => {
             return (
-              <SubNavItem
+              <SubNavItemWMM
                 key={item.id}
                 {...item}
                 subNavItemClick={props.subNavItemClick}
-              ></SubNavItem>
+                tags={props.tags}
+              ></SubNavItemWMM>
             );
           })}
         </div>
@@ -227,6 +229,109 @@ function SubMenu(props) {
   );
 }
 
+function SubNavItemWMM(props) {
+  let megaMenu = false;
+  const brandTags = [];
+  const materialTags = [];
+  const needleTags = [];
+  const genderTags = [];
+  const itemTags = [];
+  const difficultyTags = [];
+  if (props.slug === "garn") {
+    console.log(props.tags);
+    megaMenu = true;
+    props.tags.nodes.forEach(tag => {
+      if (tag.tagType.brand && tag.slug != "petiteknit") {
+        brandTags.push(tag);
+      } else if (tag.tagType.fibre) {
+        materialTags.push(tag);
+      } else if (tag.tagType.pind) {
+        needleTags.push(tag);
+      }
+    })
+  }
+  if (props.slug === "opskrifter") {
+    megaMenu = true;
+    props.tags.nodes.forEach(tag => {
+      if (tag.tagType.brand && tag.slug != "hjertegarn" && tag.slug != "permin" && tag.slug != "permin" && tag.slug != "filcolana") {
+        brandTags.push(tag);
+      } else if (tag.tagType.kon) {
+        genderTags.push(tag);
+      } else if (tag.tagType.genstand) {
+        itemTags.push(tag);
+      } else if (tag.tagType.svaerhedsgrad) {
+        difficultyTags.push(tag);
+      }
+    })
+  }
+
+  const SubNavLink = React.forwardRef(({ onClick, href }, ref) => {
+    return (
+      <a
+        className="transition-all text-black-70 hover:text-black hover:underline"
+        href={href}
+        onClick={() => props.subNavItemClick()}
+        ref={ref}
+      >
+        {props.title}
+      </a>
+    );
+  });
+
+  function MegaMenuItems(props) {
+    return (
+      <ul className="d-flex flex-column px-16 pt-8 pb-16">
+        <li className="text-black font-bold mb-1">{props.title}</li>
+        {props.tags.map(tag => {
+          return (
+            <li key={tag.slug} className="transition-all text-black-70 hover:text-black hover:underline">
+              <Link href={`/${props.ancestor}/${props.slug}?filter=${tag.slug}`}>
+                {tag.name}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
+
+  return (
+    <>
+      <div id={props.slug + "-sub-menu"} className="px-8 lg:py-2">
+        <Link
+          href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`}
+          passHref
+        >
+          <SubNavLink></SubNavLink>
+        </Link>
+      </div>
+      {megaMenu ? 
+        <nav className="item-sub-menu absolute bg-white w-full" style={{top: "100%"}}>
+          <div className="2xl:container mx-auto px-8 flex justify-center">
+            {props.slug === "garn" ?
+            <>
+              <MegaMenuItems title="Brand" ancestor={props.ancestors.edges[0].node.slug} slug={props.slug} tags={brandTags}></MegaMenuItems>
+              <MegaMenuItems title="Fibre" ancestor={props.ancestors.edges[0].node.slug} slug={props.slug} tags={materialTags}></MegaMenuItems>
+              <MegaMenuItems title="Vejledende pind" ancestor={props.ancestors.edges[0].node.slug} slug={props.slug} tags={needleTags}></MegaMenuItems>
+            </>
+            : props.slug === "opskrifter" ?
+            <>
+              <MegaMenuItems title="Brand" ancestor={props.ancestors.edges[0].node.slug} slug={props.slug} tags={brandTags}></MegaMenuItems>
+              <MegaMenuItems title="Køn" ancestor={props.ancestors.edges[0].node.slug} slug={props.slug} tags={genderTags}></MegaMenuItems>
+              <MegaMenuItems title="Produkt" ancestor={props.ancestors.edges[0].node.slug} slug={props.slug} tags={itemTags}></MegaMenuItems>
+              <MegaMenuItems title="Sværhedsgrad" ancestor={props.ancestors.edges[0].node.slug} slug={props.slug} tags={difficultyTags}></MegaMenuItems>
+            </>
+            : ""
+            }
+            
+          </div>
+        </nav>
+      : ""
+      }
+    </>
+  );
+}
+
 function SubNavItem(props) {
   const SubNavLink = React.forwardRef(({ onClick, href }, ref) => {
     return (
@@ -242,13 +347,15 @@ function SubNavItem(props) {
   });
 
   return (
-    <div className="mx-8">
-      <Link
-        href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`}
-        passHref
-      >
-        <SubNavLink></SubNavLink>
-      </Link>
-    </div>
+    <>
+      <div id={props.slug + "-sub-menu"} className="px-8 lg:py-2">
+        <Link
+          href={`/${props.ancestors.edges[0].node.slug}/${props.slug}`}
+          passHref
+        >
+          <SubNavLink></SubNavLink>
+        </Link>
+      </div>
+    </>
   );
 }
