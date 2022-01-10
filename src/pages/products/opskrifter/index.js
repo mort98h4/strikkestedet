@@ -28,6 +28,8 @@ export default function Opskrift(props) {
   const [itemFilter, setItemFilter] = useState(false);
   const [difficultyFilter, setdifficultyFilter] = useState(false);
 
+  console.log(props.data.posts.edges);
+
   useEffect(() => {
     let params = new URLSearchParams(document.location.search);
     filterSlug = params.get("filter");
@@ -467,6 +469,7 @@ export default function Opskrift(props) {
           </div>
           <section className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 ">
             {filteredProducts.map((item) => {
+              console.log(item.node.onesize);
               return (
                 <div key={item.slug} className="col-span-1">
                   {/* Transition css ligger i globals.css på linje 139-159 */}
@@ -497,7 +500,16 @@ export default function Opskrift(props) {
                             {item.node.opskriftprodukt.maerke}
                           </span>
                           <span className="block mt-2">
-                            {item.node.opskriftprodukt.pris} DKK
+                            {item.node.opskriftprodukt.onesize ? (
+                              `${item.node.opskriftprodukt.pris} DKK`
+                            ) : (
+                              <>
+                                <span className="text-xs">Fra </span>
+                                <span>
+                                  {item.node.opskriftprodukt.pris} DKK
+                                </span>
+                              </>
+                            )}
                           </span>
                         </div>
                       </article>

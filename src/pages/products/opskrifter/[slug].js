@@ -1,4 +1,4 @@
-import { getData, getKnittingPatterns } from "../../../../lib/api";
+import { getData, getKnittingPatterns, getTags } from "../../../../lib/api";
 import Image from "next/image";
 import Sizes from "../../../components/Sizes";
 import clsx from "clsx";
@@ -124,6 +124,72 @@ function KnittingPattern(props) {
                 </button>
               </div>
             </div>
+            <div className="grid grid-cols-2 gap-4 mt-10  mb-10 md:mb-20">
+              <div className="col-span-1">
+                <span className="block font-bold">Fragt</span>
+                <span className="block">Fri fragt ved køb over 500 DKK</span>
+              </div>
+              <div className="col-span-1">
+                <span className="block font-bold">Returnering</span>
+                <span className="block ">
+                  Fuld returret de første 2 uger ved uåbnede produkter
+                </span>
+              </div>
+              <div>
+                <div className="max-w-[96px] max-h-[24px] relative">
+                  <Image
+                    layout="responsive"
+                    width="96"
+                    height="24"
+                    className="w-24"
+                    src="/trustpilot.svg"
+                    alt="TrustPilot"
+                  />
+                </div>
+                <div className="relative max-w-[96px] flex justify-center">
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
+                  <Image
+                    layout="fixed"
+                    width="15"
+                    height="15"
+                    className="inline"
+                    src="/review_star.svg"
+                    alt="star"
+                  />
+                </div>
+              </div>
+            </div>
           </aside>
         </div>
         <PatternInfo product={info} garn1={garn1} garn2={garn2} />
@@ -158,11 +224,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const data = await getKnittingPatterns(params.slug);
   const headerFooterData = await getData();
+  const tags = await getTags();
 
   return {
     props: {
       data,
       headerFooterData,
+      tags,
     },
   };
 }
