@@ -158,6 +158,15 @@ function SubMenu(props) {
 
   return (
     <nav
+      // className={
+      //   "sub-menu " +
+      //   (props.settings[3].visible ||
+      //   props.settings[0].visible ||
+      //   props.settings[1].visible ||
+      //   props.settings[2].visible
+      //     ? "translate-x-0 lg:translate-y-0"
+      //     : "translate-x-full lg:translate-x-0 lg:-translate-y-20")
+      // }
       className={
         "sub-menu " +
         (props.settings[3].visible ||
@@ -165,7 +174,7 @@ function SubMenu(props) {
         props.settings[1].visible ||
         props.settings[2].visible
           ? "translate-x-0 lg:translate-y-0"
-          : "translate-x-full lg:translate-x-0 lg:-translate-y-20")
+          : "translate-x-full lg:translate-x-0")
       }
     >
       <div className="2xl:container mx-auto px-8">
@@ -306,7 +315,7 @@ function SubNavItemWMM(props) {
         </Link>
       </div>
       {megaMenu ? 
-        <nav className="item-sub-menu absolute bg-white w-full" style={{top: "100%"}}>
+        <nav className="item-sub-menu absolute bg-white w-full shadow" style={{top: "100%", zIndex: "19"}}>
           <div className="2xl:container mx-auto px-8 flex justify-center">
             {props.slug === "garn" ?
             <>
