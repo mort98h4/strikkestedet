@@ -1,14 +1,19 @@
-import { getHomePage, getData, getSelectedYarnItems, getSelectedPatternsItems } from "../../lib/api";
+import {
+  getHomePage,
+  getData,
+  getSelectedYarnItems,
+  getSelectedPatternsItems,
+} from "../../lib/api";
 import Button from "../globals/Button";
 import CustomerReview from "../components/CustomerReview";
 import Image from "next/image";
 import Head from "next/head";
-import Link from 'next/link';
-import { useState } from 'react';
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Home(props) {
   const [selectedItemsList, setSelectedItemsList] = useState(props.yarn);
-  const [categoryIsYarn, setCategoryIsYarn] = useState(true)
+  const [categoryIsYarn, setCategoryIsYarn] = useState(true);
 
   const ctaSection1 = props.content.page.homepagectasection1;
   const ctaSection2 = props.content.page.homepagectasection2;
@@ -24,26 +29,62 @@ export default function Home(props) {
   }
 
   function handleChange(e) {
-    e.currentTarget.value === "knittingPatterns" ? setSelectedItemsList(props.patterns) : setSelectedItemsList(props.yarn);
-    setCategoryIsYarn(categoryIsYarn = !categoryIsYarn)
+    e.currentTarget.value === "knittingPatterns"
+      ? setSelectedItemsList(props.patterns)
+      : setSelectedItemsList(props.yarn);
+    setCategoryIsYarn((categoryIsYarn = !categoryIsYarn));
   }
 
   return (
     <>
       <Head>
         <title>{props.content.page.metaFields.sideTitel}</title>
-        <meta name="description" content={props.content.page.metaFields.sideBeskrivelse}></meta>
-        <link rel="icon" type="image/png" sizez="180x180" href="./apple-touch-icon.ico"></link>
-        <link rel="icon" type="image/png" sizez="32x32" href="./favicon32x32"></link>
-        <link rel="icon" type="image/png" sizez="16x16" href="./favicon16x16"></link>
+        <meta
+          name="description"
+          content={props.content.page.metaFields.sideBeskrivelse}
+        ></meta>
+        <link
+          rel="icon"
+          type="image/png"
+          sizez="180x180"
+          href="./apple-touch-icon.ico"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          sizez="32x32"
+          href="./favicon32x32"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          sizez="16x16"
+          href="./favicon16x16"
+        ></link>
       </Head>
       <section className="grid grid-cols-6 gap-4">
         <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
-          <Image priority={true} layout="fill" objectFit="cover" sizes="100vw, 66vw" src={ctaSection1.image1.guid} alt={ctaSection1.image1.altText}></Image>
-          <Button href={ctaSection1.ctaHref1} fullWidth={false}>{ctaSection1.ctaText1}</Button>
+          <Image
+            priority={true}
+            layout="fill"
+            objectFit="cover"
+            sizes="100vw, 66vw"
+            src={ctaSection1.image1.guid}
+            alt={ctaSection1.image1.altText}
+          ></Image>
+          <Button href={ctaSection1.ctaHref1} fullWidth={false}>
+            {ctaSection1.ctaText1}
+          </Button>
         </div>
         <div className="col-span-6 md:col-span-2 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
-          <Image priority={true} layout="fill" objectFit="cover" sizes="100vw, 33vw" src={ctaSection2.image2.guid} alt={ctaSection2.image2.altText}></Image>
+          <Image
+            priority={true}
+            layout="fill"
+            objectFit="cover"
+            sizes="100vw, 33vw"
+            src={ctaSection2.image2.guid}
+            alt={ctaSection2.image2.altText}
+          ></Image>
           <Button href={ctaSection2.ctaHref2}>{ctaSection2.ctaText2}</Button>
         </div>
       </section>
@@ -62,9 +103,7 @@ export default function Home(props) {
           <h2 className="font-serif text-3xl lg:text-5xl mb-4">
             {newsLetter.headerNewsletter}
           </h2>
-          <p className="text-black-60 mb-16">
-            {newsLetter.bodyNewsletter}
-          </p>
+          <p className="text-black-60 mb-16">{newsLetter.bodyNewsletter}</p>
           <form className="w-full" onSubmit={handleSubmit}>
             <div className="w-full mb-16">
               <label htmlFor="newsletterEmail" className="block mb-2 text-lg">
@@ -87,7 +126,13 @@ export default function Home(props) {
           </form>
         </div>
         <div className="col-span-6 md:col-span-4 bg-cover bg-center min-h-80 flex flex-wrap items-center justify-center relative">
-          <Image layout="fill" objectFit="cover" sizes="100vw, 66vw" src={ctaSection3.image3.guid} alt={ctaSection3.image3.altText}></Image>
+          <Image
+            layout="fill"
+            objectFit="cover"
+            sizes="100vw, 66vw"
+            src={ctaSection3.image3.guid}
+            alt={ctaSection3.image3.altText}
+          ></Image>
           <Button href={ctaSection3.ctaHref3}>{ctaSection3.ctaText3}</Button>
         </div>
       </section>
@@ -146,27 +191,41 @@ export default function Home(props) {
         </div>
         <div className="col-span-6 lg:col-span-4 grid grid-cols-4 gap-4 px-4 lg:px-0 lg:pr-4">
           {selectedItemsList.posts.edges.map((item) => {
-            const product = categoryIsYarn ? item.node.yarnproduct : item.node.opskriftprodukt;
+            const product = categoryIsYarn
+              ? item.node.yarnproduct
+              : item.node.opskriftprodukt;
 
             return (
               <div key={item.node.id} className="col-span-2 md:col-span-1">
                 <Link
-                      href={{
-                        pathname: "/products/garn/[slug]",
-                        query: { slug: item.node.slug },
-                      }}
+                  href={{
+                    pathname: "/products/garn/[slug]",
+                    query: { slug: item.node.slug },
+                  }}
                 >
                   <a>
                     <article className="col-span-1 product-container h-100 relative">
                       <div className="image-container w-full">
                         <Image
-                          width={categoryIsYarn ? product.image.mediaDetails.width : product.imageforlist.mediaDetails.width}
-                          height={categoryIsYarn ? product.image.mediaDetails.height : product.imageforlist.mediaDetails.height}
+                          width={
+                            categoryIsYarn
+                              ? product.image.mediaDetails.width
+                              : product.imageforlist.mediaDetails.width
+                          }
+                          height={
+                            categoryIsYarn
+                              ? product.image.mediaDetails.height
+                              : product.imageforlist.mediaDetails.height
+                          }
                           sizes={"50vw"}
-                          layout='responsive'
-                          objectFit='cover'
+                          layout="responsive"
+                          objectFit="cover"
                           className="product-image"
-                          src={(categoryIsYarn ? product.image.guid : product.imageforlist.guid)}
+                          src={
+                            categoryIsYarn
+                              ? product.image.guid
+                              : product.imageforlist.guid
+                          }
                           alt={"Udvalgt produkt"}
                         ></Image>
                       </div>
@@ -183,10 +242,9 @@ export default function Home(props) {
                   </a>
                 </Link>
               </div>
-            )
+            );
           })}
         </div>
-        
       </section>
 
       <section className="grid grid-cols-6 gap-4 md:mt-8">
@@ -194,11 +252,11 @@ export default function Home(props) {
           Kunderne siger
         </h2>
         {reviews.map((item) => {
-            return <CustomerReview key={item.node.id} {...item}></CustomerReview>
+          return <CustomerReview key={item.node.id} {...item}></CustomerReview>;
         })}
-      </section> 
+      </section>
     </>
-  )
+  );
 }
 
 export async function getStaticProps() {
@@ -211,7 +269,7 @@ export async function getStaticProps() {
       content,
       headerFooterData,
       yarn,
-      patterns
-    }
-  }
+      patterns,
+    },
+  };
 }
